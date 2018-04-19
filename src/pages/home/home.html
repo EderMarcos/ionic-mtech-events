@@ -7,16 +7,26 @@
 </ion-header>
 
 <ion-content class="list-avatar-page">
-  <!-- Todo Add a slide to show current events  -->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="ios-arrow-down"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent"
+      refreshingText="Refreshing"></ion-refresher-content>
+  </ion-refresher>
+
   <ion-slides pager style="max-height:150px">
-    <ion-slide *ngFor="let slide of slides">
-      <img [src]="slide">
+    <ion-slide>
+      <img src="https://picsum.photos/400/300?image=100">
+    </ion-slide>
+    <ion-slide>
+      <img src="https://picsum.photos/400/300?image=10">
     </ion-slide>
   </ion-slides>
 
   <div padding-top padding-bottom>
     <ion-list>
-      <ion-list-header> Day 1 </ion-list-header>
+      <ion-list-header> Day 1</ion-list-header>
       <ion-item>
         <ion-avatar item-start>
           <img src="https://picsum.photos/80/80">
@@ -64,10 +74,7 @@
     </ion-list>
 
     <ion-list>
-      <ion-list-header>
-        Day 2
-      </ion-list-header>
-
+      <ion-list-header> Day 2 </ion-list-header>
       <ion-item>
         <ion-avatar item-start>
           <img src="https://picsum.photos/80/80">
@@ -97,10 +104,7 @@
     </ion-list>
 
     <ion-list>
-      <ion-list-header>
-        Day 3
-      </ion-list-header>
-
+      <ion-list-header> Day 3 </ion-list-header>
       <ion-item>
         <ion-avatar item-start>
           <img src="https://picsum.photos/80/80">

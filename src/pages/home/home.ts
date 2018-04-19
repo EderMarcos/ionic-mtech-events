@@ -20,6 +20,15 @@ export class HomePage {
     'https://picsum.photos/400/300?image=5',
   ];
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 4000);
+  }
+
   goToEvents() {
     this.navCtrl.push(EventsPage);
   }
