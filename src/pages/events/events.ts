@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {EventDetailsPage} from "../event-details/event-details";
 
 @Component({
   selector: 'page-events',
@@ -32,6 +33,6 @@ export class EventsPage {
   ];
 
   goToDetail(event: any) {
-    console.log(event);
+    this.navCtrl.push(EventDetailsPage, { event })
   }
 }
