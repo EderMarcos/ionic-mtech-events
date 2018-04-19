@@ -1,22 +1,16 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>
-      Home
+      MTech Events
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <button
-    ion-button
-    outline
-    (click)="goToEvents()">
-    Events</button>
-
-  <button
-    ion-button
-    outline
-    color="secondary"
-    (click)="goToEventDetail()">
-    Event Detail</button>
+<ion-content>
+  <!-- Todo Add a slide to show current events  -->
+  <ion-slides pager style="max-height:150px">
+    <ion-slide *ngFor="let slide of slides">
+      <img [src]="slide">
+    </ion-slide>
+  </ion-slides>
 </ion-content>
