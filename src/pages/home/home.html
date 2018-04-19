@@ -6,11 +6,127 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="list-avatar-page">
   <!-- Todo Add a slide to show current events  -->
   <ion-slides pager style="max-height:150px">
     <ion-slide *ngFor="let slide of slides">
       <img [src]="slide">
     </ion-slide>
   </ion-slides>
+
+  <div padding-top padding-bottom>
+    <ion-list>
+      <ion-list-header> Day 1 </ion-list-header>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Finn</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've had a pretty messed up day. If we just...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Han</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've got enough on my plate as it is, and I...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Rey</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>You will remove these restraints and leave...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Rey</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>You will remove these restraints and leave...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Luke</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I feel the good in you, the conflict...</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        Day 2
+      </ion-list-header>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Poe</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I just upgraded my X-Wing. Next time...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Ben</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>These aren't the droids you're looking for...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Leia</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've placed information vital to the survival...</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        Day 3
+      </ion-list-header>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Poe</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I just upgraded my X-Wing. Next time...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Ben</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>These aren't the droids you're looking for...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Leia</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've placed information vital to the survival...</p>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
