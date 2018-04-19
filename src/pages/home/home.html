@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="secondary">
+  <ion-navbar color="secondary" class="no-border">
     <ion-title>
       MTech Events
     </ion-title>
@@ -15,14 +15,27 @@
       refreshingText="Refreshing"></ion-refresher-content>
   </ion-refresher>
 
-  <ion-slides pager style="max-height:150px">
-    <ion-slide>
-      <img src="https://picsum.photos/400/300?image=100">
-    </ion-slide>
-    <ion-slide>
-      <img src="https://picsum.photos/400/300?image=10">
-    </ion-slide>
-  </ion-slides>
+  <!-- Cuirrent event -->
+  <div class="card-event text-center">
+    <img class="card-event__img" src="https://picsum.photos/150/150"/>
+    <p class="card-event__name">CTM 2015 - Totally Enormous Extinct Dinosaurus, Greco-Roman</p>
+    <p class="card-event__location">
+      <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
+      Berghain / Panorama Bar
+    </p>
+    <p class="card-event__date">
+      <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
+      Today 23:00 - 11:00
+    </p>
+    <button
+      ion-button
+      icon-right
+      small
+      color="danger">
+      Read more
+      <ion-icon ios="ios-more" md="md-more"></ion-icon>
+    </button>
+  </div>
 
   <div padding-top padding-bottom>
     <ion-list>
