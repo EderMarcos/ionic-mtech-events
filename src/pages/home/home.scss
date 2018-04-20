@@ -15,7 +15,7 @@ page-home {
     position: relative;
     height: 200px;
     overflow: hidden;
-    padding: 0 1rem;
+    padding: 1rem;
     &__img {
       position: absolute;
       width: 100%;
@@ -24,7 +24,8 @@ page-home {
       left: 0;
       object-fit: cover;
       object-position: center;
-      filter: blur(2px);
+      -webkit-filter: brightness(.3);
+      filter: brightness(.3);
     }
     &__name,
     &__location,
@@ -41,6 +42,7 @@ page-home {
     }
     &__name {
       font-size: 1.5em;
+      margin-top: 0;
     }
   }
 }

@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage, EventsPage, EventDetailsPage, AboutPage } from '../pages/index';
+import { MtTabsComponent } from "../components/mt-tabs-components/components-tabs";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { HomePage, EventsPage, EventDetailsPage, AboutPage } from '../pages/inde
     EventsPage,
     EventDetailsPage,
     AboutPage,
+    MtTabsComponent
   ],
   imports: [
     BrowserModule,
@@ -26,11 +28,12 @@ import { HomePage, EventsPage, EventDetailsPage, AboutPage } from '../pages/inde
     EventsPage,
     EventDetailsPage,
     AboutPage,
+    MtTabsComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule {}
