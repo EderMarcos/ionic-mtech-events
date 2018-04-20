@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { MtTabsComponent } from "../components/mt-tabs-components/components-tabs";
+import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.component";
 
 @Component({
   templateUrl: 'app.html'

@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-navbar color="primary" no-border>
+    <ion-title>
+      MTech Events
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="list-avatar-page">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="ios-arrow-down"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent"
+      refreshingText="Refreshing"></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Cuirrent event -->
+  <div class="card-event text-center">
+    <img class="card-event__img" src="https://picsum.photos/150/150"/>
+    <p class="card-event__name">CTM 2015 - Totally Enormous Extinct Dinosaurus, Greco-Roman</p>
+    <p class="card-event__location">
+      <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
+      Berghain / Panorama Bar
+    </p>
+    <p class="card-event__date">
+      <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
+      Today 23:00 - 11:00
+    </p>
+    <button
+      ion-button
+      icon-right
+      color="danger">
+      Read more
+    </button>
+  </div>
+
+  <div padding-top padding-bottom>
+    <ion-list>
+      <ion-list-header> Day 3 </ion-list-header>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Poe</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I just upgraded my X-Wing. Next time...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Ben</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>These aren't the droids you're looking for...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Leia</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've placed information vital to the survival...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Leia</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've placed information vital to the survival...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Leia</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've placed information vital to the survival...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Leia</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've placed information vital to the survival...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Leia</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've placed information vital to the survival...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Leia</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've placed information vital to the survival...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Leia</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've placed information vital to the survival...</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="https://picsum.photos/80/80">
+        </ion-avatar>
+        <h2>Leia</h2>
+        <ion-note item-end>3:43 pm</ion-note>
+        <p>I've placed information vital to the survival...</p>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

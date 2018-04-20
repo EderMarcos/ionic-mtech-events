@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
-import { ComponentsSlideComponent } from './components-slide/components-slide';
-import { MtTabsComponent } from "./mt-tabs-components/components-tabs";
+import { MtTabsComponent } from "./mt-tabs-component/mt-tabs.component";
+import { MtSlideComponent } from "./mt-slide-component/mt-slide.component";
+import { ComponentsMtListComponent } from './mt-list.component/mt-list.component.';
 @NgModule({
-	declarations: [ComponentsSlideComponent,
-    MtTabsComponent],
+	declarations: [
+	  MtSlideComponent,
+    MtTabsComponent,
+    ComponentsMtListComponent
+  ],
 	imports: [],
-	exports: [ComponentsSlideComponent,
-    MtTabsComponent]
+	exports: [
+	  MtSlideComponent,
+    MtTabsComponent,
+    ComponentsMtListComponent
+  ]
 })
 export class ComponentsModule {}
