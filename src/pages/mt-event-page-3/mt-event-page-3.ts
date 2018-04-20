@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EnventProvider } from "../../providers/envent/envent";
 
 @Component({
   selector: 'page-mt-event-page-3',
@@ -6,12 +7,18 @@ import { Component } from '@angular/core';
 })
 export class MtEventPage_3Page {
 
-  constructor() { }
+  private events;
+
+  constructor(private _eventProvider: EnventProvider) {
+    this._eventProvider.getEntities({ collection: 'events',
+      query: (ref => ref.where('day', '==', '3').orderBy('date', 'asc'))})
+      .then(events => this.events = events);
+  }
 
   doRefresh(refresher) {
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 3000);
+    this._eventProvider.getEntities({ collection: 'events',
+      query: (ref => ref.where('day', '==', '3').orderBy('date', 'asc'))})
+      .then(events => this.events = events)
+      .then(refresher.complete());
   }
 }

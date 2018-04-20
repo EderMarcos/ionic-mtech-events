@@ -37,95 +37,14 @@
 
   <div padding-top padding-bottom>
     <ion-list>
-      <ion-list-header> Day 3 </ion-list-header>
-      <ion-item>
+      <ion-list-header> Day 3</ion-list-header>
+      <ion-item *ngFor="let e of events">
         <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
+          <img [src]="e.eventImg ? e.eventImg : 'https://picsum.photos/80/80'">
         </ion-avatar>
-        <h2>Poe</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I just upgraded my X-Wing. Next time...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Ben</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>These aren't the droids you're looking for...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Leia</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I've placed information vital to the survival...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Leia</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I've placed information vital to the survival...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Leia</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I've placed information vital to the survival...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Leia</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I've placed information vital to the survival...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Leia</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I've placed information vital to the survival...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Leia</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I've placed information vital to the survival...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Leia</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I've placed information vital to the survival...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Leia</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I've placed information vital to the survival...</p>
+        <h2>{{ e.eventName }}</h2>
+        <ion-note item-end>{{ e.date | date:'shortTime' }}</ion-note>
+        <p>{{ e.exhibitorName }}</p>
       </ion-item>
     </ion-list>
   </div>

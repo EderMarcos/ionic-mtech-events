@@ -7,21 +7,18 @@ import { EnventProvider } from "../../providers/envent/envent";
 })
 export class MtEventPage_1Page {
 
+  private events;
+
   constructor(private _eventProvider: EnventProvider) {
-    this._eventProvider.getEntities({ collection: 'events', query: (ref => ref.where('eventName', '==', 'Welcome'))})
-      .then(events => {
-        console.log(events);
-      });
+    this._eventProvider.getEntities({ collection: 'events',
+      query: (ref => ref.where('day', '==', '1').orderBy('date', 'asc'))})
+      .then(events => this.events = events);
   }
 
   doRefresh(refresher) {
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 1000);
-  }
-
-  fu() {
-
+    this._eventProvider.getEntities({ collection: 'events',
+      query: (ref => ref.where('day', '==', '1').orderBy('date', 'asc'))})
+      .then(events => this.events = events)
+      .then(refresher.complete());
   }
 }

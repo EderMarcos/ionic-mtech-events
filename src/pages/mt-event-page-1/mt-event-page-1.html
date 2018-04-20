@@ -38,49 +38,13 @@
   <div padding-top padding-bottom>
     <ion-list>
       <ion-list-header> Day 1</ion-list-header>
-      <ion-item>
+      <ion-item *ngFor="let e of events">
         <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
+          <img [src]="e.eventImg ? e.eventImg : 'https://picsum.photos/80/80'">
         </ion-avatar>
-        <h2>Finn</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I've had a pretty messed up day. If we just...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Han</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I've got enough on my plate as it is, and I...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Rey</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>You will remove these restraints and leave...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Rey</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>You will remove these restraints and leave...</p>
-      </ion-item>
-
-      <ion-item>
-        <ion-avatar item-start>
-          <img src="https://picsum.photos/80/80">
-        </ion-avatar>
-        <h2>Luke</h2>
-        <ion-note item-end>3:43 pm</ion-note>
-        <p>I feel the good in you, the conflict...</p>
+        <h2>{{ e.eventName }}</h2>
+        <ion-note item-end>{{ e.date | date:'shortTime' }}</ion-note>
+        <p>{{ e.exhibitorName }}</p>
       </ion-item>
     </ion-list>
   </div>
