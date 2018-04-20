@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from "angularfire2/firestore";
 
-import { EventInterface } from "../../interfaces/EventInterface";
+import { EventInterface } from "../../interfaces/eventInterface";
 
 @Injectable()
 export class EnventProvider {

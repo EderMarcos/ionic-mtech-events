@@ -11,6 +11,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { firebaseConfig } from "../config/firebase.config";
 
+// Plugins
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
 import { MyApp } from './app.component';
 import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.component";
 import { MtSlideComponent } from "../components/mt-slide-component/mt-slide.component";
@@ -18,6 +21,8 @@ import { MtEventPage_1Page } from "../pages/mt-event-page-1/mt-event-page-1";
 import { MtEventPage_2Page } from "../pages/mt-event-page-2/mt-event-page-2";
 import { MtEventPage_3Page } from "../pages/mt-event-page-3/mt-event-page-3";
 import { EnventProvider } from '../providers/envent/envent';
+import { MtScanPage } from "../pages/mt-scan-page/mt-scan-page";
+import { ToastProvider } from '../providers/toast/toast';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,8 @@ import { EnventProvider } from '../providers/envent/envent';
     MtSlideComponent,
     MtEventPage_1Page,
     MtEventPage_2Page,
-    MtEventPage_3Page
+    MtEventPage_3Page,
+    MtScanPage
   ],
   imports: [
     BrowserModule,
@@ -43,13 +49,16 @@ import { EnventProvider } from '../providers/envent/envent';
     MtSlideComponent,
     MtEventPage_1Page,
     MtEventPage_2Page,
-    MtEventPage_3Page
+    MtEventPage_3Page,
+    MtScanPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    EnventProvider
+    EnventProvider,
+    BarcodeScanner,
+    ToastProvider
   ]
 })
 export class AppModule {}
