@@ -19,6 +19,8 @@ export class MtScanPage {
     if (this.platform.is('cordova')) {
       this.barcodeScanner.scan().then(barcodeData => {
         this.toast.showToast(barcodeData.text, 4000);
+        // Code..
+
       }).catch(err => {
         this.toast.showToast(err);
       });
