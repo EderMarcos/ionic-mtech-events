@@ -1,0 +1,14 @@
+<div padding-top padding-bottom *ngIf="data">
+  <ion-list>
+    <ion-item *ngFor="let item of data">
+      <ion-avatar item-start>
+        <img [src]="item.eventImg ? item.eventImg : errImg">
+      </ion-avatar>
+      <h2>{{ item.eventName }}</h2>
+      <ion-note item-end>{{ item.date | date:typeDate }}</ion-note>
+      <p>{{ item.exhibitorName }}</p>
+    </ion-item>
+  </ion-list>
+</div>
+
+<div *ngIf="!data">No hay informacion</div>

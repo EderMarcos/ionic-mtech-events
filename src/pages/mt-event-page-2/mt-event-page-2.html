@@ -16,36 +16,8 @@
   </ion-refresher>
 
   <!-- Cuirrent event -->
-  <div class="card-event text-center">
-    <img class="card-event__img" src="https://picsum.photos/150/150"/>
-    <p class="card-event__name">CTM 2015 - Totally Enormous Extinct Dinosaurus, Greco-Roman</p>
-    <p class="card-event__location">
-      <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
-      Berghain / Panorama Bar
-    </p>
-    <p class="card-event__date">
-      <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-      Today 23:00 - 11:00
-    </p>
-    <button
-      ion-button
-      icon-right
-      color="danger">
-      Read more
-    </button>
-  </div>
+  <mt-card></mt-card>
 
-  <div padding-top padding-bottom>
-    <ion-list>
-      <ion-list-header> Day 2</ion-list-header>
-      <ion-item *ngFor="let e of events">
-        <ion-avatar item-start>
-          <img [src]="e.eventImg ? e.eventImg : 'https://picsum.photos/80/80'">
-        </ion-avatar>
-        <h2>{{ e.eventName }}</h2>
-        <ion-note item-end>{{ e.date | date:'shortTime' }}</ion-note>
-        <p>{{ e.exhibitorName }}</p>
-      </ion-item>
-    </ion-list>
-  </div>
+  <mt-list
+    [data]="events"></mt-list>
 </ion-content>

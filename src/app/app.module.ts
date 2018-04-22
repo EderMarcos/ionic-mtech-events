@@ -21,8 +21,9 @@ import { MtEventPage_1Page } from "../pages/mt-event-page-1/mt-event-page-1";
 import { MtEventPage_2Page } from "../pages/mt-event-page-2/mt-event-page-2";
 import { MtEventPage_3Page } from "../pages/mt-event-page-3/mt-event-page-3";
 import { EnventProvider } from '../providers/envent/envent';
-import { MtScanPage } from "../pages/mt-scan-page/mt-scan-page";
 import { ToastProvider } from '../providers/toast/toast';
+import { MtListComponent } from "../components/mt-list-component/mt-list.component";
+import { MtCardComponent } from "../components/mt-card-component/mt-card-component";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,10 @@ import { ToastProvider } from '../providers/toast/toast';
     MtEventPage_1Page,
     MtEventPage_2Page,
     MtEventPage_3Page,
-    MtScanPage
+    MtSlideComponent,
+    MtTabsComponent,
+    MtListComponent,
+    MtCardComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,6 @@ import { ToastProvider } from '../providers/toast/toast';
     MtEventPage_1Page,
     MtEventPage_2Page,
     MtEventPage_3Page,
-    MtScanPage
   ],
   providers: [
     StatusBar,
