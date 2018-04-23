@@ -18,6 +18,12 @@ export class StorageService {
   }
 
   getEntity(key: string) {
-    return new Promise(resolve => resolve(this.platform.is('cordova') ? this.storage.get(key) : localStorage.getItem(key)));
+    return new Promise(resolve => {
+      if (!this.platform.is('cordova')) {
+        return resolve(localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : false)
+      }
+      this.storage.get(key)
+        .then(data => resolve(JSON.parse(data)));
+    });
   }
 }

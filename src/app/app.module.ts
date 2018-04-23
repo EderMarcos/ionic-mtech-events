@@ -30,6 +30,7 @@ import { MtMapsPage } from "../pages/mt-maps-page/mt-maps-page";
 import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
 import { MtDetailEventPage } from "../pages/mt-detail-event/mt-detail-event";
 import { StorageService } from "../providers/storage/storage";
+import { MtSigninPage } from "../pages/mt-signin/mt-signin";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { StorageService } from "../providers/storage/storage";
     MtMapsPage,
     MtFormFeedbackPage,
     MtDetailEventPage,
+    MtSigninPage,
     MtSlideComponent,
     MtTabsComponent,
     MtListComponent,
@@ -70,6 +72,7 @@ import { StorageService } from "../providers/storage/storage";
     MtMapsPage,
     MtFormFeedbackPage,
     MtDetailEventPage,
+    MtSigninPage,
   ],
   providers: [
     StatusBar,
