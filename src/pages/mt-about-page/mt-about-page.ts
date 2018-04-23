@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'page-mt-about',
@@ -7,7 +6,5 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class MtAboutPage {
 
-  constructor(
-    private readonly navCtrl: NavController,
-    private readonly navParams: NavParams) { }
+  constructor() { }
 }

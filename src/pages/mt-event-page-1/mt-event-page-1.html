@@ -1,12 +1,12 @@
 <ion-header>
-  <ion-navbar color="primary" no-border class="white">
+  <ion-navbar color="primary" no-border>
     <ion-title>
       MTech Events
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content class="list-avatar-page mt-list">
+<ion-content class="list-avatar-page mt-event-page">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="ios-arrow-down"
@@ -20,5 +20,4 @@
 
   <mt-list
     [data]="events"></mt-list>
-
 </ion-content>

@@ -1,12 +1,8 @@
-components-mt-list {
-
-}
-
 .mt-list-item {
   background: #0B1B33;
-  color: #116A74;
+  color: #fff;
+  border: 0 !important;
   &__title {
-    font-weight: bold !important;
     font-size: 1.5rem !important;
   }
   .item-inner {
@@ -17,6 +13,6 @@ components-mt-list {
     color: #97D2C1 !important;
   }
   &__date {
-    color: #fff;
+    color: #116A74;
   }
 }
