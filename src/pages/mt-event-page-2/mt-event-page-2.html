@@ -4,9 +4,10 @@
       MTech Events
     </ion-title>
   </ion-navbar>
+  <mt-card></mt-card>
 </ion-header>
 
-<ion-content class="list-avatar-page mt-event-page">
+<ion-content class="list-avatar-page mt-event-page animated fadeIn">
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="ios-arrow-down"
@@ -14,9 +15,6 @@
       refreshingSpinner="crescent"
       refreshingText="Refreshing"></ion-refresher-content>
   </ion-refresher>
-
-  <!-- Cuirrent event -->
-  <mt-card></mt-card>
 
   <mt-list
     [data]="events"></mt-list>

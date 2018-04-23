@@ -4,12 +4,10 @@
       MTech Events
     </ion-title>
   </ion-navbar>
+  <mt-card></mt-card>
 </ion-header>
 
-<ion-content class="list-avatar-page mt-event-page">
-  <!-- Cuirrent event -->
-  <mt-card></mt-card>
-
+<ion-content class="list-avatar-page mt-event-page animated fadeIn">
   <ion-refresher
     (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
