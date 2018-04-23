@@ -12,4 +12,5 @@ export interface EventInterface {
   longitude: number;
   place: string;
   address: string;
+  id?: string;
 }

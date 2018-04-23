@@ -9,9 +9,19 @@ import { EventInterface } from "../../interfaces/eventInterface";
 export class MtMapsPage {
 
   event: EventInterface;
+  tabBarElement: any;
 
   constructor(
     private readonly navParams: NavParams) {
     this.event = this.navParams.get('event');
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+  }
+
+  ionViewWillEnter() {
+    this.tabBarElement.style.display = 'none';
+  }
+
+  ionViewWillLeave() {
+    this.tabBarElement.style.display = 'flex';
   }
 }

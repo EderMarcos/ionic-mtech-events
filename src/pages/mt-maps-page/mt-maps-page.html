@@ -8,7 +8,9 @@
   <agm-map
     [latitude]="event.latitude || 20.561113"
     [longitude]="event.longitude || -100.366558"
-    [zoom]="18">
-    <agm-marker [latitude]="event.latitude || 20.561113" [longitude]="event.longitude || -100.366558"></agm-marker>
+    [zoom]="16">
+    <agm-marker [latitude]="event.latitude || 20.561113" [longitude]="event.longitude || -100.366558">
+      <agm-info-window>{{ event.eventName || 'EventName' }}</agm-info-window>
+    </agm-marker>
   </agm-map>
 </ion-content>

@@ -1,25 +1,23 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from "angularfire2/firestore";
 
-import { EventInterface } from "../../interfaces/eventInterface";
-
 @Injectable()
-export class EnventProvider {
+export class DataService {
 
   constructor(
     private readonly db: AngularFirestore) {
   }
 
-  public setEntity(collection: string, entity: EventInterface) {
+  public setEntity(collection: string, entity: any) {
     return this.db.collection(collection).add(entity);
   }
 
-  public updateEntity(params: { collection: string, key: string }, entity: EventInterface) {
+  public updateEntity(params: { collection: string, key: string }, entity: any) {
     return this.db.doc(`/${ params.collection }/${ params.key }`)
       .update(entity);
   }
 
-  public getEntity(params: { collection: string, key: string, query?:any }) {
+  public getEntity(params: { collection: string, key?: string, query?:any }) {
     return new Promise((resolve, _) => {
       this.db.doc(`/${ params.collection }/${ params.key }`)
         .valueChanges()
@@ -32,10 +30,14 @@ export class EnventProvider {
   public getEntities(params: { collection: string, query?: ((ref: any) => any)}) {
     return new Promise((resolve, _) => {
       this.db.collection(params.collection, params.query)
-        .valueChanges()
-        .subscribe(data => {
-          resolve(data ? data : false);
-        });
+        .snapshotChanges()
+        .map(res => {
+          return res.map(a => {
+            const data = a.payload.doc.data();
+            data.id = a.payload.doc.id;
+            return data;
+          });
+        }).subscribe(data => resolve(data ? data : false));
     });
   }
 

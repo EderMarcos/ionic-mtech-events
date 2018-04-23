@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EnventProvider } from "../../providers/envent/envent";
+import { DataService } from "../../providers/dataService/dataService";
 
 @Component({
   selector: 'page-mt-event-page-1',
@@ -9,14 +9,14 @@ export class MtEventPage_1Page {
 
   private events;
 
-  constructor(private _eventProvider: EnventProvider) {
-    this._eventProvider.getEntities({ collection: 'events',
+  constructor(private _dataService: DataService) {
+    this._dataService.getEntities({ collection: 'events',
       query: (ref => ref.where('day', '==', '1').orderBy('date', 'asc'))})
       .then(events => this.events = events);
   }
 
   doRefresh(refresher) {
-    this._eventProvider.getEntities({ collection: 'events',
+    this._dataService.getEntities({ collection: 'events',
       query: (ref => ref.where('day', '==', '1').orderBy('date', 'asc'))})
       .then(events => this.events = events)
       .then(refresher.complete());

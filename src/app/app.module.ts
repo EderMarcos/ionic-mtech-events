@@ -22,13 +22,14 @@ import { MtSlideComponent } from "../components/mt-slide-component/mt-slide.comp
 import { MtEventPage_1Page } from "../pages/mt-event-page-1/mt-event-page-1";
 import { MtEventPage_2Page } from "../pages/mt-event-page-2/mt-event-page-2";
 import { MtEventPage_3Page } from "../pages/mt-event-page-3/mt-event-page-3";
-import { EnventProvider } from '../providers/envent/envent';
+import { DataService } from '../providers/dataService/dataService';
 import { ToastProvider } from '../providers/toast/toast';
 import { MtListComponent } from "../components/mt-list-component/mt-list.component";
 import { MtCardComponent } from "../components/mt-card-component/mt-card-component";
 import { MtMapsPage } from "../pages/mt-maps-page/mt-maps-page";
 import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
 import { MtDetailEventPage } from "../pages/mt-detail-event/mt-detail-event";
+import { StorageService } from "../providers/storage/storage";
 
 @NgModule({
   declarations: [
@@ -74,9 +75,10 @@ import { MtDetailEventPage } from "../pages/mt-detail-event/mt-detail-event";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    EnventProvider,
+    DataService,
     BarcodeScanner,
-    ToastProvider
+    ToastProvider,
+    StorageService
   ]
 })
 export class AppModule {}

@@ -19,7 +19,7 @@ export class MtListComponent {
     private readonly modalCtrl: ModalController) {
     this.loader = this.loadingCtrl.create({
       content: "Please wait...",
-      duration: 3000,
+      duration: 1000,
       dismissOnPageChange: true
     });
     this.loader.present();
