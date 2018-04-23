@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Event Details</ion-title>
+    <ion-title>Event Detail</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -24,24 +24,24 @@
     </ion-item>
   </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      Location
-    </ion-card-header>
+  <!--<ion-card>-->
+    <!--<ion-card-header>-->
+      <!--Location-->
+    <!--</ion-card-header>-->
 
-    <agm-map style="height: 300px"
-             [latitude]="event.latitude"
-             [longitude]="event.longitude"
-             [zoom]="16">
-      <agm-marker [latitude]="event.latitude" [longitude]="event.longitude">
-        <agm-info-window>{{ event.eventName }}</agm-info-window>
-      </agm-marker>
-    </agm-map>
+    <!--<agm-map style="height: 300px"-->
+             <!--[latitude]="event.latitude"-->
+             <!--[longitude]="event.longitude"-->
+             <!--[zoom]="16">-->
+      <!--<agm-marker [latitude]="event.latitude" [longitude]="event.longitude">-->
+        <!--<agm-info-window>{{ event.eventName }}</agm-info-window>-->
+      <!--</agm-marker>-->
+    <!--</agm-map>-->
 
-    <ion-item>
-      <ion-icon name="map" item-start large></ion-icon>
-      <h2>{{ event.place }}</h2>
-      <p>{{ event.address }}</p>
-    </ion-item>
-  </ion-card>
+    <!--<ion-item>-->
+      <!--<ion-icon name="map" item-start large></ion-icon>-->
+      <!--<h2>{{ event.place }}</h2>-->
+      <!--<p>{{ event.address }}</p>-->
+    <!--</ion-item>-->
+  <!--</ion-card>-->
 </ion-content>
