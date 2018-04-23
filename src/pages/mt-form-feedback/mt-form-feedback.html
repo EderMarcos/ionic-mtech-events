@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      {{ event.eventName }}
+      Poll
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -13,29 +13,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>
-      Qualification
-    </ion-list-header>
-    <ion-item>
-      <ion-range min="0"
-                 max="5"
-                 pin="true"
-                 color="green-3"
-                 step="1"
-                 snaps="true"
-                 [(ngModel)]="rating">
-        <ion-icon range-left
-                  small
-                  ios="ios-star-outline"
-                  md="md-star-outline"
-                  color="green-3"></ion-icon>
-        <ion-icon range-right
-                  ios="ios-star"
-                  md="md-star"
-                  color="green-3"></ion-icon>
-      </ion-range>
-    </ion-item>
+  <ion-list no-border>
+    <ion-list-header> Event: {{ event.eventName }} </ion-list-header>
 
     <ion-item>
       <ion-label stacked>Name</ion-label>
@@ -49,8 +28,38 @@
 
     <ion-item>
       <ion-textarea placeholder="Enter a review"
-                    rows="4"
+                    rows="10"
                     maxLength="500"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <rating [(ngModel)]="rate"
+              text-center
+              readOnly="false"
+              max="5"
+              emptyStarIconName="star-outline"
+              halfStarIconName="star-half"
+              starIconName="star"
+              nullable="false"
+              (ngModelChange)="onModelChange($event)">
+      </rating>
+      <!--<ion-range min="0"-->
+                 <!--max="5"-->
+                 <!--pin="true"-->
+                 <!--color="green-3"-->
+                 <!--step="1"-->
+                 <!--snaps="true"-->
+                 <!--[(ngModel)]="rating">-->
+        <!--<ion-icon range-left-->
+                  <!--small-->
+                  <!--ios="ios-star-outline"-->
+                  <!--md="md-star-outline"-->
+                  <!--color="green-3"></ion-icon>-->
+        <!--<ion-icon range-right-->
+                  <!--ios="ios-star"-->
+                  <!--md="md-star"-->
+                  <!--color="green-3"></ion-icon>-->
+      <!--</ion-range>-->
     </ion-item>
   </ion-list>
 
@@ -59,7 +68,7 @@
             color="green-3"
             block
             icon-end>
-      Send my review
+      Send
       <ion-icon ios="ios-send" md="md-send"></ion-icon>
     </button>
   </div>

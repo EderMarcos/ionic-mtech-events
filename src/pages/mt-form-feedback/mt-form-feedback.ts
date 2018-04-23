@@ -17,6 +17,10 @@ export class MtFormFeedbackPage {
     this.event = this.navParams.get('event');
   }
 
+  onModelChange(e) {
+    console.log(e);
+  }
+
   dismiss() {
     this.view.dismiss();
   }

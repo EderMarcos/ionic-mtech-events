@@ -14,6 +14,7 @@ import { firebaseConfig } from "../config/firebase.config";
 // Plugins
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AgmCoreModule } from '@agm/core';
+import { Ionic2RatingModule } from "ionic2-rating";
 
 import { MyApp } from './app.component';
 import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.component";
@@ -54,7 +55,8 @@ import { MtDetailEventPage } from "../pages/mt-detail-event/mt-detail-event";
     IonicStorageModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDPxN_-ncHex7P1JpCYZjpJnMSD5ytiyBA'
-    })
+    }),
+    Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
