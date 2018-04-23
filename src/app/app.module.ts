@@ -13,6 +13,7 @@ import { firebaseConfig } from "../config/firebase.config";
 
 // Plugins
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { AgmCoreModule } from '@agm/core';
 
 import { MyApp } from './app.component';
 import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.component";
@@ -48,7 +49,10 @@ import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDPxN_-ncHex7P1JpCYZjpJnMSD5ytiyBA'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
