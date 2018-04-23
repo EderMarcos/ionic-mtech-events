@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ModalController } from "ionic-angular";
+import { NavController } from "ionic-angular";
 
 import { MtMapsPage } from "../../pages/mt-maps-page/mt-maps-page";
 
@@ -9,15 +9,14 @@ import { MtMapsPage } from "../../pages/mt-maps-page/mt-maps-page";
 })
 export class MtCardComponent {
 
-  constructor(private readonly modalCtrl: ModalController) { }
+  constructor(private readonly navCtrl: NavController) { }
 
   @Input() imgBackground: string = 'https://picsum.photos/150/150';
   @Input() title: string = 'CTM 2015 - Totally Enormous Extinct Dinosaurus, Greco-Roman';
   @Input() location: string = 'Berghain / Panorama Bar';
   @Input() date: string = 'Today 23:00 - 11:00';
 
-  openModal() {
-    let modal = this.modalCtrl.create(MtMapsPage);
-    modal.present();
+  onCardClick() {
+    this.navCtrl.push(MtMapsPage, { event });
   }
 }

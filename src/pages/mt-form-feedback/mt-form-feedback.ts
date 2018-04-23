@@ -21,7 +21,7 @@ export class MtFormFeedbackPage {
     console.log(e);
   }
 
-  dismiss() {
+  onDismiss() {
     this.view.dismiss();
   }
 }

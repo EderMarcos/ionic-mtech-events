@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { NavParams, ViewController } from "ionic-angular";
+import { Component } from '@angular/core';
+import { NavParams } from "ionic-angular";
+import { EventInterface } from "../../interfaces/eventInterface";
 
 @Component({
   selector: 'page-mt-maps',
@@ -7,19 +8,10 @@ import { NavParams, ViewController } from "ionic-angular";
 })
 export class MtMapsPage {
 
-  lat: number;
-  lng: number;
+  event: EventInterface;
 
   constructor(
-    private readonly view: ViewController,
     private readonly navParams: NavParams) {
-    this.lat = 20.561113;
-    this.lng = -100.366558;
-  }
-
-  @Input() allowFooter: boolean = true;
-
-  onDismiss() {
-    this.view.dismiss();
+    this.event = this.navParams.get('event');
   }
 }

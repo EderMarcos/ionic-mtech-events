@@ -1,27 +1,14 @@
-<!--<ion-header>-->
-
-  <!--<ion-navbar>-->
-    <!--<ion-title>mt-maps</ion-title>-->
-  <!--</ion-navbar>-->
-
-<!--</ion-header>-->
-
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title> Location </ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content>
   <agm-map
-    [latitude]="lat"
-    [longitude]="lng"
+    [latitude]="event.latitude || 20.561113"
+    [longitude]="event.longitude || -100.366558"
     [zoom]="18">
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    <agm-marker [latitude]="event.latitude || 20.561113" [longitude]="event.longitude || -100.366558"></agm-marker>
   </agm-map>
 </ion-content>
-
-<ion-footer *ngIf="allowFooter">
-  <ion-toolbar color="primary">
-    <ion-buttons end>
-      <button ion-button (click)="onDismiss()">
-        Close
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
