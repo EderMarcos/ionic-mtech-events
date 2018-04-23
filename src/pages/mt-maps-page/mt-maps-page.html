@@ -16,7 +16,7 @@
   </agm-map>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="allowFooter">
   <ion-toolbar color="primary">
     <ion-buttons end>
       <button ion-button (click)="onDismiss()">

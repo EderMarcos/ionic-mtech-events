@@ -6,5 +6,10 @@ export interface EventInterface {
   exhibitorImg: string;
   eventImg: string;
   breakFast: boolean;
-  day: string
+  day: string;
+  description: string;
+  latitude: number;
+  longitude: number;
+  place: string;
+  address: string;
 }

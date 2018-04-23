@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Event Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="event">
+  <ion-card>
+    <ion-item>
+      <h2>{{ event.eventName }}</h2>
+    </ion-item>
+
+    <img [src]="event.eventImg">
+    <ion-card-content>
+      <p>{{ event.description }}</p>
+    </ion-card-content>
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img [src]="event.exhibitorImg">
+      </ion-avatar>
+      <h2>{{ event.exhibitorName }}</h2>
+      <p>{{ event.date | date:'MMM d, y, h:mm a'}}</p>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Location
+    </ion-card-header>
+
+    <agm-map style="height: 300px"
+             [latitude]="event.latitude"
+             [longitude]="event.longitude"
+             [zoom]="16">
+      <agm-marker [latitude]="event.latitude" [longitude]="event.longitude">
+        <agm-info-window>{{ event.eventName }}</agm-info-window>
+      </agm-marker>
+    </agm-map>
+
+    <ion-item>
+      <ion-icon name="map" item-start large></ion-icon>
+      <h2>{{ event.place }}</h2>
+      <p>{{ event.address }}</p>
+    </ion-item>
+  </ion-card>
+</ion-content>

@@ -27,6 +27,7 @@ import { MtListComponent } from "../components/mt-list-component/mt-list.compone
 import { MtCardComponent } from "../components/mt-card-component/mt-card-component";
 import { MtMapsPage } from "../pages/mt-maps-page/mt-maps-page";
 import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
+import { MtDetailEventPage } from "../pages/mt-detail-event/mt-detail-event";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
     MtEventPage_3Page,
     MtMapsPage,
     MtFormFeedbackPage,
+    MtDetailEventPage,
     MtSlideComponent,
     MtTabsComponent,
     MtListComponent,
@@ -63,7 +65,8 @@ import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
     MtEventPage_2Page,
     MtEventPage_3Page,
     MtMapsPage,
-    MtFormFeedbackPage
+    MtFormFeedbackPage,
+    MtDetailEventPage,
   ],
   providers: [
     StatusBar,

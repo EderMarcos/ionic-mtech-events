@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavParams, ViewController } from "ionic-angular";
 
 @Component({
@@ -16,6 +16,8 @@ export class MtMapsPage {
     this.lat = 20.561113;
     this.lng = -100.366558;
   }
+
+  @Input() allowFooter: boolean = true;
 
   onDismiss() {
     this.view.dismiss();
