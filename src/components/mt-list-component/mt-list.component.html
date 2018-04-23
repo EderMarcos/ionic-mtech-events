@@ -5,7 +5,7 @@
         <img [src]="item.eventImg ? item.eventImg : errImg">
       </ion-avatar>
       <!--<ion-icon name="leaf" item-start></ion-icon>-->
-      <h2 class="mt-list-item__title" [ngClass]="{ 'text-break': item.endTime }">{{ item.eventName }}</h2>
+      <h2 class="mt-list-item__title" [ngClass]="{ 'green-text': item.breakFast, 'white-text': !item.breakFast }">{{ item.eventName }}</h2>
       <ion-note class="mt-list-item__date" item-end>{{ item.date | date:'h:mm' }} - {{ item.endTime | date:typeDate }}</ion-note>
       <p class="mt-list-item__subtitle">{{ item.exhibitorName }}</p>
     </ion-item>
