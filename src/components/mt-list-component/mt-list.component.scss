@@ -1,3 +1,22 @@
 components-mt-list {
 
 }
+
+.mt-list-item {
+  background: #0B1B33;
+  color: #116A74;
+  &__title {
+    font-weight: bold !important;
+    font-size: 1.5rem !important;
+  }
+  .item-inner {
+    border: 0 !important;
+  }
+  &__subtitle {
+    font-size: 1.2rem !important;;
+    color: #97D2C1 !important;
+  }
+  &__date {
+    color: #fff;
+  }
+}
