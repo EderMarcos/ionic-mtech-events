@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams } from "ionic-angular";
+import { NavParams, ViewController } from "ionic-angular";
 
 @Component({
   selector: 'page-mt-maps',
@@ -10,12 +10,14 @@ export class MtMapsPage {
   lat: number;
   lng: number;
 
-  constructor(private readonly navParams: NavParams) {
-    this.lat = 51.678418;
-    this.lng = 7.809007;
+  constructor(
+    private readonly view: ViewController,
+    private readonly navParams: NavParams) {
+    this.lat = 20.561113;
+    this.lng = -100.366558;
   }
 
   onDismiss() {
-
+    this.view.dismiss();
   }
 }
