@@ -17,8 +17,11 @@
   text-align: center;
 }
 
+.no-list-border .item-inner {
+  border: 0 !important;
+}
 .no-border {
-  border: 0;
+  border: 0 !important;
 }
 
 .mt-event-page {
@@ -35,39 +38,4 @@
 
 .header-ios .toolbar-ios:last-child .toolbar-background-ios {
   border-color: transparent;
-}
-
-.card-event {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-  padding: 1rem;
-  &__img {
-    position: absolute;
-    width: 100%;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-    object-position: center;
-    -webkit-filter: brightness(.7);
-    filter: brightness(.7);
-  }
-  &__name,
-  &__location,
-  &__date {
-    color: #fff;
-  }
-  &__name,
-  &__location {
-    margin-bottom: 0;
-  }
-  &__location,
-  &__date {
-    font-size: 0.9em;
-  }
-  &__name {
-    font-size: 1.5em;
-    margin-top: 0;
-  }
 }

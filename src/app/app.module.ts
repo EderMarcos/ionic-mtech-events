@@ -24,6 +24,8 @@ import { EnventProvider } from '../providers/envent/envent';
 import { ToastProvider } from '../providers/toast/toast';
 import { MtListComponent } from "../components/mt-list-component/mt-list.component";
 import { MtCardComponent } from "../components/mt-card-component/mt-card-component";
+import { MtMapsPage } from "../pages/mt-maps-page/mt-maps-page";
+import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { MtCardComponent } from "../components/mt-card-component/mt-card-compone
     MtEventPage_1Page,
     MtEventPage_2Page,
     MtEventPage_3Page,
+    MtMapsPage,
+    MtFormFeedbackPage,
     MtSlideComponent,
     MtTabsComponent,
     MtListComponent,
@@ -54,6 +58,8 @@ import { MtCardComponent } from "../components/mt-card-component/mt-card-compone
     MtEventPage_1Page,
     MtEventPage_2Page,
     MtEventPage_3Page,
+    MtMapsPage,
+    MtFormFeedbackPage
   ],
   providers: [
     StatusBar,

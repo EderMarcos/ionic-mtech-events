@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { LoadingController } from "ionic-angular";
+import { LoadingController, ModalController } from "ionic-angular";
+import { MtFormFeedbackPage } from "../../pages/mt-form-feedback/mt-form-feedback";
 
 @Component({
   selector: 'mt-list',
@@ -9,7 +10,9 @@ export class MtListComponent {
 
   private readonly  loader: any;
 
-  constructor(private readonly loadingCtrl: LoadingController) {
+  constructor(
+    private readonly loadingCtrl: LoadingController,
+    private readonly modalCtrl: ModalController) {
     this.loader = this.loadingCtrl.create({
       content: "Please wait...",
       duration: 3000,
@@ -25,4 +28,9 @@ export class MtListComponent {
   @Input() data: any;
   @Input() errImg: string = 'https://picsum.photos/80/80';
   @Input() typeDate: string = 'shortTime';
+
+  openModal(event: string) {
+    let modal = this.modalCtrl.create(MtFormFeedbackPage, { event: event });
+    modal.present();
+  }
 }
