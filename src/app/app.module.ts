@@ -38,6 +38,7 @@ import { ToastService } from '../providers/toast/toast-service';
 import { StorageService } from "../providers/storage/storage-service";
 import { AlertService } from "../providers/alert/alert-service";
 import { LoaderService } from "../providers/loader/loader-service";
+import { SwitchEventService } from "../providers/switch-event/switch-event-service";
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { LoaderService } from "../providers/loader/loader-service";
     StorageService,
     AlertService,
     LoaderService,
+    SwitchEventService,
   ]
 })
 export class AppModule {}

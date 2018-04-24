@@ -1,13 +1,17 @@
 <div padding-top padding-bottom *ngIf="data">
   <ion-list>
-    <ion-item class="mt-list-item" *ngFor="let item of data" (click)="onItemClick(item)">
-      <ion-avatar item-start *ngIf="!item.breakFast">
-        <img [src]="item.eventImg ? item.eventImg : onNullImage">
+    <ion-item class="mt-list-item" *ngFor="let event of data" (click)="onItemClick(event)">
+      <ion-avatar item-start *ngIf="!event.breakFast">
+        <img [src]="event.eventImg || onNullImage">
       </ion-avatar>
       <!--<ion-icon name="leaf" item-start></ion-icon>-->
-      <h2 class="mt-list-item__title" [ngClass]="{ 'break-activities': item.breakFast }">{{ item.eventName }}</h2>
-      <ion-note class="mt-list-item__date" item-end>{{ item.date | date:'h:mm' }} - {{ item.endTime | date:typeDate }}</ion-note>
-      <p class="mt-list-item__subtitle">{{ item.exhibitorName }}</p>
+      <h2 class="mt-list-item__title"
+          [ngClass]="{ 'break-activities': event.breakFast, 'disableda': !event.available }">{{ event.eventName }}</h2>
+      <ion-note class="mt-list-item__date"
+                [ngClass]="{ 'disableda': !event.available }"
+                item-end>{{ event.date | date:'h:mm' }} - {{ event.endTime | date:typeDate }}</ion-note>
+      <p class="mt-list-item__subtitle"
+         [ngClass]="{ 'disableda': !event.available }">{{ event.exhibitorName }}</p>
     </ion-item>
   </ion-list>
 </div>

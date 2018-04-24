@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Platform } from "ionic-angular";
 import { Storage } from "@ionic/storage";
-import {ToastService} from "../toast/toast-service";
+import { ToastService } from "../toast/toast-service";
 
 @Injectable()
 export class StorageService {

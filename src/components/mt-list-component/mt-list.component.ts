@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChange } from '@angular/core';
 import { ModalController, NavController } from "ionic-angular";
 
 import { MtFormFeedbackPage } from "../../pages/mt-form-feedback/mt-form-feedback";
 import { EventInterface } from "../../interfaces/event-interface";
 import { MtDetailEventPage } from "../../pages/mt-detail-event/mt-detail-event";
+import { SwitchEventService } from "../../providers/switch-event/switch-event-service";
 
 @Component({
   selector: 'mt-list',
@@ -13,6 +14,7 @@ export class MtListComponent {
 
   constructor(
     private readonly navCtrl: NavController,
+    private readonly switchEvent: SwitchEventService,
     private readonly modalCtrl: ModalController) {
   }
 
@@ -25,10 +27,31 @@ export class MtListComponent {
     if (event.breakFast) {
       return;
     }
-    if (event.eventName.toLocaleLowerCase() === 'welcome') {
+    if (event.available) {
       let modal = this.modalCtrl.create(MtFormFeedbackPage, { event: event });
       return modal.present();
     }
     this.navCtrl.push(MtDetailEventPage, { event });
+  }
+
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    if (this.data) {
+      console.log(this.data);
+      this.switchEvent.setEvents(this.data);
+      this.switchEvent.getCurrentEvent()
+        .subscribe(a => console.log(a));
+    }
+  }
+
+  verifyEventIsValid(event: EventInterface): boolean {
+    const now = new Date().getTime();
+    if (now < +event.endTime) {
+      console.log(((+event.endTime) - now) / 1000);
+      console.log('Valid');
+      return true;
+    } else {
+      console.error('Ya caduco', event.id, event.eventName);
+      return false;
+    }
   }
 }

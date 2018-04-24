@@ -1,6 +1,6 @@
 export interface EventInterface {
-  date: Date;
-  endTime: Date;
+  date: number;
+  endTime: number;
   eventName: string;
   exhibitorName: string;
   exhibitorImg: string;
@@ -13,4 +13,5 @@ export interface EventInterface {
   place: string;
   address: string;
   id?: string;
+  available: boolean;
 }
