@@ -1,19 +1,14 @@
-<div class="card-event text-center">
-  <img class="card-event__img" [src]="imgBackground"/>
-  <p class="card-event__name">{{ title }}</p>
-  <p class="card-event__location">
-    <ion-icon ios="ios-navigate" md="md-navigate"></ion-icon>
-    {{ location }}
-  </p>
-  <p class="card-event__date">
-    <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-    {{ date }}
-  </p>
-  <button
-    ion-button
-    icon-right
-    (click)="onCardClick()"
-    color="danger">
-    Read more
-  </button>
+<div class="card-container">
+  <img class="card-container__img" [src]="imgBackground"/>
+  <div class="card">
+    <p class="card__title">{{ title }}</p>
+    <p class="card__date">
+      <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
+      {{ date }}
+    </p>
+    <button ion-button
+            outline
+            color="light"
+            (click)="onCardClick()"> Read more</button>
+  </div>
 </div>
