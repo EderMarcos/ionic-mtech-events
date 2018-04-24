@@ -1,5 +1,5 @@
 export interface UserInterface {
-  address?: string
+  address?: string;
   city?: string;
   company?: string;
   name?: string;

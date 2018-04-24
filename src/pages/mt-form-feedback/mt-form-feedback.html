@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="animated fadeIn">
   <ion-toolbar color="primary">
     <ion-title>
       Poll
@@ -12,19 +12,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="feedback">
+<ion-content class="animated fadeIn">
   <ion-list>
     <ion-list-header> Event: {{ event.eventName }} </ion-list-header>
-
-    <ion-item>
-      <ion-label stacked>Name</ion-label>
-      <ion-input type="text" [(ngModel)]="feedback.name"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Email</ion-label>
-      <ion-input type="email" [(ngModel)]="feedback.email"></ion-input>
-    </ion-item>
 
     <ion-item>
       <ion-textarea placeholder="Enter a review"
