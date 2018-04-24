@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Platform } from "ionic-angular";
 import { Storage } from "@ionic/storage";
+import {ToastService} from "../toast/toast-service";
 
 @Injectable()
 export class StorageService {
 
   constructor(
     private readonly platform: Platform,
+    private readonly toast: ToastService,
     private readonly storage: Storage) {}
 
   setEntity(key: string, entity: string) {
@@ -23,7 +25,7 @@ export class StorageService {
         return resolve(localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : false)
       }
       this.storage.get(key)
-        .then(data => resolve(JSON.parse(data)));
+        .then(data => resolve(data ? JSON.parse(data) : false));
     });
   }
 }
