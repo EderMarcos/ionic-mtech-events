@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Signin</ion-title>
+    <ion-title>Log in</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -19,9 +19,14 @@
           </ion-list>
 
           <button ion-button
+                  icon-right=""
                   color="light"
-                  outline
-                  (click)="onSubmit()">Sign In</button>
+                  round
+                  block
+                  (click)="onSubmit()">
+            Sign In
+            <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
+          </button>
         </div>
       </ion-col>
     </ion-row>
