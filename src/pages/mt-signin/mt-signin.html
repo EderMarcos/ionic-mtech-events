@@ -5,18 +5,25 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label fixed>Email</ion-label>
-      <ion-input type="text" [(ngModel)]="user.email"></ion-input>
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-content">
+  <ion-grid class="h-100">
+    <ion-row justify-content-center align-items-center class="h-100">
+      <ion-col col-12>
+        <img class="ion-content__logo" src="https://picsum.photos/150/150" alt="">
+        <div padding>
+          <ion-list>
+            <ion-item class="no-bt">
+              <ion-label floating>Email</ion-label>
+              <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+            </ion-item>
+          </ion-list>
 
-  <div padding>
-    <button ion-button
-            color="primary"
-            (click)="onSubmit()"
-            block>Sign In</button>
-  </div>
+          <button ion-button
+                  color="light"
+                  outline
+                  (click)="onSubmit()">Sign In</button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
