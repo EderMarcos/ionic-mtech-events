@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { LoadingController, ModalController, NavController } from "ionic-angular";
+import { ModalController, NavController } from "ionic-angular";
 
 import { MtFormFeedbackPage } from "../../pages/mt-form-feedback/mt-form-feedback";
-import { EventInterface } from "../../interfaces/eventInterface";
+import { EventInterface } from "../../interfaces/event-interface";
 import { MtDetailEventPage } from "../../pages/mt-detail-event/mt-detail-event";
 
 @Component({
@@ -11,26 +11,13 @@ import { MtDetailEventPage } from "../../pages/mt-detail-event/mt-detail-event";
 })
 export class MtListComponent {
 
-  private readonly  loader: any;
-
   constructor(
-    private readonly loadingCtrl: LoadingController,
     private readonly navCtrl: NavController,
     private readonly modalCtrl: ModalController) {
-    this.loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 1000,
-      dismissOnPageChange: true
-    });
-    this.loader.present();
-
-    if (this.data) {
-      this.loader.dismissAll();
-    }
   }
 
-  @Input() data: any;
-  @Input() errImg: string = 'https://picsum.photos/80/80';
+  @Input() data: EventInterface[];
+  @Input() onNullImage: string = 'https://picsum.photos/80/80';
   @Input() typeDate: string = 'shortTime';
 
   onItemClick(event: EventInterface) {

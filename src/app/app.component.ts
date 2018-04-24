@@ -5,8 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.component";
 import { MtSigninPage } from "../pages/mt-signin/mt-signin";
-import { StorageService } from "../providers/storage/storage";
-import {UserInterface} from "../interfaces/userInterface";
+import { StorageService } from "../providers/storage/storage-service";
+import {UserInterface} from "../interfaces/user-interface";
 
 @Component({
   templateUrl: 'app.html'

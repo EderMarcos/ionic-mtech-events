@@ -16,21 +16,28 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AgmCoreModule } from '@agm/core';
 import { Ionic2RatingModule } from "ionic2-rating";
 
+// Components
 import { MyApp } from './app.component';
+import { MtListComponent } from "../components/mt-list-component/mt-list.component";
+import { MtCardComponent } from "../components/mt-card-component/mt-card-component";
 import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.component";
 import { MtSlideComponent } from "../components/mt-slide-component/mt-slide.component";
+
+// Pages
 import { MtEventPage_1Page } from "../pages/mt-event-page-1/mt-event-page-1";
 import { MtEventPage_2Page } from "../pages/mt-event-page-2/mt-event-page-2";
 import { MtEventPage_3Page } from "../pages/mt-event-page-3/mt-event-page-3";
-import { DataService } from '../providers/dataService/dataService';
-import { ToastProvider } from '../providers/toast/toast';
-import { MtListComponent } from "../components/mt-list-component/mt-list.component";
-import { MtCardComponent } from "../components/mt-card-component/mt-card-component";
 import { MtMapsPage } from "../pages/mt-maps-page/mt-maps-page";
 import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
 import { MtDetailEventPage } from "../pages/mt-detail-event/mt-detail-event";
-import { StorageService } from "../providers/storage/storage";
 import { MtSigninPage } from "../pages/mt-signin/mt-signin";
+
+// Services
+import { DataService } from '../providers/data/data-service';
+import { ToastService } from '../providers/toast/toast-service';
+import { StorageService } from "../providers/storage/storage-service";
+import { AlertService } from "../providers/alert/alert-service";
+import { LoaderService } from "../providers/loader/loader-service";
 
 @NgModule({
   declarations: [
@@ -44,8 +51,6 @@ import { MtSigninPage } from "../pages/mt-signin/mt-signin";
     MtFormFeedbackPage,
     MtDetailEventPage,
     MtSigninPage,
-    MtSlideComponent,
-    MtTabsComponent,
     MtListComponent,
     MtCardComponent
   ],
@@ -80,8 +85,10 @@ import { MtSigninPage } from "../pages/mt-signin/mt-signin";
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataService,
     BarcodeScanner,
-    ToastProvider,
-    StorageService
+    ToastService,
+    StorageService,
+    AlertService,
+    LoaderService,
   ]
 })
 export class AppModule {}

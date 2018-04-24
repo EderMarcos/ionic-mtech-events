@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
-import { EventInterface } from "../../interfaces/eventInterface";
+import { EventInterface } from "../../interfaces/event-interface";
 
 @Component({
   selector: 'page-mt-detail-event',

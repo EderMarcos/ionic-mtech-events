@@ -8,15 +8,6 @@
 </ion-header>
 
 <ion-content class="list-avatar-page mt-event-page animated fadeIn">
-  <ion-refresher
-    (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="ios-arrow-down"
-      pullingText="Pull to refresh"
-      refreshingSpinner="crescent"
-      refreshingText="Refreshing"></ion-refresher-content>
-  </ion-refresher>
-
   <mt-list
     [data]="events"></mt-list>
 </ion-content>

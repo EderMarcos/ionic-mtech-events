@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { ToastProvider } from "../../providers/toast/toast";
+import { ToastService } from "../../providers/toast/toast-service";
 import {Platform} from "ionic-angular";
 
 @Component({
@@ -11,7 +11,7 @@ export class MtScanPage {
 
   constructor(
     private readonly barcodeScanner: BarcodeScanner,
-    private readonly toast: ToastProvider,
+    private readonly toast: ToastService,
     private readonly platform: Platform) {
   }
 

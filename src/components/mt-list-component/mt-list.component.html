@@ -2,7 +2,7 @@
   <ion-list>
     <ion-item class="mt-list-item" *ngFor="let item of data" (click)="onItemClick(item)">
       <ion-avatar item-start *ngIf="!item.breakFast">
-        <img [src]="item.eventImg ? item.eventImg : errImg">
+        <img [src]="item.eventImg ? item.eventImg : onNullImage">
       </ion-avatar>
       <!--<ion-icon name="leaf" item-start></ion-icon>-->
       <h2 class="mt-list-item__title" [ngClass]="{ 'green-text': item.breakFast, 'white-text': !item.breakFast }">{{ item.eventName }}</h2>

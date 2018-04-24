@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { DataService } from "../../providers/dataService/dataService";
+
+import { DataService } from "../../providers/data/data-service";
+import { LoaderService } from "../../providers/loader/loader-service";
 
 @Component({
   selector: 'page-mt-event-page-3',
@@ -9,16 +11,18 @@ export class MtEventPage_3Page {
 
   private events;
 
-  constructor(private _dataService: DataService) {
-    this._dataService.getEntities({ collection: 'events',
-      query: (ref => ref.where('day', '==', '3').orderBy('date', 'asc'))})
-      .then(events => this.events = events);
+  constructor(
+    private readonly _dataService: DataService,
+    private readonly loader: LoaderService) {
+    this.getEventsByDay('3');
   }
 
-  doRefresh(refresher) {
-    this._dataService.getEntities({ collection: 'events',
-      query: (ref => ref.where('day', '==', '3').orderBy('date', 'asc'))})
+  getEventsByDay(day: string) {
+    this.loader.showLoading({ content: 'Loading events...', duration: 0 });
+    this._dataService.getEntities({
+      collection: 'events',
+      query: (ref => ref.where('day', '==', day).orderBy('date', 'asc'))})
       .then(events => this.events = events)
-      .then(refresher.complete());
+      .then((_) => this.loader.clear());
   }
 }

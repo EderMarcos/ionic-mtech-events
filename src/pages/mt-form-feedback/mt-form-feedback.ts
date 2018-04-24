@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
-import { FeedbackInterface } from "../../interfaces/feedbackInterface";
-import { EventInterface } from "../../interfaces/eventInterface";
-import { QuizInterface } from "../../interfaces/quizInterface";
-import { UserInterface } from "../../interfaces/userInterface";
-import { StorageService } from "../../providers/storage/storage";
-import { ToastProvider } from "../../providers/toast/toast";
-import { DataService } from "../../providers/dataService/dataService";
+import { FeedbackInterface } from "../../interfaces/feedback-interface";
+import { EventInterface } from "../../interfaces/event-interface";
+import { QuizInterface } from "../../interfaces/quiz-interface";
+import { UserInterface } from "../../interfaces/user-interface";
+import { StorageService } from "../../providers/storage/storage-service";
+import { ToastService } from "../../providers/toast/toast-service";
+import { DataService } from "../../providers/data/data-service";
 
 @Component({
   selector: 'page-mt-form-feedback',
@@ -23,7 +23,7 @@ export class MtFormFeedbackPage {
   constructor(
     private readonly view: ViewController,
     private readonly navParams: NavParams,
-    private readonly toast: ToastProvider,
+    private readonly toast: ToastService,
     private readonly storage: StorageService,
     private _dataService: DataService) {
     this.event = this.navParams.get('event');
