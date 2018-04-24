@@ -13,13 +13,28 @@
 </ion-header>
 
 <ion-content class="animated fadeIn fast">
-  <ion-list>
-    <ion-list-header> Event: {{ event.eventName }} </ion-list-header>
-
+  <ion-list no-border style="margin-bottom: 11px">
+    <ion-list-header>Personal Information</ion-list-header>
     <ion-item>
-      <ion-textarea placeholder="Enter a review"
+      <ion-icon name="contact" item-start></ion-icon>
+      Name:
+      <ion-note item-end>{{ user.name }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="mail" item-start></ion-icon>
+      Email:
+      <ion-note item-end>{{ user.email }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-list no-border style="margin: 0">
+    <ion-list-header> Event: {{ event.eventName }} </ion-list-header>
+    <ion-item class="no-p">
+      <ion-textarea style="margin-left: 1rem"
+                    placeholder="Enter a review"
                     rows="10"
-                    maxLength="500" [(ngModel)]="feedback.comments"></ion-textarea>
+                    maxLength="500"
+                    [(ngModel)]="feedback.comments"></ion-textarea>
     </ion-item>
 
     <ion-item>
@@ -35,14 +50,14 @@
     </ion-item>
   </ion-list>
 
-  <div padding>
+  <div class="text-center" padding>
     <button ion-button
             color="green-3"
+            outline
+            round
             block
-            (click)="onSubmit()"
-            icon-end>
+            (click)="onSubmit()">
       Send
-      <ion-icon ios="ios-send" md="md-send"></ion-icon>
     </button>
   </div>
 </ion-content>

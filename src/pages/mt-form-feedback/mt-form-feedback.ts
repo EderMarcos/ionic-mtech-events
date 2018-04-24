@@ -18,7 +18,7 @@ export class MtFormFeedbackPage {
   private event: EventInterface;
   private feedback: FeedbackInterface;
   private user: UserInterface;
-  private quiz: QuizInterface;
+  private readonly quiz: QuizInterface;
 
   constructor(
     private readonly view: ViewController,
