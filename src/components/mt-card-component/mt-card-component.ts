@@ -25,10 +25,12 @@ export class MtCardComponent {
     private readonly toast: ToastService,
     private readonly backgroundMode: BackgroundMode,
     private readonly switchEvent: SwitchEventService) {
-    this.backgroundMode.enable();
-    this.backgroundMode.on('enable').subscribe((a) => {
-      this.toast.showToast(`Enable ${ a }`)
-    });
+    if (this.platform.is('cordova')) {
+      this.backgroundMode.enable();
+      this.backgroundMode.on('enable').subscribe((a) => {
+        this.toast.showToast(`Enable ${ a }`)
+      });
+    }
     this.init();
   }
 
