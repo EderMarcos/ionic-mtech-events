@@ -29,10 +29,12 @@ export class SwitchEventService {
     private readonly platform: Platform,
     private readonly toast: ToastService,
     private readonly backgroundMode: BackgroundMode,) {
+    platform.ready().then(() => {
+      this.backgroundMode.enable();
+    });
   }
 
   getCurrentOrLastEvent(events: EventInterface[], lastEvent: boolean = false): Observable<EventInterface> {
-    this.backgroundMode.enable();
     let now = new Date().getTime();
     return new Observable<EventInterface>(observer => {
       for (let i = 0; i < events.length; i++) {
