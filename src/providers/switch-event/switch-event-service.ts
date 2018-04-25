@@ -64,6 +64,7 @@ export class SwitchEventService {
       let timer = Math.floor(lastEvent ? event.endTime - new Date().getTime() : event.date - new Date().getTime());
       if (this.platform.is('cordova')) {
         this.backgroundMode.enable();
+        this.toast.showToast(`Enable ${ this.backgroundMode.isActive() }`);
         this.backgroundMode.on('activate').subscribe((a) => {
           this.toast.showToast(`Enable ${ a }`);
           setTimeout(() => {
