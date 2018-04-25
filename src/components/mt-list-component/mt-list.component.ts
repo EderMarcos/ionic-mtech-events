@@ -5,6 +5,7 @@ import { MtFormFeedbackPage } from "../../pages/mt-form-feedback/mt-form-feedbac
 import { EventInterface } from "../../interfaces/event-interface";
 import { MtDetailEventPage } from "../../pages/mt-detail-event/mt-detail-event";
 import { SwitchEventService } from "../../providers/switch-event/switch-event-service";
+import { NotificationService } from "../../providers/notification/notification-service";
 
 @Component({
   selector: 'mt-list',
@@ -15,6 +16,7 @@ export class MtListComponent {
   constructor(
     private readonly navCtrl: NavController,
     private readonly switchEvent: SwitchEventService,
+    private readonly notification: NotificationService,
     private readonly modalCtrl: ModalController) {
   }
 
@@ -35,12 +37,9 @@ export class MtListComponent {
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     if (this.events) {
-      console.log(this.events);
       this.switchEvent.getCurrentOrLastEvent(this.events, true)
         .subscribe(event => {
-          if (event.id) {
-            this.events.find(f => f.id === event.id).available = false;
-          }
+          if (event.id && !event.available) return this.events.find(f => f.id === event.id).available = false;
         });
     }
   }

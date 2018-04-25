@@ -78,14 +78,14 @@ export class MtFormFeedbackPage {
       this.feedback.updatedAt = new Date().getTime();
       return await this._dataService.updateEntity({ collection: 'feedback', key: this.feedback.id }, this.feedback)
         .then((_) => {
-          this.toast.showToast('Updated Record');
+          this.toast.showToast('Your comment has been updated');
           this.onDismiss();
         });
     }
     await this._dataService.setEntity('surveyHistory', this.quiz);
     await this._dataService.setEntity('feedback', this.feedback)
       .then((_) => {
-        this.toast.showToast('Added Record');
+        this.toast.showToast('Your comment has been sent');
         this.onDismiss();
       });
   }

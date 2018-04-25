@@ -10,7 +10,7 @@ export class SwitchEventService {
   private onNullEvent: EventInterface = {
     eventName: 'Coming soon',
     exhibitorName: 'MTech Systems',
-    eventImg: null,
+    eventImg: 'https://picsum.photos/300/300',
     exhibitorImg: null,
     breakFast: false,
     day: null,
@@ -42,9 +42,8 @@ export class SwitchEventService {
           // At the start Event
           observer.next(this.onNullEvent);
         }
-        console.log(events[i].endTime + (10 * this.minute));
         // If there are some events that are available
-        if (now > (events[i].endTime + (10 * this.minute)) && events[i].available || events[i].surveyEnable) {
+        if (now > (events[i].endTime + (10 * this.minute)) && events[i].available && events[i].surveyEnable) {
           events[i].available = false;
           events[i].surveyEnable = false;
           this.updateEvent(events[i]);
@@ -64,17 +63,17 @@ export class SwitchEventService {
         return resolve(event);
       }
       let timer = Math.floor(lastEvent ? event.endTime - new Date().getTime() : event.date - new Date().getTime());
-      console.log(timer + 10 * this.minute);
       if (lastEvent) {
         setTimeout(() => {
           event.available = false;
           event.surveyEnable = false;
           this.updateEvent(event);
+          resolve(event);
         }, timer + 10 * this.minute);
       }
       this.timeoutVar = setTimeout(() => {
         if (lastEvent) {
-          event.surveyEnable = true;
+          event.surveyEnable = event.available;
           this.updateEvent(event);
         }
         resolve(event);
@@ -89,9 +88,5 @@ export class SwitchEventService {
 
   updateEvent(data: EventInterface) {
     this.dataService.updateEntity({ collection: 'events', key: data.id }, data);
-  }
-
-  addMinutes(date: number) {
-    // return
   }
 }

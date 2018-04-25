@@ -18,7 +18,6 @@ export class MtCardComponent {
   constructor(
     private readonly navCtrl: NavController,
     private readonly dataService: DataService,
-    private readonly notification: NotificationService,
     private readonly switchEvent: SwitchEventService) {
     this.init();
   }
@@ -33,7 +32,6 @@ export class MtCardComponent {
         this.switchEvent.getCurrentOrLastEvent(entities)
           .subscribe(event => {
             if (event.available) {
-              this.notification.showNotification({ id: event.date, title: event.eventName, text: 'Please help us to know your opinion about the event' });
               this.currentEvent = event;
             }
           });
