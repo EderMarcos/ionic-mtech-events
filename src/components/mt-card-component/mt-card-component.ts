@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import {NavController, Platform} from "ionic-angular";
+import { NavController, Platform } from "ionic-angular";
 
 import { MtMapsPage } from "../../pages/mt-maps-page/mt-maps-page";
 import { SwitchEventService } from "../../providers/switch-event/switch-event-service";
 import { EventInterface } from "../../interfaces/event-interface";
 import { DataService } from "../../providers/data/data-service";
-import { LocalNotifications } from "@ionic-native/local-notifications";
+import { NotificationService } from "../../providers/notification/notification-service";
 
 @Component({
   selector: 'mt-card',
@@ -18,9 +18,15 @@ export class MtCardComponent {
   constructor(
     private readonly navCtrl: NavController,
     private readonly dataService: DataService,
-    private readonly localNotifications: LocalNotifications,
+    private readonly notification: NotificationService,
     private readonly platform: Platform,
     private readonly switchEvent: SwitchEventService) {
+    this.init();
+  }
+
+  @Input() onNullImg: string = 'https://picsum.photos/300/300';
+
+  init() {
     this.dataService.getEntities({
       collection: 'events',
       query: (ref => ref.orderBy('date', 'asc'))})
@@ -28,23 +34,12 @@ export class MtCardComponent {
         this.switchEvent.getCurrentOrLastEvent(entities)
           .subscribe(event => {
             if (event.available) {
-              this.currentEvent = event
+              this.notification.showNotification({ id: event.date, title: event.eventName, text: 'Please help us to know your opinion about the event' });
+              this.currentEvent = event;
             }
           });
       });
-
-    // Notifications
-    this.localNotifications.schedule({
-      id: 1,
-      title: 'Title',
-      text: 'Textoooooooo',
-      sound: 'file://beep.caf',
-      trigger: { at: new Date(new Date().getTime() + 5 * 1000) },
-      data: { mydata: 'lorem' }
-    });
   }
-
-  @Input() onNullImg: string = 'https://picsum.photos/300/300';
 
   onCardClick() {
     this.navCtrl.push(MtMapsPage, { event: this.currentEvent });

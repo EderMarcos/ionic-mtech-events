@@ -40,6 +40,7 @@ import { AlertService } from "../providers/alert/alert-service";
 import { LoaderService } from "../providers/loader/loader-service";
 import { SwitchEventService } from "../providers/switch-event/switch-event-service";
 import { LocalNotifications } from "@ionic-native/local-notifications";
+import { NotificationService } from "../providers/notification/notification-service";
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { LocalNotifications } from "@ionic-native/local-notifications";
     LoaderService,
     SwitchEventService,
     LocalNotifications,
+    NotificationService,
   ]
 })
 export class AppModule {}

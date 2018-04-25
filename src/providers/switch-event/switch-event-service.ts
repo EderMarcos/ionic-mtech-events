@@ -7,7 +7,7 @@ import { DataService } from "../data/data-service";
 @Injectable()
 export class SwitchEventService {
 
-  onNullEvent: EventInterface = {
+  private onNullEvent: EventInterface = {
     eventName: 'Coming soon',
     exhibitorName: null,
     eventImg: null,
