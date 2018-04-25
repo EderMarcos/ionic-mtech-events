@@ -1,13 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { NavController, Platform } from "ionic-angular";
+import { NavController } from "ionic-angular";
 
 import { MtMapsPage } from "../../pages/mt-maps-page/mt-maps-page";
 import { SwitchEventService } from "../../providers/switch-event/switch-event-service";
 import { EventInterface } from "../../interfaces/event-interface";
 import { DataService } from "../../providers/data/data-service";
 import { NotificationService } from "../../providers/notification/notification-service";
-import { BackgroundMode } from "@ionic-native/background-mode";
-import { ToastService } from "../../providers/toast/toast-service";
 
 @Component({
   selector: 'mt-card',
@@ -21,16 +19,7 @@ export class MtCardComponent {
     private readonly navCtrl: NavController,
     private readonly dataService: DataService,
     private readonly notification: NotificationService,
-    private readonly platform: Platform,
-    private readonly toast: ToastService,
-    private readonly backgroundMode: BackgroundMode,
     private readonly switchEvent: SwitchEventService) {
-    // if (this.platform.is('cordova')) {
-    //   this.backgroundMode.enable();
-    //   this.backgroundMode.on('enable').subscribe((a) => {
-    //     this.toast.showToast(`Enable ${ a }`)
-    //   });
-    // }
     this.init();
   }
 
