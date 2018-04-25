@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, SimpleChange} from '@angular/core';
 import { NavController } from "ionic-angular";
 
 import { MtMapsPage } from "../../pages/mt-maps-page/mt-maps-page";
+import { SwitchEventService } from "../../providers/switch-event/switch-event-service";
+import { EventInterface } from "../../interfaces/event-interface";
 
 @Component({
   selector: 'mt-card',
@@ -9,14 +11,27 @@ import { MtMapsPage } from "../../pages/mt-maps-page/mt-maps-page";
 })
 export class MtCardComponent {
 
-  constructor(private readonly navCtrl: NavController) { }
+  currentEvent: EventInterface;
 
-  @Input() imgBackground: string = 'https://picsum.photos/150/150';
-  @Input() title: string = 'CTM 2015 - Totally Enormous Extinct Dinosaurus, Greco-Roman';
-  @Input() location: string = 'Berghain / Panorama Bar';
-  @Input() date: string = 'Today May 22, 2018 9:15 - 10:15 AM';
+  constructor(
+    private readonly navCtrl: NavController,
+    private readonly switchEvent: SwitchEventService,) {
+  }
+
+  @Input() events: EventInterface[];
+  @Input() onNullImg: string = 'https://picsum.photos/300/300';
+
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    if (this.events) {
+      this.switchEvent.getCurrentEvent(this.events)
+        .subscribe(event => {
+          console.log('Evento Actual', event.eventName);
+          this.currentEvent = event;
+        });
+    }
+  }
 
   onCardClick() {
-    this.navCtrl.push(MtMapsPage, { event });
+    this.navCtrl.push(MtMapsPage, { event: this.currentEvent });
   }
 }

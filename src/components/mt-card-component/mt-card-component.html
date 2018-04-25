@@ -1,10 +1,10 @@
 <div class="card-container">
-  <img class="card-container__img" [src]="imgBackground"/>
+  <img class="card-container__img" [src]="currentEvent?.eventImg || onNullImg"/>
   <div class="card">
-    <p class="card__title">{{ title }}</p>
-    <p class="card__date">
+    <p class="card__title">{{ currentEvent?.eventName || 'No disponible' }}</p>
+    <p class="card__date" *ngIf="currentEvent?.date">
       <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-      {{ date }}
+      {{ currentEvent?.date | date:'medium' }}
     </p>
     <button ion-button
             outline

@@ -18,12 +18,11 @@ export class MtListComponent {
     private readonly modalCtrl: ModalController) {
   }
 
-  @Input() data: EventInterface[];
+  @Input() events: EventInterface[];
   @Input() onNullImage: string = 'https://picsum.photos/80/80';
   @Input() typeDate: string = 'shortTime';
 
   onItemClick(event: EventInterface) {
-    // Todo logica para validar si aun puede abrir el modal o si es muy tarde
     if (event.breakFast) {
       return;
     }
@@ -35,23 +34,9 @@ export class MtListComponent {
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-    if (this.data) {
-      console.log(this.data);
-      this.switchEvent.setEvents(this.data);
-      // this.switchEvent.getCurrentEvent()
-      //   .subscribe(a => console.log(a));
-    }
-  }
-
-  verifyEventIsValid(event: EventInterface): boolean {
-    const now = new Date().getTime();
-    if (now < +event.endTime) {
-      console.log(((+event.endTime) - now) / 1000);
-      console.log('Valid');
-      return true;
-    } else {
-      console.error('Ya caduco', event.id, event.eventName);
-      return false;
+    if (this.events) {
+      this.switchEvent.getLastEvent(this.events)
+        .subscribe(event => this.events.find(f => f.id === event.id).available = false);
     }
   }
 }

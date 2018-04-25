@@ -4,10 +4,9 @@
       MTech Events
     </ion-title>
   </ion-navbar>
-  <mt-card></mt-card>
+  <mt-card [events]="events"></mt-card>
 </ion-header>
 
 <ion-content class="list-avatar-page mt-event-page animated fadeIn fast">
-  <mt-list
-    [data]="events"></mt-list>
+  <mt-list [events]="events"></mt-list>
 </ion-content>
