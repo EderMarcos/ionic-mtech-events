@@ -7,45 +7,62 @@ import { DataService } from "../data/data-service";
 @Injectable()
 export class SwitchEventService {
 
+  onNullEvent: EventInterface = {
+    eventName: 'Coming soon',
+    exhibitorName: null,
+    eventImg: null,
+    exhibitorImg: null,
+    breakFast: false,
+    day: null,
+    description: null,
+    latitude: 0,
+    longitude: 0,
+    place: null,
+    available: true,
+  };
+
   constructor(
     private readonly dataService: DataService) {
   }
 
-  getCurrentEvent(events: EventInterface[]): Observable<EventInterface> {
+  getCurrentOrLastEvent(events: EventInterface[], lastEvent: boolean = false): Observable<EventInterface> {
+    let now = new Date().getTime();
     return new Observable<EventInterface>(observer => {
       for (let i = 0; i < events.length; i++) {
-        this.getEventByDate2(events[i])
-          .then((event: EventInterface) => observer.next(event))
-      }
-    });
-  }
-
-  getLastEvent(events: EventInterface[]): Observable<EventInterface> {
-    return new Observable<EventInterface>(observer => {
-      for (let i = 0; i < events.length; i++) {
-        if (new Date().getTime() < events[i].endTime) {
-          this.getEventByDate(events[i])
+        if (now > events[events.length - 1].endTime) {
+          // At the end Event
+          observer.next(this.onNullEvent);
+          return observer.complete();
+        }
+        if (now < events[0].date) {
+          // At the start Event
+          observer.next(this.onNullEvent);
+        }
+        if (now > events[i].endTime && events[i].available) {
+          events[i].available = false;
+          this.dataService.updateEntity({ collection: 'events', key: events[i].id }, events[i]);
+        } else {
+          this.getEventByDate(events[i], lastEvent)
             .then((event: EventInterface) => observer.next(event))
         }
       }
     });
   }
 
-  getEventByDate(event: EventInterface) {
+  getEventByDate(event: EventInterface, lastEvent: boolean) {
     return new Promise(resolve => {
+      const now = new Date().getTime();
+      if (!lastEvent && now > event.date && now < event.endTime) {
+        return resolve(event);
+      }
+      let timer = Math.floor(lastEvent ? event.endTime - new Date().getTime() : event.date - new Date().getTime());
       setTimeout(() => {
-        event.available = false;
-        this.dataService.updateEntity({ collection: 'events', key: event.id }, event);
+        if (lastEvent) {
+          event.available = false;
+          this.dataService.updateEntity({ collection: 'events', key: event.id }, event);
+        }
         resolve(event);
-      }, Math.floor(event.endTime - new Date().getTime()));
-    });
-  }
-
-  getEventByDate2(event: EventInterface) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(event);
-      }, Math.floor(event.date - new Date().getTime()));
+      }, timer);
     });
   }
 }

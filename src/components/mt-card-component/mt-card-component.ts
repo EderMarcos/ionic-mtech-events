@@ -1,9 +1,10 @@
-import {Component, Input, SimpleChange} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController } from "ionic-angular";
 
 import { MtMapsPage } from "../../pages/mt-maps-page/mt-maps-page";
 import { SwitchEventService } from "../../providers/switch-event/switch-event-service";
 import { EventInterface } from "../../interfaces/event-interface";
+import { DataService } from "../../providers/data/data-service";
 
 @Component({
   selector: 'mt-card',
@@ -15,21 +16,22 @@ export class MtCardComponent {
 
   constructor(
     private readonly navCtrl: NavController,
-    private readonly switchEvent: SwitchEventService,) {
+    private readonly dataService: DataService,
+    private readonly switchEvent: SwitchEventService) {
+    this.dataService.getEntities({
+      collection: 'events',
+      query: (ref => ref.orderBy('date', 'asc'))})
+      .then((entities: EventInterface[]) => {
+        this.switchEvent.getCurrentOrLastEvent(entities)
+          .subscribe(event => {
+            if (event.available) {
+              this.currentEvent = event
+            }
+          });
+      });
   }
 
-  @Input() events: EventInterface[];
   @Input() onNullImg: string = 'https://picsum.photos/300/300';
-
-  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-    if (this.events) {
-      this.switchEvent.getCurrentEvent(this.events)
-        .subscribe(event => {
-          console.log('Evento Actual', event.eventName);
-          this.currentEvent = event;
-        });
-    }
-  }
 
   onCardClick() {
     this.navCtrl.push(MtMapsPage, { event: this.currentEvent });
