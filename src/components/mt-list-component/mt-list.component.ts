@@ -35,6 +35,7 @@ export class MtListComponent {
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     if (this.events) {
+      console.log(this.events);
       this.switchEvent.getCurrentOrLastEvent(this.events, true)
         .subscribe(event => {
           if (event.id) {
@@ -42,31 +43,5 @@ export class MtListComponent {
           }
         });
     }
-  }
-
-  ionViewDidEnter() {
-    console.log('ionViewDidEnter');
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad');
-  }
-  ionViewWillEnter() {
-    console.log('ionViewWillEnter');
-  }
-  ionViewWillLeave() {
-    console.log('ionViewWillLeave');
-  }
-  ionViewDidLeave() {
-    console.log('ionViewDidLeave');
-  }
-  ionViewWillUnload() {
-    console.log('ionViewWillUnload');
-  }
-  ionViewCanEnter() {
-    console.log('ionViewCanEnter');
-  }
-  ionViewCanLeave() {
-    console.log('ionViewCanLeave');
   }
 }

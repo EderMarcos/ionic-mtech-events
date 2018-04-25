@@ -22,6 +22,7 @@ export class SwitchEventService {
   };
 
   private timeoutVar;
+  private minute = 60 * 1000;
 
   constructor(
     private readonly dataService: DataService) {
@@ -33,7 +34,7 @@ export class SwitchEventService {
       for (let i = 0; i < events.length; i++) {
         if (now > events[events.length - 1].endTime) {
           // At the end Event
-          this.onNullEvent.eventName = 'Thanks';
+          this.onNullEvent.eventName = 'Thanks for coming';
           observer.next(this.onNullEvent);
           return observer.complete();
         }
@@ -41,9 +42,12 @@ export class SwitchEventService {
           // At the start Event
           observer.next(this.onNullEvent);
         }
-        if (now > events[i].endTime && events[i].available) {
+        console.log(events[i].endTime + (10 * this.minute));
+        // If there are some events that are available
+        if (now > (events[i].endTime + (10 * this.minute)) && events[i].available || events[i].surveyEnable) {
           events[i].available = false;
-          this.dataService.updateEntity({ collection: 'events', key: events[i].id }, events[i]);
+          events[i].surveyEnable = false;
+          this.updateEvent(events[i]);
         } else {
           this.getEventByDate(events[i], lastEvent)
             .then((event: EventInterface) => observer.next(event))
@@ -55,21 +59,39 @@ export class SwitchEventService {
   getEventByDate(event: EventInterface, lastEvent: boolean) {
     return new Promise(resolve => {
       const now = new Date().getTime();
+      // Current event
       if (!lastEvent && now > event.date && now < event.endTime) {
         return resolve(event);
       }
       let timer = Math.floor(lastEvent ? event.endTime - new Date().getTime() : event.date - new Date().getTime());
+      console.log(timer + 10 * this.minute);
+      if (lastEvent) {
+        setTimeout(() => {
+          event.available = false;
+          event.surveyEnable = false;
+          this.updateEvent(event);
+        }, timer + 10 * this.minute);
+      }
       this.timeoutVar = setTimeout(() => {
         if (lastEvent) {
-          event.available = false;
-          this.dataService.updateEntity({ collection: 'events', key: event.id }, event);
+          event.surveyEnable = true;
+          this.updateEvent(event);
         }
         resolve(event);
       }, timer);
+
     });
   }
 
   clearTimeout() {
     clearTimeout(this.timeoutVar);
+  }
+
+  updateEvent(data: EventInterface) {
+    this.dataService.updateEntity({ collection: 'events', key: data.id }, data);
+  }
+
+  addMinutes(date: number) {
+    // return
   }
 }
