@@ -1,12 +1,21 @@
-<div class="card-container">
-  <img class="card-container__img" [src]="currentEvent?.eventImg || onNullImg"/>
+<div class="card-container animated fadeIn">
+  <img class="card-container__img"
+       *ngIf="currentEvent?.eventImg"
+       [src]="currentEvent?.eventImg"/>
   <div class="card">
-    <p class="card__title">{{ currentEvent?.eventName || 'No disponible' }}</p>
-    <p class="card__date" *ngIf="currentEvent?.date">
-      <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-      {{ currentEvent?.date | date:'medium' }}
+    <p class="card__title">{{ currentEvent?.eventName }}</p>
+    <p class="card__date"
+       *ngIf="currentEvent?.date">
+      <ion-icon style="margin-right: 0.5rem;" name="calendar"></ion-icon>
+      {{ currentEvent?.date | date:'EEEE, MMMM d, y, h:mm a' }}
     </p>
-    <button ion-button
+    <p class="card__exhibitor"
+       *ngIf="currentEvent?.exhibitorName">
+      <ion-icon style="margin-right: 0.5rem;" name="contact"></ion-icon>
+      {{ currentEvent?.exhibitorName }}
+    </p>
+    <button *ngIf="currentEvent"
+            ion-button
             outline
             round
             small

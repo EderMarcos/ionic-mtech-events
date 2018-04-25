@@ -3,16 +3,13 @@ import { Observable } from "rxjs/Observable";
 
 import { EventInterface } from "../../interfaces/event-interface";
 import { DataService } from "../data/data-service";
-import { BackgroundMode } from "@ionic-native/background-mode";
-import { Platform } from "ionic-angular";
-import { ToastService } from "../toast/toast-service";
 
 @Injectable()
 export class SwitchEventService {
 
   private onNullEvent: EventInterface = {
     eventName: 'Coming soon',
-    exhibitorName: null,
+    exhibitorName: 'MTech Systems',
     eventImg: null,
     exhibitorImg: null,
     breakFast: false,
@@ -24,11 +21,10 @@ export class SwitchEventService {
     available: true,
   };
 
+  private timeoutVar;
+
   constructor(
-    private readonly dataService: DataService,
-    private readonly platform: Platform,
-    private readonly toast: ToastService,
-    private readonly backgroundMode: BackgroundMode,) {
+    private readonly dataService: DataService) {
   }
 
   getCurrentOrLastEvent(events: EventInterface[], lastEvent: boolean = false): Observable<EventInterface> {
@@ -37,6 +33,7 @@ export class SwitchEventService {
       for (let i = 0; i < events.length; i++) {
         if (now > events[events.length - 1].endTime) {
           // At the end Event
+          this.onNullEvent.eventName = 'Thanks';
           observer.next(this.onNullEvent);
           return observer.complete();
         }
@@ -62,7 +59,7 @@ export class SwitchEventService {
         return resolve(event);
       }
       let timer = Math.floor(lastEvent ? event.endTime - new Date().getTime() : event.date - new Date().getTime());
-      setTimeout(() => {
+      this.timeoutVar = setTimeout(() => {
         if (lastEvent) {
           event.available = false;
           this.dataService.updateEntity({ collection: 'events', key: event.id }, event);
@@ -70,5 +67,9 @@ export class SwitchEventService {
         resolve(event);
       }, timer);
     });
+  }
+
+  clearTimeout() {
+    clearTimeout(this.timeoutVar);
   }
 }

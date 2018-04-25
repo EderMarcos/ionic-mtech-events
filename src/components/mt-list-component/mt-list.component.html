@@ -1,12 +1,16 @@
 <div padding-top padding-bottom *ngIf="events">
   <ion-list>
-    <ion-item class="mt-list-item" *ngFor="let event of events" (click)="onItemClick(event)">
+    <ion-item *ngFor="let event of events"
+              class="mt-list-item"
+              [ngClass]="{ 'surveyEnable': event.surveyEnable }"
+              (click)="onItemClick(event)">
       <ion-avatar item-start *ngIf="!event.breakFast">
-        <img [src]="event.eventImg || onNullImage">
+        <img [src]="event.exhibitorImg || onNullImage">
       </ion-avatar>
       <!--<ion-icon name="leaf" item-start></ion-icon>-->
-      <h2 class="mt-list-item__title"
-          [ngClass]="{ 'break-activities': event.breakFast, 'disabled': !event.available }">{{ event.eventName }}</h2>
+      <h2 class="mt-list-item__title" [ngClass]="{
+      'break-activities': event.breakFast,
+      'disabled': !event.available }">{{ event.eventName }}</h2>
       <ion-note class="mt-list-item__date"
                 [ngClass]="{ 'disabled': !event.available }"
                 item-end>{{ event.date | date:'h:mm' }} - {{ event.endTime | date:typeDate }}</ion-note>

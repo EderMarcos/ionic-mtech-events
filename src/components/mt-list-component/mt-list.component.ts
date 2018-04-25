@@ -26,7 +26,7 @@ export class MtListComponent {
     if (event.breakFast) {
       return;
     }
-    if (event.available) {
+    if (event.surveyEnable) {
       let modal = this.modalCtrl.create(MtFormFeedbackPage, { event: event });
       return modal.present();
     }
@@ -42,5 +42,31 @@ export class MtListComponent {
           }
         });
     }
+  }
+
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter');
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad');
+  }
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter');
+  }
+  ionViewWillLeave() {
+    console.log('ionViewWillLeave');
+  }
+  ionViewDidLeave() {
+    console.log('ionViewDidLeave');
+  }
+  ionViewWillUnload() {
+    console.log('ionViewWillUnload');
+  }
+  ionViewCanEnter() {
+    console.log('ionViewCanEnter');
+  }
+  ionViewCanLeave() {
+    console.log('ionViewCanLeave');
   }
 }

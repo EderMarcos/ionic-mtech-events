@@ -13,5 +13,6 @@ export interface EventInterface {
   place?: string;
   address?: string;
   id?: string;
+  surveyEnable?: boolean;
   available: boolean;
 }
