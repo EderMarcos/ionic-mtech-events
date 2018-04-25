@@ -4,8 +4,8 @@ import { Observable } from "rxjs/Observable";
 import { EventInterface } from "../../interfaces/event-interface";
 import { DataService } from "../data/data-service";
 import { BackgroundMode } from "@ionic-native/background-mode";
-import {Platform} from "ionic-angular";
-import {ToastService} from "../toast/toast-service";
+import { Platform } from "ionic-angular";
+import { ToastService } from "../toast/toast-service";
 
 @Injectable()
 export class SwitchEventService {
@@ -33,29 +33,9 @@ export class SwitchEventService {
 
   getCurrentOrLastEvent(events: EventInterface[], lastEvent: boolean = false): Observable<EventInterface> {
     this.backgroundMode.enable();
-    if (this.platform.is('cordova')) {
-    //   this.toast.showToast(`Enable ${ this.backgroundMode.isActive() }`);
-    //   this.backgroundMode.on('activate').subscribe((a) => {
-    //     // this.toast.showToast(`Enable ${ a }`);
-    //     setTimeout(() => {
-    //       if (lastEvent) {
-    //         event.available = false;
-    //         this.dataService.updateEntity({ collection: 'events', key: event.id }, event);
-    //       }
-    //       resolve(event);
-    //     }, timer);
-    //   });
-    //   return;
-    }
-
     let now = new Date().getTime();
     return new Observable<EventInterface>(observer => {
       for (let i = 0; i < events.length; i++) {
-
-        if (this.platform.is('cordova')) {
-          this.backgroundMode.on('activate').subscribe();
-        }
-
         if (now > events[events.length - 1].endTime) {
           // At the end Event
           observer.next(this.onNullEvent);
@@ -72,10 +52,6 @@ export class SwitchEventService {
           this.getEventByDate(events[i], lastEvent)
             .then((event: EventInterface) => observer.next(event))
         }
-
-
-
-
       }
     });
   }
