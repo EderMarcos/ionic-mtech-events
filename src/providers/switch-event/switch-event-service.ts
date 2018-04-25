@@ -53,25 +53,7 @@ export class SwitchEventService {
       for (let i = 0; i < events.length; i++) {
 
         if (this.platform.is('cordova')) {
-          this.backgroundMode.on('activate').subscribe((a) => {
-            if (now > events[events.length - 1].endTime) {
-              // At the end Event
-              observer.next(this.onNullEvent);
-              return observer.complete();
-            }
-            if (now < events[0].date) {
-              // At the start Event
-              observer.next(this.onNullEvent);
-            }
-            if (now > events[i].endTime && events[i].available) {
-              events[i].available = false;
-              this.dataService.updateEntity({ collection: 'events', key: events[i].id }, events[i]);
-            } else {
-              this.getEventByDate(events[i], lastEvent)
-                .then((event: EventInterface) => observer.next(event))
-            }
-          });
-          return;
+          this.backgroundMode.on('activate').subscribe();
         }
 
         if (now > events[events.length - 1].endTime) {
