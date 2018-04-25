@@ -38,8 +38,8 @@ export class MtListComponent {
     if (this.data) {
       console.log(this.data);
       this.switchEvent.setEvents(this.data);
-      this.switchEvent.getCurrentEvent()
-        .subscribe(a => console.log(a));
+      // this.switchEvent.getCurrentEvent()
+      //   .subscribe(a => console.log(a));
     }
   }
 
