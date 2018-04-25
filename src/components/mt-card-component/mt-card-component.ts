@@ -6,6 +6,7 @@ import { SwitchEventService } from "../../providers/switch-event/switch-event-se
 import { EventInterface } from "../../interfaces/event-interface";
 import { DataService } from "../../providers/data/data-service";
 import { NotificationService } from "../../providers/notification/notification-service";
+import { BackgroundMode } from "@ionic-native/background-mode";
 
 @Component({
   selector: 'mt-card',
@@ -20,6 +21,7 @@ export class MtCardComponent {
     private readonly dataService: DataService,
     private readonly notification: NotificationService,
     private readonly platform: Platform,
+    private backgroundMode: BackgroundMode,
     private readonly switchEvent: SwitchEventService) {
     this.init();
   }
@@ -27,6 +29,7 @@ export class MtCardComponent {
   @Input() onNullImg: string = 'https://picsum.photos/300/300';
 
   init() {
+    this.backgroundMode.enable();
     this.dataService.getEntities({
       collection: 'events',
       query: (ref => ref.orderBy('date', 'asc'))})

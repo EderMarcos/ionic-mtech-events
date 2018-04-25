@@ -41,6 +41,7 @@ import { LoaderService } from "../providers/loader/loader-service";
 import { SwitchEventService } from "../providers/switch-event/switch-event-service";
 import { LocalNotifications } from "@ionic-native/local-notifications";
 import { NotificationService } from "../providers/notification/notification-service";
+import { BackgroundMode } from "@ionic-native/background-mode";
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { NotificationService } from "../providers/notification/notification-serv
     SwitchEventService,
     LocalNotifications,
     NotificationService,
+    BackgroundMode
   ]
 })
 export class AppModule {}

@@ -22,6 +22,7 @@
     "@angular/http": "5.2.9",
     "@angular/platform-browser": "5.2.9",
     "@angular/platform-browser-dynamic": "5.2.9",
+    "@ionic-native/background-mode": "^4.7.0",
     "@ionic-native/barcode-scanner": "^4.7.0",
     "@ionic-native/core": "4.6.0",
     "@ionic-native/local-notifications": "^4.7.0",
@@ -29,6 +30,7 @@
     "@ionic-native/status-bar": "4.6.0",
     "@ionic/storage": "2.1.3",
     "angularfire2": "5.0.0-rc.3",
+    "cordova-plugin-background-mode": "^0.7.2",
     "cordova-plugin-local-notification": "^0.9.0-beta.2",
     "cordova-sqlite-storage": "^2.3.1",
     "firebase": "4.6.0",
@@ -49,7 +51,8 @@
     "plugins": {
       "cordova-sqlite-storage": {},
       "phonegap-plugin-barcodescanner": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-background-mode": {}
     }
   }
 }
