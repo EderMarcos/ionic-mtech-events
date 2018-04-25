@@ -29,19 +29,11 @@ export class SwitchEventService {
     private readonly platform: Platform,
     private readonly toast: ToastService,
     private readonly backgroundMode: BackgroundMode,) {
-    platform.ready().then(() => {
-      this.backgroundMode.enable();
-    });
   }
 
   getCurrentOrLastEvent(events: EventInterface[], lastEvent: boolean = false): Observable<EventInterface> {
     let now = new Date().getTime();
     return new Observable<EventInterface>(observer => {
-      if (this.platform.is('cordova')) {
-        this.backgroundMode.on('activate').subscribe(() => {
-          this.backgroundMode.disableWebViewOptimizations();
-        });
-      }
       for (let i = 0; i < events.length; i++) {
         if (now > events[events.length - 1].endTime) {
           // At the end Event
