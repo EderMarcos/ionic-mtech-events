@@ -7,6 +7,7 @@ import { EventInterface } from "../../interfaces/event-interface";
 import { DataService } from "../../providers/data/data-service";
 import { NotificationService } from "../../providers/notification/notification-service";
 import { BackgroundMode } from "@ionic-native/background-mode";
+import { ToastService } from "../../providers/toast/toast-service";
 
 @Component({
   selector: 'mt-card',
@@ -21,15 +22,19 @@ export class MtCardComponent {
     private readonly dataService: DataService,
     private readonly notification: NotificationService,
     private readonly platform: Platform,
-    private backgroundMode: BackgroundMode,
+    private readonly toast: ToastService,
+    private readonly backgroundMode: BackgroundMode,
     private readonly switchEvent: SwitchEventService) {
+    this.backgroundMode.enable();
+    this.backgroundMode.on('enable').subscribe((a) => {
+      this.toast.showToast(`Enable ${ a }`)
+    });
     this.init();
   }
 
   @Input() onNullImg: string = 'https://picsum.photos/300/300';
 
   init() {
-    this.backgroundMode.enable();
     this.dataService.getEntities({
       collection: 'events',
       query: (ref => ref.orderBy('date', 'asc'))})
