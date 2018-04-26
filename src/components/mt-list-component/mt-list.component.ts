@@ -37,7 +37,6 @@ export class MtListComponent {
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     if (this.events) {
-      console.log(this.events);
       this.switchEvent.getCurrentOrLastEvent(this.events, true)
         .subscribe(event => {
           if (event.id && !event.available) return this.events.find(f => f.id === event.id).available = false;

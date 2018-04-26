@@ -8,8 +8,8 @@ import { EventInterface } from "../../interfaces/event-interface";
 })
 export class MtMapsPage {
 
-  event: EventInterface;
-  tabBarElement: any;
+  private event: EventInterface;
+  private tabBarElement: any;
 
   constructor(
     private readonly navParams: NavParams) {

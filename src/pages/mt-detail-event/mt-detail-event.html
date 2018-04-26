@@ -20,8 +20,27 @@
         <img [src]="event.exhibitorImg">
       </ion-avatar>
       <h2>{{ event.exhibitorName }}</h2>
-      <p>{{ event.date | date:'MMM d, y, h:mm a'}}</p>
+      <p>{{ event.date | date:'MMM d, y, h:mm a' }}</p>
     </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="feedback">
+    <ion-card-header> Reviewed </ion-card-header>
+    <ion-card-content>
+      <p>{{ feedback?.comments }}</p>
+      <rating [ngModel]="feedback?.rate"
+              text-center
+              readOnly="false"
+              max="5"
+              emptyStarIconName="star-outline"
+              halfStarIconName="star-half"
+              starIconName="star"
+              nullable="false">
+      </rating>
+    </ion-card-content>
+      <ion-item text-end>
+        <p>{{ feedback?.updatedAt | date:'MMM d, y, h:mm a' }}</p>
+      </ion-item>
   </ion-card>
 
   <!--<ion-card>-->

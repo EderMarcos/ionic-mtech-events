@@ -6,6 +6,7 @@ import { EventInterface } from "../../interfaces/event-interface";
 import { QuizInterface } from "../../interfaces/quiz-interface";
 import { UserInterface } from "../../interfaces/user-interface";
 import { StorageService } from "../../providers/storage/storage-service";
+import { LoaderService } from "../../providers/loader/loader-service";
 import { ToastService } from "../../providers/toast/toast-service";
 import { DataService } from "../../providers/data/data-service";
 
@@ -24,6 +25,7 @@ export class MtFormFeedbackPage {
     private readonly view: ViewController,
     private readonly navParams: NavParams,
     private readonly toast: ToastService,
+    private readonly loader: LoaderService,
     private readonly storage: StorageService,
     private _dataService: DataService) {
     this.event = this.navParams.get('event');
@@ -74,6 +76,7 @@ export class MtFormFeedbackPage {
   }
 
   async onSubmit() {
+    this.loader.showLoading({ content: 'Sending...', duration: 0 });
     if (this.feedback.id) {
       this.feedback.updatedAt = new Date().getTime();
       return await this._dataService.updateEntity({ collection: 'feedback', key: this.feedback.id }, this.feedback)
@@ -84,6 +87,7 @@ export class MtFormFeedbackPage {
     }
     await this._dataService.setEntity('surveyHistory', this.quiz);
     await this._dataService.setEntity('feedback', this.feedback)
+      .then((_) => this.loader.clear())
       .then((_) => {
         this.toast.showToast('Your comment has been sent');
         this.onDismiss();
