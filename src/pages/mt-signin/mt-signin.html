@@ -1,34 +1,22 @@
-<ion-header>
-  <ion-navbar color="primary">
-    <ion-title>Log in</ion-title>
-  </ion-navbar>
-</ion-header>
-
-
-<ion-content class="ion-content">
-  <ion-grid class="h-100">
-    <ion-row justify-content-center align-items-center class="h-100">
-      <ion-col col-12>
-        <img class="ion-content__logo" src="https://picsum.photos/150/150" alt="">
-        <div padding>
-          <ion-list>
-            <ion-item class="no-bt">
-              <ion-label floating>Email</ion-label>
-              <ion-input type="text" [(ngModel)]="user.email"></ion-input>
-            </ion-item>
-          </ion-list>
-
-          <button ion-button
-                  icon-right=""
-                  color="light"
-                  round
-                  block
-                  (click)="onSubmit()">
-            Sign In
-            <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
+<ion-content class="background">
+  <ion-card>
+    <ion-card-header>
+      Login Form
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <ion-list no-line>
+          <img class="img" src="https://picsum.photos/100/100" alt="Logo">
+          <ion-item [ngClass]="{ 'error': !form.get('email').valid && form.get('email').touched }">
+            <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+          </ion-item>
+          <button ion-button block round outline icon-right color="light" [disabled]="!form.valid">
+            Log in
+            <ion-icon name="log-in"></ion-icon>
           </button>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <p class="bottom" color="light">Don't have permissions? Please contact an administrator</p>
 </ion-content>

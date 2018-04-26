@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule } from "@angular/common/http";
 import { IonicStorageModule } from '@ionic/storage';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 // Firebase
 import { AngularFireModule } from 'angularfire2';
@@ -68,7 +69,9 @@ import { BackgroundMode } from "@ionic-native/background-mode";
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDPxN_-ncHex7P1JpCYZjpJnMSD5ytiyBA'
     }),
-    Ionic2RatingModule
+    Ionic2RatingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

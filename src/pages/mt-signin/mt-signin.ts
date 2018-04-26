@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 import { StorageService } from "../../providers/storage/storage-service";
 import { UserInterface } from "../../interfaces/user-interface";
@@ -15,6 +16,7 @@ import { LoaderService } from "../../providers/loader/loader-service";
 export class MtSigninPage {
 
   private user: UserInterface;
+  private form: FormGroup;
 
   constructor(
     private readonly storage: StorageService,
@@ -25,10 +27,15 @@ export class MtSigninPage {
     this.user = {
       email: null
     };
+    this.form = new FormGroup({
+      'email': new FormControl('', [
+        Validators.required,
+        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9._]+\.[a-z]{2,3}$')])
+    })
   }
 
   onSubmit() {
-    console.log(this.user.email);
+    this.user.email = this.form.value.email;
     this.loader.showLoading({ content: 'Please wait!', duration: 0 });
     this.dataService.getEntities({
       collection: 'users',
@@ -43,7 +50,7 @@ export class MtSigninPage {
           this.storage.setEntity('user', JSON.stringify(this.user));
           this.navCtrl.push(MtTabsComponent);
         } else {
-          this.alert.showAlert({ title: 'Error signin', subTitle: 'Este email no esta en la base de datos'})
+          this.alert.showAlert({ title: 'Failed to login', subTitle: 'This email does not have permissions' })
         }
       });
   }
