@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { NavParams, ViewController } from 'ionic-angular';
 
 import { FeedbackInterface } from "../../interfaces/feedback-interface";
@@ -16,6 +17,7 @@ import { DataService } from "../../providers/data/data-service";
 })
 export class MtFormFeedbackPage {
 
+  private feedbackForm: FormGroup;
   private event: EventInterface;
   private feedback: FeedbackInterface;
   private user: UserInterface;
@@ -45,6 +47,10 @@ export class MtFormFeedbackPage {
       updatedAt: new Date().getTime(),
     };
     this.getUser();
+    this.feedbackForm = new FormGroup({
+      'comments': new FormControl('', Validators.required),
+      'rate': new FormControl(0, Validators.required)
+    });
   }
 
   onDismiss() {
@@ -71,15 +77,20 @@ export class MtFormFeedbackPage {
       .then((record: FeedbackInterface) => {
         if (record) {
           this.feedback = record;
+          this.feedbackForm.get('comments').setValue(record.comments);
+          this.feedbackForm.get('rate').setValue(record.rate);
         }
       });
   }
 
   async onSubmit() {
     this.loader.showLoading({ content: 'Sending...', duration: 0 });
+    this.feedback.comments = this.feedbackForm.value.comments;
+    this.feedback.rate = this.feedbackForm.value.rate;
     if (this.feedback.id) {
       this.feedback.updatedAt = new Date().getTime();
       return await this._dataService.updateEntity({ collection: 'feedback', key: this.feedback.id }, this.feedback)
+        .then((_) => this.loader.clear())
         .then((_) => {
           this.toast.showToast('Your comment has been updated');
           this.onDismiss();

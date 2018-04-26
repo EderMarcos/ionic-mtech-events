@@ -14,3 +14,29 @@ ul {
 .item-ios {
   font-size: 1.5rem;
 }
+
+.error {
+  border: 1px solid #EB2227;
+  .text-input {
+    color: #EB2227;
+  }
+  input::-moz-placeholder  {
+    color: #EB2227!important;
+  }
+
+  input:-moz-placeholder {
+    color: #EB2227!important;
+  }
+
+  *::-webkit-input-placeholder  {
+    color: #EB2227!important;
+  }
+
+  *:-ms-input-placeholder  {
+    color: #EB2227!important;
+  }
+
+  *:-moz-placeholder  {
+    color: #EB2227!important;
+  }
+}

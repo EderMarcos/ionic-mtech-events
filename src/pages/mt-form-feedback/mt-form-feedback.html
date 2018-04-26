@@ -27,37 +27,32 @@
     </ion-item>
   </ion-list>
 
-  <ion-list no-border style="margin: 0">
-    <ion-list-header> Event: {{ event.eventName }} </ion-list-header>
-    <ion-item class="no-p">
-      <ion-textarea style="margin-left: 1rem"
-                    placeholder="Enter a review"
-                    rows="10"
-                    maxLength="500"
-                    [(ngModel)]="feedback.comments"></ion-textarea>
-    </ion-item>
+  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" novalidate>
+    <ion-list no-border style="margin: 0">
+      <ion-list-header> Event: {{ event.eventName }} </ion-list-header>
+      <ion-item class="no-p" [ngClass]="{ 'error': !feedbackForm.get('comments').valid && feedbackForm.get('comments').touched }">
+        <ion-textarea style="margin-left: 1rem"
+                      formControlName="comments"
+                      placeholder="Enter a review"
+                      rows="10"></ion-textarea>
+      </ion-item>
 
-    <ion-item>
-      <rating [(ngModel)]="feedback.rate"
-              text-center
-              readOnly="false"
-              max="5"
-              emptyStarIconName="star-outline"
-              halfStarIconName="star-half"
-              starIconName="star"
-              nullable="false">
-      </rating>
-    </ion-item>
-  </ion-list>
-
-  <div class="text-center" padding>
-    <button ion-button
-            color="green-3"
-            outline
-            round
-            block
-            (click)="onSubmit()">
-      Send
-    </button>
-  </div>
+      <ion-item>
+        <rating formControlName="rate"
+                text-center
+                readOnly="false"
+                max="5"
+                emptyStarIconName="star-outline"
+                halfStarIconName="star-half"
+                starIconName="star"
+                nullable="false">
+        </rating>
+      </ion-item>
+      <div class="text-center" padding>
+        <button ion-button color="green-3" outline round block [disabled]="!feedbackForm.valid || feedbackForm.get('rate').value === 0">
+          Send
+        </button>
+      </div>
+    </ion-list>
+  </form>
 </ion-content>
