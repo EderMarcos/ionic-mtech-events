@@ -8,7 +8,6 @@ import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.compone
 import { MtSigninPage } from "../pages/mt-signin/mt-signin";
 import { StorageService } from "../providers/storage/storage-service";
 import { UserInterface } from "../interfaces/user-interface";
-import { MtAboutPage } from "../pages/mt-about-page/mt-about-page";
 
 @Component({
   templateUrl: 'app.html'
@@ -25,7 +24,7 @@ export class MyApp {
     private readonly storage: StorageService) {
     platform.ready().then(() => {
       this.storage.getEntity('user')
-        .then((record: UserInterface) => this.rootPage = (record.email) ? MtAboutPage : MtAboutPage);
+        .then((record: UserInterface) => this.rootPage = (record.email) ? MtTabsComponent : MtSigninPage);
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.backgroundColorByName('light');

@@ -39,6 +39,7 @@ export class MtListComponent {
     if (this.events) {
       this.switchEvent.getCurrentOrLastEvent(this.events, true)
         .subscribe(event => {
+          console.log(event);
           if (event.id && !event.available) return this.events.find(f => f.id === event.id).available = false;
         });
     }
