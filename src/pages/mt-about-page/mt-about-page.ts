@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
 })
 export class MtAboutPage {
 
-  constructor() { }
+  constructor() {
+    console.log('[EderConsole] Console');
+  }
 }

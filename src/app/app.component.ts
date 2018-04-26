@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { BackgroundMode } from "@ionic-native/background-mode";
 
 import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.component";
 import { MtSigninPage } from "../pages/mt-signin/mt-signin";
 import { StorageService } from "../providers/storage/storage-service";
 import { UserInterface } from "../interfaces/user-interface";
+import { MtAboutPage } from "../pages/mt-about-page/mt-about-page";
 
 @Component({
   templateUrl: 'app.html'
@@ -19,10 +21,11 @@ export class MyApp {
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
+    private backgroundMode: BackgroundMode,
     private readonly storage: StorageService) {
     platform.ready().then(() => {
       this.storage.getEntity('user')
-        .then((record: UserInterface) => this.rootPage = (record.email) ? MtTabsComponent : MtSigninPage);
+        .then((record: UserInterface) => this.rootPage = (record.email) ? MtAboutPage : MtAboutPage);
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.backgroundColorByName('light');

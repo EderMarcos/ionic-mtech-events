@@ -32,6 +32,7 @@ import { MtMapsPage } from "../pages/mt-maps-page/mt-maps-page";
 import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
 import { MtDetailEventPage } from "../pages/mt-detail-event/mt-detail-event";
 import { MtSigninPage } from "../pages/mt-signin/mt-signin";
+import { MtAboutPage } from "../pages/mt-about-page/mt-about-page";
 
 // Services
 import { DataService } from '../providers/data/data-service';
@@ -53,6 +54,7 @@ import { BackgroundMode } from "@ionic-native/background-mode";
     MtEventPage_2Page,
     MtEventPage_3Page,
     MtMapsPage,
+    MtAboutPage,
     MtFormFeedbackPage,
     MtDetailEventPage,
     MtSigninPage,
@@ -82,6 +84,7 @@ import { BackgroundMode } from "@ionic-native/background-mode";
     MtEventPage_2Page,
     MtEventPage_3Page,
     MtMapsPage,
+    MtAboutPage,
     MtFormFeedbackPage,
     MtDetailEventPage,
     MtSigninPage,
