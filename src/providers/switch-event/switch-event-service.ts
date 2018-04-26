@@ -21,7 +21,8 @@ export class SwitchEventService {
     available: true,
   };
 
-  private timeoutVar;
+  private mainTimeout;
+  private afterEventTimeout;
   private readonly delay = 10 * 60 * 1000;
 
   constructor(
@@ -62,7 +63,7 @@ export class SwitchEventService {
       }
       // Timer
       let timer = Math.floor(lastEvent ? event.endTime - new Date().getTime() : event.date - new Date().getTime());
-      this.timeoutVar = setTimeout(() => {
+      this.mainTimeout = setTimeout(() => {
         if (lastEvent) {
           event.surveyEnable = event.available;
           this.updateEvent(event);
@@ -72,7 +73,7 @@ export class SwitchEventService {
       // Only last event
       if (lastEvent) {
         // Time that the survey will be available
-        setTimeout(() => {
+        this.afterEventTimeout = setTimeout(() => {
           event.available = false;
           event.surveyEnable = false;
           this.updateEvent(event);
@@ -83,7 +84,8 @@ export class SwitchEventService {
   }
 
   clearTimeout() {
-    clearTimeout(this.timeoutVar);
+    clearTimeout(this.mainTimeout);
+    clearTimeout(this.afterEventTimeout);
   }
 
   updateEvent(data: EventInterface) {
