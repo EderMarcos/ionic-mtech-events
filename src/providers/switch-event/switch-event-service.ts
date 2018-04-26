@@ -22,7 +22,7 @@ export class SwitchEventService {
   };
 
   private timeoutVar;
-  private minute = 60 * 1000;
+  private readonly delay = 10 * 60 * 1000;
 
   constructor(
     private readonly dataService: DataService) {
@@ -32,24 +32,22 @@ export class SwitchEventService {
     let now = new Date().getTime();
     return new Observable<EventInterface>(observer => {
       for (let i = 0; i < events.length; i++) {
+        // If there are some events that are available
+        if (now > events[i].endTime + this.delay && events[i].available) {
+          events[i].available = false;
+          events[i].surveyEnable = false;
+          this.updateEvent(events[i]);
+        }
+        // At the start Event
+        if (now < events[0].date) {
+          observer.next(this.onNullEvent);
+        }
+        this.getEventByDate(events[i], lastEvent)
+          .then((event: EventInterface) => observer.next(event))
         if (now > events[events.length - 1].endTime) {
           // At the end Event
           this.onNullEvent.eventName = 'Thanks for coming';
           observer.next(this.onNullEvent);
-          return observer.complete();
-        }
-        if (now < events[0].date) {
-          // At the start Event
-          observer.next(this.onNullEvent);
-        }
-        // If there are some events that are available
-        if (now > (events[i].endTime + (10 * this.minute)) && events[i].available && events[i].surveyEnable) {
-          events[i].available = false;
-          events[i].surveyEnable = false;
-          this.updateEvent(events[i]);
-        } else {
-          this.getEventByDate(events[i], lastEvent)
-            .then((event: EventInterface) => observer.next(event))
         }
       }
     });
@@ -62,15 +60,8 @@ export class SwitchEventService {
       if (!lastEvent && now > event.date && now < event.endTime) {
         return resolve(event);
       }
+      // Timer
       let timer = Math.floor(lastEvent ? event.endTime - new Date().getTime() : event.date - new Date().getTime());
-      if (lastEvent) {
-        setTimeout(() => {
-          event.available = false;
-          event.surveyEnable = false;
-          this.updateEvent(event);
-          resolve(event);
-        }, timer + 10 * this.minute);
-      }
       this.timeoutVar = setTimeout(() => {
         if (lastEvent) {
           event.surveyEnable = event.available;
@@ -78,7 +69,16 @@ export class SwitchEventService {
         }
         resolve(event);
       }, timer);
-
+      // Only last event
+      if (lastEvent) {
+        // Time that the survey will be available
+        setTimeout(() => {
+          event.available = false;
+          event.surveyEnable = false;
+          this.updateEvent(event);
+          resolve(event);
+        }, timer + this.delay);
+      }
     });
   }
 
