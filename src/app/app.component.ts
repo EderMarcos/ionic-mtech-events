@@ -23,6 +23,8 @@ export class MyApp {
     private backgroundMode: BackgroundMode,
     private readonly storage: StorageService) {
     platform.ready().then(() => {
+      this.backgroundMode.enable();
+      this.backgroundMode.disableWebViewOptimizations();
       this.storage.getEntity('user')
         .then((record: UserInterface) => this.rootPage = (record.email) ? MtTabsComponent : MtSigninPage);
       // Okay, so the platform is ready and our plugins are available.

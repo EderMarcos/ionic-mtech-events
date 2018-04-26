@@ -39,8 +39,11 @@ export class MtListComponent {
     if (this.events) {
       this.switchEvent.getCurrentOrLastEvent(this.events, true)
         .subscribe(event => {
-          console.log(event);
-          if (event.id && !event.available) return this.events.find(f => f.id === event.id).available = false;
+          if (event.id && !event.available) {
+            return this.events.find(f => f.id === event.id).available = false;
+          } else if (event.available && event.surveyEnable) {
+            this.notification.showNotification({ id: event.date, text: 'Hola', title: event.eventName })
+          }
         });
     }
   }

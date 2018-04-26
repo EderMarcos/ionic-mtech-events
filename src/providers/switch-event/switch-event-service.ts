@@ -59,6 +59,7 @@ export class SwitchEventService {
       const now = new Date().getTime();
       // Current event
       if (!lastEvent && now > event.date && now < event.endTime) {
+        console.log('current', event.eventName);
         return resolve(event);
       }
       // Timer

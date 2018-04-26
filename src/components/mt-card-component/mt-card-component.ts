@@ -5,7 +5,6 @@ import { MtMapsPage } from "../../pages/mt-maps-page/mt-maps-page";
 import { SwitchEventService } from "../../providers/switch-event/switch-event-service";
 import { EventInterface } from "../../interfaces/event-interface";
 import { DataService } from "../../providers/data/data-service";
-import { NotificationService } from "../../providers/notification/notification-service";
 
 @Component({
   selector: 'mt-card',
@@ -18,7 +17,6 @@ export class MtCardComponent {
   constructor(
     private readonly navCtrl: NavController,
     private readonly dataService: DataService,
-    private readonly notification: NotificationService,
     private readonly switchEvent: SwitchEventService) {
     this.init();
   }
@@ -32,8 +30,7 @@ export class MtCardComponent {
       .then((entities: EventInterface[]) => {
         this.switchEvent.getCurrentOrLastEvent(entities)
           .subscribe(event => {
-            if (event.available) {
-              // this.notification.showNotification({ id: event.date, title: event.eventName, text: 'Dummy' });
+            if (event.available && !event.surveyEnable) {
               this.currentEvent = event;
             }
           });
