@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { NavController} from "ionic-angular";
-import { Keyboard } from '@ionic-native/keyboard';
 
 import { StorageService } from "../../providers/storage/storage-service";
 import { UserInterface } from "../../interfaces/user-interface";
@@ -23,10 +22,8 @@ export class MtSigninPage {
     private readonly storage: StorageService,
     private readonly alert: AlertService,
     private readonly loader: LoaderService,
-    private readonly keyboard: Keyboard,
     private readonly dataService: DataService,
     private readonly navCtrl: NavController) {
-    this.keyboard.disableScroll(true);
     this.user = {
       email: null
     };
