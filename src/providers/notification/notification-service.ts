@@ -17,7 +17,11 @@ export class NotificationService {
         id: params.id,
         title: params.title,
         text: params.text,
-        sound: this.platform.is('ios') ? 'file://beep.caf' : 'file://sound.mp3',
+        icon: params.icon || 'res://icon.png',
+        vibrate: params.vibrate || true,
+        smallIcon: params.smallIcon || 'res://ic_popup_reminder',
+        launch: params.launch || true,
+        sound: params.sound || this.platform.is('ios') ? 'file://beep.caf' : 'res://platform_default',
         trigger: { at: params.at },
         data: params.data
       });

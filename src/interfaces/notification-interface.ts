@@ -5,4 +5,8 @@ export interface NotificationInterface {
   sound?: string;
   data?: any
   at?: Date;
+  icon?: string,
+  smallIcon?: string,
+  launch?: boolean,
+  vibrate?: boolean;
 }
