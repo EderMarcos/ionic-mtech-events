@@ -19,8 +19,8 @@
       <ion-avatar item-start>
         <img [src]="event.exhibitorImg">
       </ion-avatar>
-      <h2>{{ event.exhibitorName }}</h2>
-      <p>{{ event.date | date:'MMM d, y, h:mm a' }}</p>
+      <h2 class="name">{{ event.exhibitorName }}</h2>
+      <p class="date">{{ event.date | date:'MMM d, y, h:mm a' }}</p>
     </ion-item>
   </ion-card>
 

@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list style="margin-bottom: 11px">
+  <ion-list style="margin-bottom: 0">
     <ion-list-header style="font-weight: bold;">PERSONAL INFORMATION</ion-list-header>
     <ion-item>
       <ion-icon name="person" item-start></ion-icon>
@@ -20,7 +20,7 @@
   <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" novalidate>
     <ion-list style="margin: 0">
       <ion-list-header style="font-weight: bold;"> EVENT: {{ event.eventName | uppercase }} </ion-list-header>
-      <ion-item class="no-p" style="border: 0.55px solid #c8c7cc" [ngClass]="{ 'error': !feedbackForm.get('comments').valid && feedbackForm.get('comments').touched }">
+      <ion-item class="no-p text-area" [ngClass]="{ 'error': !feedbackForm.get('comments').valid && feedbackForm.get('comments').touched }">
         <ion-textarea style="margin-left: 1rem"
                       formControlName="comments"
                       placeholder="Enter a review"
