@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BackgroundMode } from "@ionic-native/background-mode";
+import { Network } from "@ionic-native/network";
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -37,13 +39,13 @@ import { MtAboutPage } from "../pages/mt-about-page/mt-about-page";
 // Services
 import { DataService } from '../providers/data/data-service';
 import { ToastService } from '../providers/toast/toast-service';
-import { StorageService } from "../providers/storage/storage-service";
 import { AlertService } from "../providers/alert/alert-service";
 import { LoaderService } from "../providers/loader/loader-service";
+import { NetworkService } from "../providers/network/network-service";
+import { StorageService } from "../providers/storage/storage-service";
 import { SwitchEventService } from "../providers/switch-event/switch-event-service";
 import { LocalNotifications } from "@ionic-native/local-notifications";
 import { NotificationService } from "../providers/notification/notification-service";
-import { BackgroundMode } from "@ionic-native/background-mode";
 
 @NgModule({
   declarations: [
@@ -102,7 +104,9 @@ import { BackgroundMode } from "@ionic-native/background-mode";
     SwitchEventService,
     LocalNotifications,
     NotificationService,
-    BackgroundMode
+    BackgroundMode,
+    Network,
+    NetworkService
   ]
 })
 export class AppModule {}

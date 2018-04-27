@@ -6,11 +6,12 @@ export class ToastService {
 
   constructor(private readonly toastCtrl: ToastController) { }
 
-  showToast(msg: string, duration: number = 2500, position: string = 'top') {
+  showToast(msg: string, duration: number = 2500, position: string = 'top', dismissOnPageChange: boolean = false) {
     let toast = this.toastCtrl.create({
       message: msg,
       duration,
-      position
+      position,
+      dismissOnPageChange,
     });
     toast.present();
   }
