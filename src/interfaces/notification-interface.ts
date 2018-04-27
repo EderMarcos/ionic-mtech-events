@@ -4,4 +4,5 @@ export interface NotificationInterface {
   text: string;
   sound?: string;
   data?: any
+  at?: Date;
 }

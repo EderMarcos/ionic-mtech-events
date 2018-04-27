@@ -17,7 +17,8 @@ export class NotificationService {
         id: params.id,
         title: params.title,
         text: params.text,
-        sound: params.sound || 'file://sound.mp3',
+        sound: this.platform.is('ios') ? 'file://beep.caf' : 'file://sound.mp3',
+        trigger: { at: params.at },
         data: params.data
       });
     }

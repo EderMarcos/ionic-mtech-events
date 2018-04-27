@@ -2,7 +2,7 @@ page-mt-signin {
   .background {
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom,  #0B1B33 0%, #2CB897 100%);
+    background: linear-gradient(to bottom,  #0B1B33 20%, #2CB897 100%);
   }
 
   .img {
@@ -18,6 +18,7 @@ page-mt-signin {
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    padding-bottom: 0 !important;
   }
 
   ion-card.card {
@@ -33,6 +34,12 @@ page-mt-signin {
 
   .list > .item-block:first-child {
     border: medium none;
+  }
+
+  .item-inner {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;;
+    box-shadow: none !important;;
   }
 
   .item {

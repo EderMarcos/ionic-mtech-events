@@ -28,11 +28,7 @@ export class MtListComponent {
     if (event.breakFast) {
       return;
     }
-    if (event.surveyEnable) {
-      let modal = this.modalCtrl.create(MtFormFeedbackPage, { event: event });
-      return modal.present();
-    }
-    this.navCtrl.push(MtDetailEventPage, { event });
+    return this.navCtrl.push(event.surveyEnable ? MtFormFeedbackPage : MtDetailEventPage, { event });
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
