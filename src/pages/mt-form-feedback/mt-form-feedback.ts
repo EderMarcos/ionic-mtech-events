@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { NavController, NavParams } from "ionic-angular";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { NavParams, ViewController } from 'ionic-angular';
 
 import { FeedbackInterface } from "../../interfaces/feedback-interface";
 import { EventInterface } from "../../interfaces/event-interface";
@@ -21,15 +21,17 @@ export class MtFormFeedbackPage {
   private event: EventInterface;
   private feedback: FeedbackInterface;
   private user: UserInterface;
+  private tabBarElement: any;
   private readonly quiz: QuizInterface;
 
   constructor(
-    private readonly view: ViewController,
     private readonly navParams: NavParams,
     private readonly toast: ToastService,
     private readonly loader: LoaderService,
     private readonly storage: StorageService,
+    private readonly navCtrl: NavController,
     private _dataService: DataService) {
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.event = this.navParams.get('event');
     this.feedback = {
       idEvent: null,
@@ -53,10 +55,6 @@ export class MtFormFeedbackPage {
     });
   }
 
-  onDismiss() {
-    this.view.dismiss();
-  }
-
   getUser() {
     this.storage.getEntity('user')
       .then((user: UserInterface) => this.user = user)
@@ -71,8 +69,10 @@ export class MtFormFeedbackPage {
   }
 
   getFeedbackByEventId(id: string) {
-    this._dataService.getEntities({ collection: 'feedback',
-      query: (ref => ref.where('idEvent', '==', id).where('email', '==', this.user.email || '')) })
+    this._dataService.getEntities({
+      collection: 'feedback',
+      query: (ref => ref.where('idEvent', '==', id).where('email', '==', this.user.email || ''))
+    })
       .then(res => res[0])
       .then((record: FeedbackInterface) => {
         if (record) {
@@ -84,16 +84,16 @@ export class MtFormFeedbackPage {
   }
 
   async onSubmit() {
-    this.loader.showLoading({ content: 'Sending...', duration: 0 });
+    this.loader.showLoading({content: 'Sending...', duration: 0});
     this.feedback.comments = this.feedbackForm.value.comments;
     this.feedback.rate = this.feedbackForm.value.rate;
     if (this.feedback.id) {
       this.feedback.updatedAt = new Date().getTime();
-      return await this._dataService.updateEntity({ collection: 'feedback', key: this.feedback.id }, this.feedback)
+      return await this._dataService.updateEntity({collection: 'feedback', key: this.feedback.id}, this.feedback)
         .then((_) => this.loader.clear())
         .then((_) => {
           this.toast.showToast('Your comment has been updated');
-          this.onDismiss();
+          this.navCtrl.pop();
         });
     }
     await this._dataService.setEntity('surveyHistory', this.quiz);
@@ -101,7 +101,15 @@ export class MtFormFeedbackPage {
       .then((_) => this.loader.clear())
       .then((_) => {
         this.toast.showToast('Your comment has been sent');
-        this.onDismiss();
+        this.navCtrl.pop();
       });
+  }
+
+  ionViewWillEnter() {
+    this.tabBarElement.style.display = 'none';
+  }
+
+  ionViewWillLeave() {
+    this.tabBarElement.style.display = 'flex';
   }
 }

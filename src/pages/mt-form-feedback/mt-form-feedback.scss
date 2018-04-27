@@ -16,7 +16,7 @@ ul {
 }
 
 .error {
-  border: 1px solid #EB2227;
+  border: 0.55px solid #EB2227;
   .text-input {
     color: #EB2227;
   }
@@ -38,5 +38,14 @@ ul {
 
   *:-moz-placeholder  {
     color: #EB2227!important;
+  }
+}
+
+.no-border-rating {
+  .item-inner{
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
   }
 }

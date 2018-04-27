@@ -1,8 +1,8 @@
 import { Component, Input, SimpleChange } from '@angular/core';
-import { ModalController, NavController } from "ionic-angular";
+import { NavController } from "ionic-angular";
 
-import { MtFormFeedbackPage } from "../../pages/mt-form-feedback/mt-form-feedback";
 import { EventInterface } from "../../interfaces/event-interface";
+import { MtFormFeedbackPage } from "../../pages/mt-form-feedback/mt-form-feedback";
 import { MtDetailEventPage } from "../../pages/mt-detail-event/mt-detail-event";
 import { SwitchEventService } from "../../providers/switch-event/switch-event-service";
 import { NotificationService } from "../../providers/notification/notification-service";
@@ -16,8 +16,7 @@ export class MtListComponent {
   constructor(
     private readonly navCtrl: NavController,
     private readonly switchEvent: SwitchEventService,
-    private readonly notification: NotificationService,
-    private readonly modalCtrl: ModalController) {
+    private readonly notification: NotificationService) {
   }
 
   @Input() events: EventInterface[];
@@ -28,7 +27,7 @@ export class MtListComponent {
     if (event.breakFast) {
       return;
     }
-    return this.navCtrl.push(event.surveyEnable ? MtFormFeedbackPage : MtDetailEventPage, { event });
+    this.navCtrl.push(event.surveyEnable ? MtFormFeedbackPage : MtDetailEventPage, { event });
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {

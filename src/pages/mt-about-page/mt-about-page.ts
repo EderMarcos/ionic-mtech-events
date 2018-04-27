@@ -6,11 +6,18 @@ import { Component } from '@angular/core';
 })
 export class MtAboutPage {
 
-  constructor() {
-    console.log('[EderConsole] Console');
+  private tabBarElement: any;
 
-    // setTimeout(() => {
-    //   console.log('Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-    // }, 2*60*1000);
+  constructor() {
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+  }
+
+  ionViewWillEnter() {
+    this.tabBarElement.style.display = 'none';
+  }
+
+  ionViewWillLeave() {
+    this.tabBarElement.style.display = 'flex';
   }
 }
+
