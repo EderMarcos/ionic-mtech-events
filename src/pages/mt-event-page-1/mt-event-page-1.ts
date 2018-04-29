@@ -1,27 +1,30 @@
-import { Platform } from "ionic-angular";
 import { Component } from '@angular/core';
+import { Platform } from "ionic-angular";
+import { Network } from "@ionic-native/network";
 
-import { DataService } from "../../providers/data/data-service";
 import { LoaderService } from "../../providers/loader/loader-service";
-import { NetworkService } from "../../providers/network/network-service";
-import { AlertService } from "../../providers/alert/alert-service";
-import {Subscription} from "rxjs/Subscription";
+import { BaseComponent } from "../../components/base-component/base.component";
+import { ToastService } from "../../providers/toast/toast-service";
+import { DataService } from "../../providers/data/data-service";
 
 @Component({
   selector: 'page-mt-event-page-1',
   templateUrl: 'mt-event-page-1.html',
 })
-export class MtEventPage_1Page {
+export class MtEventPage_1Page extends BaseComponent {
 
   private events;
-  private subscription: Subscription;
 
   constructor(
     private readonly _dataService: DataService,
-    private readonly network: NetworkService,
-    private readonly platform: Platform,
-    private readonly alert: AlertService,
-    private readonly loader: LoaderService) {
+    private readonly loader: LoaderService,
+    network: Network,
+    platform: Platform,
+    toast: ToastService) {
+    super(platform, toast, network);
+    if (this.isOnline) {
+      this.getEventsByDay('1');
+    }
   }
 
   getEventsByDay(day: string) {
@@ -33,18 +36,9 @@ export class MtEventPage_1Page {
       .then((_) => this.loader.clear());
   }
 
-  ionViewWillEnter() {
-    if (this.network.isConnected()) {
-      this.getEventsByDay('1');
-    }
-    this.subscription = this.network.onConnect().subscribe(() => {
-      setTimeout(() => {
-        this.getEventsByDay('1');
-      }, 3000);
-    });
+  onConnect(): void {
+    this.getEventsByDay('1');
   }
 
-  ionViewWillLeave() {
-    this.subscription.unsubscribe();
-  }
+  onDisconnect(): void { }
 }

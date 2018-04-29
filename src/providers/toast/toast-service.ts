@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 
+import { ToastInterface } from "../../interfaces/toast-interface";
+
 @Injectable()
 export class ToastService {
 
   constructor(private readonly toastCtrl: ToastController) { }
 
-  showToast(msg: string, duration: number = 2500, position: string = 'top', dismissOnPageChange: boolean = false) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration,
-      position,
-      dismissOnPageChange,
-    });
-    toast.present();
+  showToast(params: ToastInterface) {
+    this.toastCtrl.create({
+      message: params.message,
+      duration: params.duration || 2500,
+      position: params.position || 'bottom',
+      showCloseButton: params.showCloseButton,
+      closeButtonText: params.closeButtonText,
+      dismissOnPageChange: params.dismissOnPageChange,
+    }).present();
   }
 
 }

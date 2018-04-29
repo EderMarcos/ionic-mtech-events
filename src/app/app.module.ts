@@ -41,7 +41,6 @@ import { DataService } from '../providers/data/data-service';
 import { ToastService } from '../providers/toast/toast-service';
 import { AlertService } from "../providers/alert/alert-service";
 import { LoaderService } from "../providers/loader/loader-service";
-import { NetworkService } from "../providers/network/network-service";
 import { StorageService } from "../providers/storage/storage-service";
 import { SwitchEventService } from "../providers/switch-event/switch-event-service";
 import { LocalNotifications } from "@ionic-native/local-notifications";
@@ -106,7 +105,6 @@ import { NotificationService } from "../providers/notification/notification-serv
     NotificationService,
     BackgroundMode,
     Network,
-    NetworkService
   ]
 })
 export class AppModule {}

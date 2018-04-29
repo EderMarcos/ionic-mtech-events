@@ -1,16 +1,16 @@
 <ion-content class="background">
   <ion-card>
     <ion-card-header>
-      Login Form
+      Login
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <ion-list no-line>
-          <img class="img" src="https://picsum.photos/100/100" alt="Logo">
+          <img class="img" src="https://picsum.photos/100/100/" alt="Logo">
           <ion-item [ngClass]="{ 'error': !form.get('email').valid && form.get('email').touched }">
             <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
           </ion-item>
-          <button ion-button block round outline icon-right color="light" [disabled]="!form.valid">
+          <button ion-button block round icon-right color="light" [disabled]="!form.valid">
             Log in
             <ion-icon name="log-in"></ion-icon>
           </button>
@@ -18,5 +18,4 @@
       </form>
     </ion-card-content>
   </ion-card>
-  <p class="bottom" color="light">MTech Systems</p>
 </ion-content>

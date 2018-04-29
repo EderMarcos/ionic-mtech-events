@@ -37,7 +37,7 @@ export class MtListComponent {
           if (event.id && !event.available) {
             return this.events.find(f => f.id === event.id).available = false;
           } else if (event.available && event.surveyEnable) {
-            this.notification.showNotification({ id: event.date, text: 'Hola', title: event.eventName })
+            this.notification.showNotification({ id: event.date, text: `This is a survey about event: ${ event.eventName }, remember that you only have 10 minutes to send your answer`, title: 'New survey available!'})
           }
         });
     }

@@ -1,20 +1,30 @@
 import { Component } from '@angular/core';
+import { Platform } from "ionic-angular";
+import { Network } from "@ionic-native/network";
 
-import { DataService } from "../../providers/data/data-service";
 import { LoaderService } from "../../providers/loader/loader-service";
+import { BaseComponent } from "../../components/base-component/base.component";
+import { ToastService } from "../../providers/toast/toast-service";
+import { DataService } from "../../providers/data/data-service";
 
 @Component({
   selector: 'page-mt-event-page-3',
   templateUrl: 'mt-event-page-3.html',
 })
-export class MtEventPage_3Page {
+export class MtEventPage_3Page extends BaseComponent {
 
   private events;
 
   constructor(
     private readonly _dataService: DataService,
-    private readonly loader: LoaderService) {
-    this.getEventsByDay('3');
+    private readonly loader: LoaderService,
+    network: Network,
+    platform: Platform,
+    toast: ToastService) {
+    super(platform, toast, network);
+    if (this.isOnline) {
+      this.getEventsByDay('2');
+    }
   }
 
   getEventsByDay(day: string) {
@@ -25,4 +35,10 @@ export class MtEventPage_3Page {
       .then(events => this.events = events)
       .then((_) => this.loader.clear());
   }
+
+  onConnect(): void {
+    this.getEventsByDay('3');
+  }
+
+  onDisconnect(): void { }
 }

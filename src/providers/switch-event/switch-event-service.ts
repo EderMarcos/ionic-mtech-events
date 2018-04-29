@@ -10,7 +10,7 @@ export class SwitchEventService {
   private onNullEvent: EventInterface = {
     eventName: 'Coming soon',
     exhibitorName: 'MTech Systems',
-    eventImg: 'https://picsum.photos/300/300',
+    eventImg: 'https://picsum.photos/300/300/?image=1075&blur',
     exhibitorImg: null,
     breakFast: false,
     day: null,

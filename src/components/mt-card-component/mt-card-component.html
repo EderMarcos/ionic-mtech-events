@@ -4,22 +4,15 @@
        [src]="currentEvent?.eventImg"/>
   <div class="card">
     <p class="card__title">{{ currentEvent?.eventName }}</p>
-    <p class="card__date"
-       *ngIf="currentEvent?.date">
+    <p class="card__date" *ngIf="currentEvent?.date">
       <ion-icon style="margin-right: 0.5rem;" name="calendar"></ion-icon>
       {{ currentEvent?.date | date:'EEEE, MMMM d, y, h:mm a' }}
     </p>
     <p class="card__exhibitor"
        *ngIf="currentEvent?.exhibitorName">
-      <ion-icon style="margin-right: 0.5rem;" name="contact"></ion-icon>
+      <ion-icon *ngIf="currentEvent?.day" style="margin-right: 0.5rem;" name="contact"></ion-icon>
       {{ currentEvent?.exhibitorName }}
     </p>
-    <button *ngIf="currentEvent"
-            ion-button
-            outline
-            round
-            small
-            color="light"
-            (click)="onCardClick()"> Read more</button>
+    <button *ngIf="currentEvent?.day" ion-button round small color="light" (click)="onCardClick()">Location</button>
   </div>
 </div>

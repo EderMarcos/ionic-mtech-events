@@ -6,7 +6,6 @@ import { BackgroundMode } from "@ionic-native/background-mode";
 
 import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.component";
 import { StorageService } from "../providers/storage/storage-service";
-import { NetworkService } from "../providers/network/network-service";
 import { MtSigninPage } from "../pages/mt-signin/mt-signin";
 import { UserInterface } from "../interfaces/user-interface";
 
@@ -22,10 +21,8 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     private backgroundMode: BackgroundMode,
-    private readonly network: NetworkService,
     private readonly storage: StorageService) {
     platform.ready().then(() => {
-      this.network.initNetworkWatch();
       this.backgroundMode.enable();
       this.backgroundMode.disableWebViewOptimizations();
       this.storage.getEntity('user')
@@ -35,11 +32,6 @@ export class MyApp {
       statusBar.backgroundColorByName('light');
       splashScreen.hide();
     });
-
-  }
-
-  ionViewWillLeave() {
-    this.network.unsuscribe();
   }
 }
 
