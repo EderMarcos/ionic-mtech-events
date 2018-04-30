@@ -59,9 +59,16 @@ export class MtFormFeedbackPage extends BaseComponent {
 
   private validateForm() {
     this.feedbackForm = new FormGroup({
-      'comments': new FormControl('', Validators.required),
+      'comments': new FormControl('', [
+        Validators.required,
+        this.validForm
+      ]),
       'rate': new FormControl(0, Validators.required)
     });
+  }
+
+  validForm(data: FormControl): { [s:string]:boolean } {
+    return (data.value.trim().length > 0) ? null : { validForm: true };
   }
 
   private getUser() {
