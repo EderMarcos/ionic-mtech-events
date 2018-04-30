@@ -7,7 +7,7 @@ import { DataService } from "../data/data-service";
 @Injectable()
 export class SwitchEventService {
 
-  private onNullEvent: EventInterface = {
+  private customEvent: EventInterface = {
     eventName: 'Coming soon',
     exhibitorName: 'MTech Systems',
     eventImg: 'https://picsum.photos/300/300/?image=1075&blur',
@@ -21,8 +21,7 @@ export class SwitchEventService {
     available: true,
   };
 
-  private mainTimeout;
-  private afterEventTimeout;
+  private customInterval;
   private readonly delay = 10 * 60 * 1000;
 
   constructor(
@@ -30,63 +29,43 @@ export class SwitchEventService {
   }
 
   getCurrentOrLastEvent(events: EventInterface[], lastEvent: boolean = false): Observable<EventInterface> {
-    let now = new Date().getTime();
-    return new Observable<EventInterface>(observer => {
-      for (let i = 0; i < events.length; i++) {
-        // If there are some events that are available
-        if (now > events[i].endTime + this.delay && events[i].available) {
-          events[i].available = false;
-          events[i].surveyEnable = false;
-          this.updateEvent(events[i]);
-        }
-        // At the start Event
-        if (now < events[0].date) {
-          observer.next(this.onNullEvent);
-        }
-        this.getEventByDate(events[i], lastEvent)
-          .then((event: EventInterface) => observer.next(event))
-        if (now > events[events.length - 1].endTime) {
-          // At the end Event
-          this.onNullEvent.eventName = 'Thanks for coming';
-          observer.next(this.onNullEvent);
-        }
+    return new Observable<EventInterface>(obs => {
+      if (events.length > 0) {
+        let interval = setInterval(() => {
+          let now = new Date().getTime();
+          if (now < events[0].date) {
+            return obs.next(this.customEvent);
+          }
+          if (now > events[events.length - 1].endTime) {
+            clearInterval(interval);
+            this.customEvent.eventName = 'Thanks for comming';
+            obs.next(this.customEvent);
+            return obs.complete();
+          }
+
+          events.forEach(ev => {
+            if (now > ev.date && now < ev.endTime) {
+              obs.next(ev);
+            } else if (ev.available && now > ev.endTime) {
+              ev.surveyEnable = true;
+              this.updateEvent(ev);
+              obs.next(ev);
+            }
+            if (ev.available && now > ev.endTime + this.delay) {
+              ev.available = false;
+              ev.surveyEnable = false;
+              this.updateEvent(ev);
+            }
+          });
+        }, 1000);
+      } else {
+        obs.complete();
       }
     });
   }
 
-  getEventByDate(event: EventInterface, lastEvent: boolean) {
-    return new Promise(resolve => {
-      const now = new Date().getTime();
-      // Current event
-      if (!lastEvent && now > event.date && now < event.endTime) {
-        console.log('current', event.eventName);
-        return resolve(event);
-      }
-      // Timer
-      let timer = Math.floor(lastEvent ? event.endTime - new Date().getTime() : event.date - new Date().getTime());
-      this.mainTimeout = setTimeout(() => {
-        if (lastEvent) {
-          event.surveyEnable = event.available;
-          this.updateEvent(event);
-        }
-        resolve(event);
-      }, timer);
-      // Only last event
-      if (lastEvent) {
-        // Time that the survey will be available
-        this.afterEventTimeout = setTimeout(() => {
-          event.available = false;
-          event.surveyEnable = false;
-          this.updateEvent(event);
-          resolve(event);
-        }, timer + this.delay);
-      }
-    });
-  }
-
-  clearTimeout() {
-    clearTimeout(this.mainTimeout);
-    clearTimeout(this.afterEventTimeout);
+  clear() {
+    clearInterval(this.customInterval);
   }
 
   updateEvent(data: EventInterface) {
