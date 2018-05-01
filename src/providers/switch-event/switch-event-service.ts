@@ -36,27 +36,30 @@ export class SwitchEventService {
           if (now < events[0].date) {
             return obs.next(this.customEvent);
           }
+          events.forEach(ev => {
+            console.log(ev.available);
+            if (ev.available && !ev.surveyEnable && now > ev.endTime) {
+              console.log('Termino:', ev.eventName, ev.available);
+              ev.surveyEnable = true;
+              this.updateEvent(ev);
+              obs.next(ev);
+            }
+            if (ev.available && now > ev.endTime + this.delay) {
+              console.log('Termino encuesta:', ev.eventName, ev.available);
+              ev.available = false;
+              ev.surveyEnable = false;
+              this.updateEvent(ev);
+            }
+            if (now > ev.date && now < ev.endTime) {
+              obs.next(ev);
+            }
+          });
           if (now > events[events.length - 1].endTime) {
             clearInterval(interval);
             this.customEvent.eventName = 'Thanks for comming';
             obs.next(this.customEvent);
             return obs.complete();
           }
-
-          events.forEach(ev => {
-            if (now > ev.date && now < ev.endTime) {
-              obs.next(ev);
-            } else if (ev.available && now > ev.endTime) {
-              ev.surveyEnable = true;
-              this.updateEvent(ev);
-              obs.next(ev);
-            }
-            if (ev.available && now > ev.endTime + this.delay) {
-              ev.available = false;
-              ev.surveyEnable = false;
-              this.updateEvent(ev);
-            }
-          });
         }, 1000);
       } else {
         obs.complete();
