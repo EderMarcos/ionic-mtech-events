@@ -29,7 +29,7 @@ export class MtEventPage_3Page extends BaseComponent {
     toast: ToastService) {
     super(platform, toast, network);
     if (this.isOnline) {
-      this.getEventsByDay('2');
+      this.getEventsByDay('3');
     }
   }
 

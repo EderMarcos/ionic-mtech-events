@@ -4,7 +4,7 @@
               class="mt-list-item"
               [ngClass]="{ 'surveyEnable': event.surveyEnable && !event.breakFast }"
               (click)="onItemClick(event)">
-      <ion-avatar item-start *ngIf="!event.breakFast">
+      <ion-avatar item-start>
         <img [src]="event.exhibitorImg || onNullImage">
       </ion-avatar>
       <!--<ion-icon name="leaf" item-start></ion-icon>-->

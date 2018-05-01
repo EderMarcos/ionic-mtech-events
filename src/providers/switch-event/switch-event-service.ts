@@ -40,21 +40,25 @@ export class SwitchEventService {
             if (ev.available && now > ev.endTime) {
               if (ev.breakFast) {
                 ev.available = false;
-                this.updateEvent(ev);
+                return this.updateEvent(ev);
               } else if (!ev.surveyEnable) {
                 ev.surveyEnable = true;
                 this.updateEvent(ev);
-                obs.next(ev);
+                return obs.next(ev);
               } else if (ev.endTime + this.delay) {
                 ev.available = false;
                 ev.surveyEnable = false;
-                this.updateEvent(ev);
-              } else if (new Date(now).getDay() <= new Date(ev.endTime).getDay() && !ev.available) {
+                return this.updateEvent(ev);
+              } else if (new Date(now).getDay() === new Date(ev.endTime).getDay() && !ev.available) {
                 this.customEvent.eventName = 'Thanks for comming today';
                 obs.next(this.customEvent);
               }
             } else if (now > ev.date && now < ev.endTime) {
-              obs.next(ev);
+              return obs.next(ev);
+            } else if (Math.ceil((ev.date - now) / (1000 * 60)) > 1 && !(now > ev.date && now < ev.endTime) && new Date(now).getDay() === new Date(ev.endTime).getDay()) {
+              this.customEvent.eventName = ev.eventName ;
+              this.customEvent.exhibitorName = `starts in ${ Math.ceil((ev.date - now) / (1000 * 60)) } minutes`;
+              obs.next(this.customEvent);
             }
           });
           if (now > events[events.length - 1].endTime) {
