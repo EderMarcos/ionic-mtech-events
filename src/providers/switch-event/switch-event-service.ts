@@ -37,15 +37,12 @@ export class SwitchEventService {
             return obs.next(this.customEvent);
           }
           events.forEach(ev => {
-            console.log(ev.available);
             if (ev.available && !ev.surveyEnable && now > ev.endTime) {
-              console.log('Termino:', ev.eventName, ev.available);
               ev.surveyEnable = true;
               this.updateEvent(ev);
               obs.next(ev);
             }
             if (ev.available && now > ev.endTime + this.delay) {
-              console.log('Termino encuesta:', ev.eventName, ev.available);
               ev.available = false;
               ev.surveyEnable = false;
               this.updateEvent(ev);

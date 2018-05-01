@@ -71,7 +71,6 @@
       "cordova-plugin-network-information": {}
     },
     "platforms": [
-      "android",
       "ios"
     ]
   }

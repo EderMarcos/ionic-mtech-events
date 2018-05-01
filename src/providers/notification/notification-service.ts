@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Platform } from "ionic-angular";
+import { NavController, Platform } from "ionic-angular";
 
 import { NotificationInterface } from "../../interfaces/notification-interface";
+import { EventInterface } from "../../interfaces/event-interface";
 import { LocalNotifications } from "@ionic-native/local-notifications";
+import { MtFormFeedbackPage } from "../../pages/mt-form-feedback/mt-form-feedback";
 
 @Injectable()
 export class NotificationService {
@@ -11,7 +13,8 @@ export class NotificationService {
     private readonly platform: Platform,
     private readonly localNotifications: LocalNotifications) {}
 
-  showNotification(params: NotificationInterface) {
+  showNotification(params: NotificationInterface, navCtrl: NavController) {
+    let event: EventInterface;
     if (this.platform.is('cordova')) {
       this.localNotifications.schedule({
         id: params.id,
@@ -26,5 +29,9 @@ export class NotificationService {
         data: params.data
       });
     }
+    this.localNotifications.on('click').subscribe(res => {
+      event.id = res.data;
+      navCtrl.push(MtFormFeedbackPage, { event });
+    });
   }
 }

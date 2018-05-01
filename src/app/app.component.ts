@@ -23,6 +23,7 @@ export class MyApp {
     private backgroundMode: BackgroundMode,
     private readonly storage: StorageService) {
     platform.ready().then(() => {
+      this.backgroundMode.setDefaults({ silent: true });
       this.backgroundMode.enable();
       this.backgroundMode.disableWebViewOptimizations();
       this.storage.getEntity('user')
