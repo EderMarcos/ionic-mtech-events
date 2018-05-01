@@ -8,7 +8,7 @@
         <img [src]="event.exhibitorImg || onNullImage">
       </ion-avatar>
       <!--<ion-icon name="leaf" item-start></ion-icon>-->
-      <h2 *ngIf="event?.breakFast" class="mt-list-item__title" [ngClass]="{
+      <h2 *ngIf="event?.breakFast" class="mt-list-item__title break" [ngClass]="{
       'green-text': event.available,
       'disabled': !event.available }">{{ event.eventName | uppercase }}</h2>
       <h2 *ngIf="!event?.breakFast" class="mt-list-item__title" [ngClass]="{
