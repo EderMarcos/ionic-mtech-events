@@ -1,8 +1,11 @@
 <ion-header>
   <ion-navbar color="primary" no-border>
-    <ion-title>
-      MTech Events
-    </ion-title>
+    <ion-title> MTech Events </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="onClickOptions()">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
   <mt-card></mt-card>
 </ion-header>

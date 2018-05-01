@@ -10,13 +10,13 @@ import { IonicStorageModule } from '@ionic/storage';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 // Firebase
+import { firebaseConfig } from "../config/firebase.config";
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { firebaseConfig } from "../config/firebase.config";
 
 // Plugins
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AgmCoreModule } from '@agm/core';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Ionic2RatingModule } from "ionic2-rating";
 
 // Components
@@ -27,14 +27,14 @@ import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.compone
 import { MtSlideComponent } from "../components/mt-slide-component/mt-slide.component";
 
 // Pages
+import { MtMapsPage } from "../pages/mt-maps-page/mt-maps-page";
+import { MtAboutPage } from "../pages/mt-about-page/mt-about-page";
+import { MtSigninPage } from "../pages/mt-signin/mt-signin";
 import { MtEventPage_1Page } from "../pages/mt-event-page-1/mt-event-page-1";
 import { MtEventPage_2Page } from "../pages/mt-event-page-2/mt-event-page-2";
 import { MtEventPage_3Page } from "../pages/mt-event-page-3/mt-event-page-3";
-import { MtMapsPage } from "../pages/mt-maps-page/mt-maps-page";
-import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
 import { MtDetailEventPage } from "../pages/mt-detail-event/mt-detail-event";
-import { MtSigninPage } from "../pages/mt-signin/mt-signin";
-import { MtAboutPage } from "../pages/mt-about-page/mt-about-page";
+import { MtFormFeedbackPage } from "../pages/mt-form-feedback/mt-form-feedback";
 
 // Services
 import { DataService } from '../providers/data/data-service';
@@ -45,6 +45,7 @@ import { StorageService } from "../providers/storage/storage-service";
 import { SwitchEventService } from "../providers/switch-event/switch-event-service";
 import { LocalNotifications } from "@ionic-native/local-notifications";
 import { NotificationService } from "../providers/notification/notification-service";
+import { ActionSheetService } from "../providers/action-sheet/action-sheet-service";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import { NotificationService } from "../providers/notification/notification-serv
     MtDetailEventPage,
     MtSigninPage,
     MtListComponent,
-    MtCardComponent
+    MtCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +75,7 @@ import { NotificationService } from "../providers/notification/notification-serv
     }),
     Ionic2RatingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -105,6 +106,7 @@ import { NotificationService } from "../providers/notification/notification-serv
     NotificationService,
     BackgroundMode,
     Network,
+    ActionSheetService
   ]
 })
 export class AppModule {}

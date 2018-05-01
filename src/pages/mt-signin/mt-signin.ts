@@ -17,6 +17,7 @@ export class MtSigninPage {
 
   private user: UserInterface;
   private form: FormGroup;
+  private tabBarElement: any;
 
   constructor(
     private readonly storage: StorageService,
@@ -24,6 +25,7 @@ export class MtSigninPage {
     private readonly loader: LoaderService,
     private readonly dataService: DataService,
     private readonly navCtrl: NavController) {
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.user = {
       email: null
     };
@@ -53,5 +55,17 @@ export class MtSigninPage {
           this.alert.showAlert({ title: 'Failed to login', subTitle: 'This email does not have permissions' })
         }
       });
+  }
+
+  ionViewWillEnter() {
+    if (this.tabBarElement) {
+      this.tabBarElement.style.display = 'none';
+    }
+  }
+
+  ionViewWillLeave() {
+    if (this.tabBarElement) {
+      this.tabBarElement.style.display = 'flex';
+    }
   }
 }

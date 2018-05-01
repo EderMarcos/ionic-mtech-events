@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { Platform } from "ionic-angular";
+import { NavController, Platform } from "ionic-angular";
 import { Network } from "@ionic-native/network";
 
+import { ActionSheetService } from "../../providers/action-sheet/action-sheet-service";
+import { StorageService } from "../../providers/storage/storage-service";
 import { LoaderService } from "../../providers/loader/loader-service";
 import { BaseComponent } from "../../components/base-component/base.component";
 import { ToastService } from "../../providers/toast/toast-service";
 import { DataService } from "../../providers/data/data-service";
+import { MtSigninPage } from "../mt-signin/mt-signin";
 
 @Component({
   selector: 'page-mt-event-page-1',
@@ -16,6 +19,9 @@ export class MtEventPage_1Page extends BaseComponent {
   private events;
 
   constructor(
+    private readonly storage: StorageService,
+    private readonly navCtrl: NavController,
+    private readonly actionSheet: ActionSheetService,
     private readonly _dataService: DataService,
     private readonly loader: LoaderService,
     network: Network,
@@ -33,7 +39,22 @@ export class MtEventPage_1Page extends BaseComponent {
       collection: 'events',
       query: (ref => ref.where('day', '==', day).orderBy('date', 'asc'))})
       .then(events => this.events = events)
-      .then((_) => this.loader.clear());
+      .then(_ => this.loader.clear());
+  }
+
+  onClickOptions() {
+    this.actionSheet.show({
+      title: 'Options',
+      buttons: [
+        {
+          text: 'Logout',
+          handler: () => {
+            this.storage.clear('user');
+            this.navCtrl.push(MtSigninPage);
+          }
+        }
+      ]
+    });
   }
 
   onConnect(): void {
