@@ -10,7 +10,25 @@
     [longitude]="event.longitude || -100.366558"
     [zoom]="16">
     <agm-marker [latitude]="event.latitude || 20.561113" [longitude]="event.longitude || -100.366558">
-      <agm-info-window>{{ event.eventName || 'EventName' }}</agm-info-window>
+      <agm-info-window>{{ event.place || '' }}</agm-info-window>
     </agm-marker>
   </agm-map>
+
+  <ion-card>
+    <ion-item text-center>
+      <h2>{{ event.eventName }}</h2>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="map" item-start large></ion-icon>
+      <h2 class="place">{{ event.place || 'Place not available' }}</h2>
+      <p>{{ event.address || 'Address not available' }}</p>
+    </ion-item>
+
+    <ion-item>
+      <p item-right>
+        {{ event?.date | date:'h:mm a' }} - {{ event?.endTime | date:'h:mm a' }}
+      </p>
+    </ion-item>
+  </ion-card>
 </ion-content>
