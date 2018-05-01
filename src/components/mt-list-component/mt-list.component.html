@@ -2,7 +2,7 @@
   <ion-list>
     <ion-item *ngFor="let event of events"
               class="mt-list-item"
-              [ngClass]="{ 'surveyEnable': event.surveyEnable }"
+              [ngClass]="{ 'surveyEnable': event.surveyEnable && !event.breakFast }"
               (click)="onItemClick(event)">
       <ion-avatar item-start *ngIf="!event.breakFast">
         <img [src]="event.exhibitorImg || onNullImage">

@@ -25,7 +25,6 @@ export class MtSigninPage {
     private readonly loader: LoaderService,
     private readonly dataService: DataService,
     private readonly navCtrl: NavController) {
-    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.user = {
       email: null
     };
@@ -58,9 +57,10 @@ export class MtSigninPage {
   }
 
   ionViewWillEnter() {
-    if (this.tabBarElement) {
-      this.tabBarElement.style.display = 'none';
-    }
+      this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+      if (this.tabBarElement) {
+        this.tabBarElement.style.display = 'none';
+      }
   }
 
   ionViewWillLeave() {
