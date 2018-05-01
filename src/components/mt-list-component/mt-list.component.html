@@ -8,7 +8,10 @@
         <img [src]="event.exhibitorImg || onNullImage">
       </ion-avatar>
       <!--<ion-icon name="leaf" item-start></ion-icon>-->
-      <h2 class="mt-list-item__title" [ngClass]="{
+      <h2 *ngIf="event?.breakFast" class="mt-list-item__title" [ngClass]="{
+      'green-text': event.available,
+      'disabled': !event.available }">{{ event.eventName | uppercase }}</h2>
+      <h2 *ngIf="!event?.breakFast" class="mt-list-item__title" [ngClass]="{
       'break-activities': event.breakFast,
       'disabled': !event.available }">{{ event.eventName }}</h2>
       <ion-note class="mt-list-item__date"

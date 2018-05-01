@@ -3,7 +3,8 @@
        *ngIf="currentEvent?.eventImg"
        [src]="currentEvent?.eventImg"/>
   <div class="card">
-    <p class="card__title">{{ currentEvent?.eventName }}</p>
+    <p class="card__title" *ngIf="currentEvent?.breakFast">{{ currentEvent?.eventName | uppercase }}</p>
+    <p class="card__title" *ngIf="!currentEvent?.breakFast">{{ currentEvent?.eventName }}</p>
     <p class="card__date" *ngIf="currentEvent?.date">
       <ion-icon style="margin-right: 0.5rem;" name="calendar"></ion-icon>
       {{ currentEvent?.date | date:'EEEE, MMMM d, y, h:mm' }} -
