@@ -37,17 +37,23 @@ export class SwitchEventService {
             return obs.next(this.customEvent);
           }
           events.forEach(ev => {
-            if (ev.available && !ev.surveyEnable && now > ev.endTime) {
-              ev.surveyEnable = true;
-              this.updateEvent(ev);
-              obs.next(ev);
-            }
-            if (ev.available && now > ev.endTime + this.delay) {
-              ev.available = false;
-              ev.surveyEnable = false;
-              this.updateEvent(ev);
-            }
-            if (now > ev.date && now < ev.endTime) {
+            if (ev.available && now > ev.endTime) {
+              if (ev.breakFast) {
+                ev.available = false;
+                this.updateEvent(ev);
+              } else if (!ev.surveyEnable) {
+                ev.surveyEnable = true;
+                this.updateEvent(ev);
+                obs.next(ev);
+              } else if (ev.endTime + this.delay) {
+                ev.available = false;
+                ev.surveyEnable = false;
+                this.updateEvent(ev);
+              } else if (new Date(now).getDay() <= new Date(ev.endTime).getDay() && !ev.available) {
+                this.customEvent.eventName = 'Thanks for comming today';
+                obs.next(this.customEvent);
+              }
+            } else if (now > ev.date && now < ev.endTime) {
               obs.next(ev);
             }
           });
