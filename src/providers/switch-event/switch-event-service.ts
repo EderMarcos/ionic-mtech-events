@@ -67,17 +67,6 @@ export class SwitchEventService {
               obs.next(ev);
               return;
             }
-            // let diff = Math.ceil((ev[id + 1].date - ev[id].endTime) / (1000 * 60));
-            // console.log(id);
-            // if (diff > 1 &&
-            //   now > ev[id].endTime &&
-            //   !(now > ev.date && now < ev.endTime) &&
-            //   new Date(now).getDay() === new Date(ev.endTime).getDay()) {
-            //   console.log('Match');
-              //   this.customEvent.eventName = ev.eventName ;
-              //   this.customEvent.exhibitorName = `starts in ${ Math.ceil((ev.date - now) / (1000 * 60)) } minutes`;
-              //   obs.next(this.customEvent);
-            // }
           });
 
           if (now > events[events.length - 1].endTime) {
