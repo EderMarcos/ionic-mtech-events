@@ -32,7 +32,7 @@ export class MtListComponent {
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     if (this.events) {
-      this.switchEvent.getCurrentOrLastEvent(this.events, true)
+      this.switchEvent.getCurrentOrLastEvent(this.events)
         .subscribe(event => {
           if (event.id && !event.available) {
             return this.events.find(f => f.id === event.id).available = false;
@@ -45,5 +45,9 @@ export class MtListComponent {
           }
         });
     }
+  }
+
+  ionViewWillLeave() {
+    console.error('Salio');
   }
 }

@@ -1,12 +1,10 @@
 <ion-content class="background">
   <ion-card>
-    <ion-card-header>
-      Login
-    </ion-card-header>
     <ion-card-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <ion-list no-line>
-          <img class="img" src="https://picsum.photos/100/100/" alt="Logo">
+          <!--<img class="img" src="assets/imgs/logo.png" alt="Logo">-->
+          <img class="img" src="assets/imgs/logo.png" alt="Logo">
           <ion-item [ngClass]="{ 'error': !form.get('email').valid && form.get('email').touched }">
             <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
           </ion-item>

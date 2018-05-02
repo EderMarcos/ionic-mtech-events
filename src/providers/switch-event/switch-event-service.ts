@@ -7,19 +7,19 @@ import { DataService } from "../data/data-service";
 @Injectable()
 export class SwitchEventService {
 
-  private customEvent: EventInterface = {
-    eventName: 'Coming soon',
-    exhibitorName: 'MTech Systems',
-    eventImg: 'https://picsum.photos/300/300/?image=1075&blur',
-    exhibitorImg: null,
-    breakFast: false,
-    day: null,
-    description: null,
-    latitude: 0,
-    longitude: 0,
-    place: null,
-    available: true,
-  };
+  // private customEvent: EventInterface = {
+  //   eventName: 'Coming soon',
+  //   exhibitorName: 'MTech Systems',
+  //   eventImg: 'https://picsum.photos/300/300/?image=1075&blur',
+  //   exhibitorImg: null,
+  //   breakFast: false,
+  //   day: null,
+  //   description: null,
+  //   latitude: 0,
+  //   longitude: 0,
+  //   place: null,
+  //   available: true,
+  // };
 
   private customInterval;
   private readonly delay = 10 * 60 * 1000;
@@ -28,14 +28,15 @@ export class SwitchEventService {
     private readonly dataService: DataService) {
   }
 
-  getCurrentOrLastEvent(events: EventInterface[], lastEvent: boolean = false): Observable<EventInterface> {
+  getCurrentOrLastEvent(events: EventInterface[]): Observable<EventInterface> {
     return new Observable<EventInterface>(obs => {
       if (events.length > 0) {
-        let interval = setInterval(() => {
+        // let interval = setInterval(() => {
+
           let now = new Date().getTime();
-          if (now < events[0].date) {
-            return obs.next(this.customEvent);
-          }
+          // if (now < events[0].date) {
+          //   return obs.next(this.customEvent);
+          // }
 
           events.forEach((ev, id) => {
             if (ev.available && now > ev.endTime) {
@@ -44,38 +45,39 @@ export class SwitchEventService {
                 ev.available = false;
                 return this.updateEvent(ev);
               }
-              if (!ev.surveyEnable) {
+              if (!ev.surveyEnable && !ev.breakFast) {
                 console.log('!ev.surveyEnable', ev.eventName);
                 ev.surveyEnable = true;
-                this.updateEvent(ev);
-                return obs.next(ev);
+                obs.next(ev);
+                return this.updateEvent(ev);
               }
-              if (ev.endTime + this.delay) {
+              if (ev.endTime + this.delay && !ev.breakFast) {
                 console.log('ev.endTime + this.delay', ev.eventName);
 
                 ev.available = false;
                 ev.surveyEnable = false;
                 return this.updateEvent(ev);
               }
-              if (new Date(now).getDay() <= new Date(ev.endTime).getDay() && !ev.available) {
-                console.log('Final', ev.eventName);
-                this.customEvent.eventName = 'Thanks for comming today';
-                obs.next(this.customEvent);
-              }
+              // if (new Date(now).getDay() <= new Date(ev.endTime).getDay() && !ev.available) {
+              //   console.log('Final', ev.eventName);
+              //   this.customEvent.eventName = 'Thanks for comming today';
+              //   obs.next(this.customEvent);
+              // }
             }
             if (now > ev.date && now < ev.endTime) {
-              obs.next(ev);
-              return;
+              return obs.next(ev);
             }
           });
 
-          if (now > events[events.length - 1].endTime) {
-            clearInterval(interval);
-            this.customEvent.eventName = 'Thanks for comming';
-            obs.next(this.customEvent);
-            return obs.complete();
-          }
-        }, 1000);
+          // if (now > events[events.length - 1].endTime) {
+          //   // clearInterval(interval);
+          //   this.customEvent.eventName = 'Thanks for comming';
+          //   obs.next(this.customEvent);
+          //   return obs.complete();
+          // }
+
+
+        // }, 1000);
       } else {
         obs.complete();
       }

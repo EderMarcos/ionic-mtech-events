@@ -10,6 +10,7 @@ import { ToastService } from "../../providers/toast/toast-service";
 import { DataService } from "../../providers/data/data-service";
 import { MtSigninPage } from "../mt-signin/mt-signin";
 import { MtAboutPage } from "../mt-about-page/mt-about-page";
+import {EventInterface} from "../../interfaces/event-interface";
 
 @Component({
   selector: 'page-mt-event-page-1',
@@ -39,7 +40,7 @@ export class MtEventPage_1Page extends BaseComponent {
     this._dataService.getEntities({
       collection: 'events',
       query: (ref => ref.where('day', '==', day).orderBy('date', 'asc'))})
-      .then(events => this.events = events)
+      .then((events: EventInterface[]) => this.events = events.filter(f => f.isVisible))
       .then(_ => this.loader.clear());
   }
 
