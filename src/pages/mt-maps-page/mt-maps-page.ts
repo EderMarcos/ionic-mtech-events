@@ -36,8 +36,7 @@ export class MtMapsPage {
   openMaps(address: string) {
     this.launchNavigator.navigate(address)
       .then(
-        success => console.log('Launched navigator'),
-        error => console.log('Error launching navigator', error)
+        success => console.log('Launched navigator')
       );
   }
 }

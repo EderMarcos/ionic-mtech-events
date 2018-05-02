@@ -1,13 +1,9 @@
-import { Component } from '@angular/core';
 import { Subscription } from "rxjs/Subscription";
 import { Platform } from "ionic-angular";
 import { Network } from "@ionic-native/network";
 
 import { ToastService } from "../../providers/toast/toast-service";
 
-@Component({
-  templateUrl: ''
-})
 export abstract class BaseComponent {
 
   private subscriptions: Subscription[] = [];

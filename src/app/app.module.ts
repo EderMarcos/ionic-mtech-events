@@ -23,11 +23,13 @@ import { Ionic2RatingModule } from "ionic2-rating";
 // Components
 import { MyApp } from './app.component';
 import { MtListComponent } from "../components/mt-list-component/mt-list.component";
+import { MtFormComponent } from "../components/mt-form/mt-form";
 import { MtCardComponent } from "../components/mt-card-component/mt-card-component";
 import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.component";
 import { MtSlideComponent } from "../components/mt-slide-component/mt-slide.component";
 
 // Pages
+import { MtScanPage } from "../pages/mt-scan-page/mt-scan-page";
 import { MtMapsPage } from "../pages/mt-maps-page/mt-maps-page";
 import { MtAboutPage } from "../pages/mt-about-page/mt-about-page";
 import { MtSigninPage } from "../pages/mt-signin/mt-signin";
@@ -65,6 +67,8 @@ import { PushNotificationProvider } from '../providers/push-notification/push-no
     MtSigninPage,
     MtListComponent,
     MtCardComponent,
+    MtFormComponent,
+    MtScanPage
   ],
   imports: [
     BrowserModule,
@@ -93,6 +97,7 @@ import { PushNotificationProvider } from '../providers/push-notification/push-no
     MtFormFeedbackPage,
     MtDetailEventPage,
     MtSigninPage,
+    MtScanPage
   ],
   providers: [
     StatusBar,

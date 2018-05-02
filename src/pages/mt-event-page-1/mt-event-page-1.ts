@@ -9,6 +9,7 @@ import { BaseComponent } from "../../components/base-component/base.component";
 import { ToastService } from "../../providers/toast/toast-service";
 import { DataService } from "../../providers/data/data-service";
 import { MtSigninPage } from "../mt-signin/mt-signin";
+import { MtAboutPage } from "../mt-about-page/mt-about-page";
 
 @Component({
   selector: 'page-mt-event-page-1',
@@ -47,6 +48,11 @@ export class MtEventPage_1Page extends BaseComponent {
       title: 'Options',
       buttons: [
         {
+          text: 'About',
+          handler: () => {
+            this.navCtrl.push(MtAboutPage);
+          }
+        }, {
           text: 'Logout',
           handler: () => {
             this.storage.clear('user');
