@@ -25,6 +25,7 @@
     "@ionic-native/background-mode": "^4.7.0",
     "@ionic-native/barcode-scanner": "^4.7.0",
     "@ionic-native/core": "4.6.0",
+    "@ionic-native/launch-navigator": "^4.7.0",
     "@ionic-native/local-notifications": "^4.7.0",
     "@ionic-native/network": "^4.7.0",
     "@ionic-native/onesignal": "^4.7.0",
@@ -34,9 +35,11 @@
     "angularfire2": "5.0.0-rc.3",
     "cordova-android": "7.0.0",
     "cordova-ios": "4.5.4",
+    "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-background-mode": "^0.7.2",
     "cordova-plugin-badge": "^0.8.7",
     "cordova-plugin-device": "^2.0.1",
+    "cordova-plugin-dialogs": "^2.0.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-local-notification": "^0.9.0-beta.2",
@@ -52,6 +55,7 @@
     "phonegap-plugin-barcodescanner": "^7.1.1",
     "rxjs": "^5.5.8",
     "sw-toolbox": "3.6.0",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "^4.2.0",
     "zone.js": "0.8.26"
   },
   "devDependencies": {
@@ -71,7 +75,10 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-network-information": {},
-      "onesignal-cordova-plugin": {}
+      "onesignal-cordova-plugin": {},
+      "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+        "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
+      }
     },
     "platforms": [
       "ios"

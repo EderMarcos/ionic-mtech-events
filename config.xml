@@ -89,4 +89,7 @@
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
     <engine name="ios" spec="4.5.4" />
     <plugin name="onesignal-cordova-plugin" spec="^2.3.3" />
+    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^4.2.0">
+        <variable name="LOCATION_USAGE_DESCRIPTION" value="This app requires access to your location for navigation purposes" />
+    </plugin>
 </widget>

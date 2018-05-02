@@ -5,25 +5,49 @@
 </ion-header>
 
 <ion-content class="animated fadeIn fast">
-  <agm-map
-    [latitude]="event.latitude || 20.561113"
-    [longitude]="event.longitude || -100.366558"
-    [zoom]="16">
-    <agm-marker [latitude]="event.latitude || 20.561113" [longitude]="event.longitude || -100.366558">
-      <agm-info-window>{{ event.place || '' }}</agm-info-window>
-    </agm-marker>
-  </agm-map>
 
   <ion-card>
-    <ion-item>
-      <h2 class="place">{{ event.place || 'Place not available' }}</h2>
-      <p>{{ event.address || 'Address not available' }}</p>
-    </ion-item>
+    <agm-map style="height: 300px"
+             [latitude]="event.latitude"
+             [longitude]="event.longitude"
+             [zoom]="16">
+      <agm-marker [latitude]="event.latitude" [longitude]="event.longitude">
+        <agm-info-window>{{ event.eventName }}</agm-info-window>
+      </agm-marker>
+    </agm-map>
 
     <ion-item>
-      <p item-right>
-        {{ event?.date | date:'h:mm a' }} - {{ event?.endTime | date:'h:mm a' }}
-      </p>
+      <ion-icon name="map" item-start large></ion-icon>
+      <h2>{{ event.place }}</h2>
+      <p>{{ event.address }}</p>
     </ion-item>
   </ion-card>
+
+  <div class="text-center" padding>
+    <button ion-button color="green-3" outline round block (click)="openMaps('160 Ted Turner Dr NW, Atlanta, GA 30303, EE. UU.')">
+      Open in Maps
+    </button>
+  </div>
+
+  <!--<agm-map-->
+    <!--[latitude]="event.latitude || 20.561113"-->
+    <!--[longitude]="event.longitude || -100.366558"-->
+    <!--[zoom]="16">-->
+    <!--<agm-marker [latitude]="event.latitude || 20.561113" [longitude]="event.longitude || -100.366558">-->
+      <!--<agm-info-window>{{ event.place || '' }}</agm-info-window>-->
+    <!--</agm-marker>-->
+  <!--</agm-map>-->
+
+  <!--<ion-card>-->
+    <!--<ion-item>-->
+      <!--<h2 class="place">{{ event.place || 'Place not available' }}</h2>-->
+      <!--<p>{{ event.address || 'Address not available' }}</p>-->
+    <!--</ion-item>-->
+
+    <!--<ion-item>-->
+      <!--<p item-right>-->
+        <!--{{ event?.date | date:'h:mm a' }} - {{ event?.endTime | date:'h:mm a' }}-->
+      <!--</p>-->
+    <!--</ion-item>-->
+  <!--</ion-card>-->
 </ion-content>

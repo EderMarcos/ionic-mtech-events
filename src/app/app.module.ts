@@ -43,10 +43,11 @@ import { ToastService } from '../providers/toast/toast-service';
 import { AlertService } from "../providers/alert/alert-service";
 import { LoaderService } from "../providers/loader/loader-service";
 import { StorageService } from "../providers/storage/storage-service";
+import { LaunchNavigator } from "@ionic-native/launch-navigator";
+import { ActionSheetService } from "../providers/action-sheet/action-sheet-service";
 import { SwitchEventService } from "../providers/switch-event/switch-event-service";
 import { LocalNotifications } from "@ionic-native/local-notifications";
 import { NotificationService } from "../providers/notification/notification-service";
-import { ActionSheetService } from "../providers/action-sheet/action-sheet-service";
 import { PushNotificationProvider } from '../providers/push-notification/push-notification';
 
 @NgModule({
@@ -110,7 +111,8 @@ import { PushNotificationProvider } from '../providers/push-notification/push-no
     Network,
     ActionSheetService,
     OneSignal,
-    PushNotificationProvider
+    PushNotificationProvider,
+    LaunchNavigator
   ]
 })
 export class AppModule {}
