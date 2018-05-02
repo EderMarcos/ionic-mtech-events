@@ -19,6 +19,7 @@ import {EventInterface} from "../../interfaces/event-interface";
 export class MtEventPage_3Page extends BaseComponent {
 
   private events;
+  firstLoad = false;
 
   constructor(
     private readonly storage: StorageService,
@@ -32,6 +33,7 @@ export class MtEventPage_3Page extends BaseComponent {
     super(platform, toast, network);
     if (this.isOnline) {
       this.getEventsByDay('3');
+      setTimeout(() => this.firstLoad = true, 1000);
     }
   }
 
@@ -62,6 +64,12 @@ export class MtEventPage_3Page extends BaseComponent {
         }
       ]
     });
+  }
+
+  ionViewWillEnter() {
+    if (this.isOnline && this.firstLoad) {
+      this.getEventsByDay('3');
+    }
   }
 
   onConnect(): void {

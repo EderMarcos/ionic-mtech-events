@@ -32,18 +32,18 @@ export class MtListComponent {
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
     if (this.events) {
-      this.switchEvent.getCurrentOrLastEvent(this.events)
-        .subscribe(event => {
-          if (event.id && !event.available) {
-            return this.events.find(f => f.id === event.id).available = false;
-          } else if (event.available && event.surveyEnable) {
-            this.notification.showNotification({
-              id: event.date,
-              text: `This is a survey about event: ${ event.eventName }, remember that you only have 10 minutes to send your answer`,
-              title: 'New survey available!'
-            }, this.navCtrl)
-          }
-        });
+      // this.switchEvent.getCurrentOrLastEvent(this.events)
+      //   .subscribe(event => {
+      //     if (event.id && !event.available) {
+      //       return this.events.find(f => f.id === event.id).available = false;
+      //     } else if (event.available && event.surveyEnable) {
+      //       this.notification.showNotification({
+      //         id: event.date,
+      //         text: `This is a survey about event: ${ event.eventName }, remember that you only have 10 minutes to send your answer`,
+      //         title: 'New survey available!'
+      //       }, this.navCtrl)
+      //     }
+      //   });
     }
   }
 

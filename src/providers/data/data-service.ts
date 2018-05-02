@@ -6,6 +6,17 @@ export class DataService {
 
   constructor(
     private readonly db: AngularFirestore) {
+    // this.db.collection('events')
+    //   .valueChanges()
+    //   .subscribe(a => {
+    //     console.log(a);
+    //   });
+
+    // this.db.collection('events')
+    //   .snapshotChanges()
+    //   .subscribe(a => {
+    //     console.log(a);
+    //   });
   }
 
   public setEntity(collection: string, entity: any) {

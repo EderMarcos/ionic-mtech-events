@@ -41,19 +41,15 @@ export class SwitchEventService {
           events.forEach((ev, id) => {
             if (ev.available && now > ev.endTime) {
               if (ev.breakFast) {
-                console.log('ev.breakFast', ev.eventName);
                 ev.available = false;
                 return this.updateEvent(ev);
               }
               if (!ev.surveyEnable && !ev.breakFast) {
-                console.log('!ev.surveyEnable', ev.eventName);
                 ev.surveyEnable = true;
                 obs.next(ev);
                 return this.updateEvent(ev);
               }
               if (ev.endTime + this.delay && !ev.breakFast) {
-                console.log('ev.endTime + this.delay', ev.eventName);
-
                 ev.available = false;
                 ev.surveyEnable = false;
                 return this.updateEvent(ev);

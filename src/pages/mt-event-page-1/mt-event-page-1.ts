@@ -19,6 +19,7 @@ import {EventInterface} from "../../interfaces/event-interface";
 export class MtEventPage_1Page extends BaseComponent {
 
   private events;
+  firstLoad = false;
 
   constructor(
     private readonly storage: StorageService,
@@ -32,6 +33,7 @@ export class MtEventPage_1Page extends BaseComponent {
     super(platform, toast, network);
     if (this.isOnline) {
       this.getEventsByDay('1');
+      setTimeout(() => this.firstLoad = true, 1000);
     }
   }
 
@@ -41,7 +43,7 @@ export class MtEventPage_1Page extends BaseComponent {
       collection: 'events',
       query: (ref => ref.where('day', '==', day).orderBy('date', 'asc'))})
       .then((events: EventInterface[]) => this.events = events.filter(f => f.isVisible))
-      .then(_ => this.loader.clear());
+      .then((_) => this.loader.clear());
   }
 
   onClickOptions() {
@@ -66,6 +68,12 @@ export class MtEventPage_1Page extends BaseComponent {
 
   onConnect(): void {
     this.getEventsByDay('1');
+  }
+
+  ionViewWillEnter() {
+    if (this.isOnline && this.firstLoad) {
+      this.getEventsByDay('1');
+    }
   }
 
   onDisconnect(): void { }
