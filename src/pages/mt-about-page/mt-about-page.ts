@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 @Component({
   selector: 'page-mt-about',
@@ -8,16 +9,28 @@ export class MtAboutPage {
 
   private tabBarElement: any;
 
-  constructor() {
-    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+  constructor(private readonly inAppBrowser: InAppBrowser) { }
+
+  openMail() {
+    // window.open('mailto:sales@mtech-systems.com', "_system");
+    window.open('mailto:marketing@mtech-systems.com?subject=Hello', "_system");
+  }
+
+  openWebPage() {
+    let browser = this.inAppBrowser.create('https://www.mtech-systems.com/');
   }
 
   ionViewWillEnter() {
-    this.tabBarElement.style.display = 'none';
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+    if (this.tabBarElement) {
+      this.tabBarElement.style.display = 'none';
+    }
   }
 
   ionViewWillLeave() {
-    this.tabBarElement.style.display = 'flex';
+    if (this.tabBarElement) {
+      this.tabBarElement.style.display = 'flex';
+    }
   }
 }
 

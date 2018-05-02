@@ -4,6 +4,20 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <h1>About this App</h1>
+<ion-content color="primary" text-center class="mt-event-page">
+  <div padding>
+    <img class="img" src="assets/imgs/logo.png" alt="Logo">
+    <p> Welcome to the 2018 Poultry & Egg IT Roundtable featuring MTech Systems Users Conference. Three full days dedicated to learn and share knowledge with Poultry Industry IT professionals, Flock Accounting and Planning Systems Managers. </p>
+    <ion-list>
+      <ion-item (click)="openWebPage()">
+        <ion-icon name="globe" item-start></ion-icon>
+        Go to website
+      </ion-item>
+      <ion-item (click)="openMail()">
+        <ion-icon name="mail" item-start></ion-icon>
+        Email us
+      </ion-item>
+    </ion-list>
+  </div>
+  <span class="bottom">MTech Systems</span>
 </ion-content>

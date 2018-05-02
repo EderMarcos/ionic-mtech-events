@@ -1,13 +1,14 @@
+import { Network } from "@ionic-native/network";
+import { StatusBar } from '@ionic-native/status-bar';
+import {InAppBrowser} from "@ionic-native/in-app-browser";
+import { ErrorHandler, NgModule } from '@angular/core';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { BrowserModule } from '@angular/platform-browser';
 import { BackgroundMode } from "@ionic-native/background-mode";
-import { Network } from "@ionic-native/network";
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
 import { HttpClientModule } from "@angular/common/http";
 import { IonicStorageModule } from '@ionic/storage';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 // Firebase
 import { firebaseConfig } from "../config/firebase.config";
@@ -117,7 +118,8 @@ import { PushNotificationProvider } from '../providers/push-notification/push-no
     ActionSheetService,
     OneSignal,
     PushNotificationProvider,
-    LaunchNavigator
+    LaunchNavigator,
+    InAppBrowser
   ]
 })
 export class AppModule {}

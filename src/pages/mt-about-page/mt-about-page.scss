@@ -1,1 +1,51 @@
+page-mt-about {
+  .img {
+    height: 100px !important;
+    width: 100px;
+    margin: auto auto 20px;
+    border-radius: 50%;
+  }
+
+  p {
+    font-size: 1.5rem;
+    margin-bottom: 4rem;
+    color: #97D2C1;
+  }
+
+  .item-ios {
+    border: 0 !important;
+  }
+
+  .item-md,
+  .item-ios {
+    background: transparent !important;
+    color: #dedede;
+    font-size: 1.4rem;
+    ion-icon {
+      font-size: 2rem;
+      min-height: 2rem;
+    }
+  }
+
+  .item-inner {
+    margin: 0 1rem !important;
+  }
+
+  .scroll-content {
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 0 !important;
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    font-size: 0.9em;
+    color: white;
+  }
+}
 
