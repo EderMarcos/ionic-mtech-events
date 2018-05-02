@@ -36,31 +36,50 @@ export class SwitchEventService {
           if (now < events[0].date) {
             return obs.next(this.customEvent);
           }
-          events.forEach(ev => {
+
+          events.forEach((ev, id) => {
             if (ev.available && now > ev.endTime) {
               if (ev.breakFast) {
+                console.log('ev.breakFast', ev.eventName);
                 ev.available = false;
                 return this.updateEvent(ev);
-              } else if (!ev.surveyEnable) {
+              }
+              if (!ev.surveyEnable) {
+                console.log('!ev.surveyEnable', ev.eventName);
                 ev.surveyEnable = true;
                 this.updateEvent(ev);
                 return obs.next(ev);
-              } else if (ev.endTime + this.delay) {
+              }
+              if (ev.endTime + this.delay) {
+                console.log('ev.endTime + this.delay', ev.eventName);
+
                 ev.available = false;
                 ev.surveyEnable = false;
                 return this.updateEvent(ev);
-              } else if (new Date(now).getDay() === new Date(ev.endTime).getDay() && !ev.available) {
+              }
+              if (new Date(now).getDay() <= new Date(ev.endTime).getDay() && !ev.available) {
+                console.log('Final', ev.eventName);
                 this.customEvent.eventName = 'Thanks for comming today';
                 obs.next(this.customEvent);
               }
-            } else if (now > ev.date && now < ev.endTime) {
-              return obs.next(ev);
-            } else if (Math.ceil((ev.date - now) / (1000 * 60)) > 1 && !(now > ev.date && now < ev.endTime) && new Date(now).getDay() === new Date(ev.endTime).getDay()) {
-              this.customEvent.eventName = ev.eventName ;
-              this.customEvent.exhibitorName = `starts in ${ Math.ceil((ev.date - now) / (1000 * 60)) } minutes`;
-              obs.next(this.customEvent);
             }
+            if (now > ev.date && now < ev.endTime) {
+              obs.next(ev);
+              return;
+            }
+            // let diff = Math.ceil((ev[id + 1].date - ev[id].endTime) / (1000 * 60));
+            // console.log(id);
+            // if (diff > 1 &&
+            //   now > ev[id].endTime &&
+            //   !(now > ev.date && now < ev.endTime) &&
+            //   new Date(now).getDay() === new Date(ev.endTime).getDay()) {
+            //   console.log('Match');
+              //   this.customEvent.eventName = ev.eventName ;
+              //   this.customEvent.exhibitorName = `starts in ${ Math.ceil((ev.date - now) / (1000 * 60)) } minutes`;
+              //   obs.next(this.customEvent);
+            // }
           });
+
           if (now > events[events.length - 1].endTime) {
             clearInterval(interval);
             this.customEvent.eventName = 'Thanks for comming';

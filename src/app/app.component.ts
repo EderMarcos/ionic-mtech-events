@@ -8,6 +8,7 @@ import { MtTabsComponent } from "../components/mt-tabs-component/mt-tabs.compone
 import { StorageService } from "../providers/storage/storage-service";
 import { MtSigninPage } from "../pages/mt-signin/mt-signin";
 import { UserInterface } from "../interfaces/user-interface";
+import {PushNotificationProvider} from "../providers/push-notification/push-notification";
 
 @Component({
   templateUrl: 'app.html'
@@ -21,6 +22,7 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     private backgroundMode: BackgroundMode,
+    private readonly pushNotification: PushNotificationProvider,
     private readonly storage: StorageService) {
     platform.ready().then(() => {
       this.backgroundMode.setDefaults({ silent: true });
@@ -28,6 +30,7 @@ export class MyApp {
       this.backgroundMode.disableWebViewOptimizations();
       this.storage.getEntity('user')
         .then((record: UserInterface) => this.rootPage = (record.email) ? MtTabsComponent : MtSigninPage);
+      this.pushNotification.initNotifications();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.backgroundColorByName('light');

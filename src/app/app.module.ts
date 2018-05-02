@@ -15,6 +15,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 // Plugins
+import { OneSignal } from "@ionic-native/onesignal";
 import { AgmCoreModule } from '@agm/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Ionic2RatingModule } from "ionic2-rating";
@@ -46,6 +47,7 @@ import { SwitchEventService } from "../providers/switch-event/switch-event-servi
 import { LocalNotifications } from "@ionic-native/local-notifications";
 import { NotificationService } from "../providers/notification/notification-service";
 import { ActionSheetService } from "../providers/action-sheet/action-sheet-service";
+import { PushNotificationProvider } from '../providers/push-notification/push-notification';
 
 @NgModule({
   declarations: [
@@ -106,7 +108,9 @@ import { ActionSheetService } from "../providers/action-sheet/action-sheet-servi
     NotificationService,
     BackgroundMode,
     Network,
-    ActionSheetService
+    ActionSheetService,
+    OneSignal,
+    PushNotificationProvider
   ]
 })
 export class AppModule {}
