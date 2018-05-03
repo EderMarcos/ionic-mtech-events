@@ -7,10 +7,11 @@ import { StorageService } from "../../providers/storage/storage-service";
 import { LoaderService } from "../../providers/loader/loader-service";
 import { BaseComponent } from "../../components/base-component/base.component";
 import { ToastService } from "../../providers/toast/toast-service";
-import { DataService } from "../../providers/data/data-service";
 import { MtSigninPage } from "../mt-signin/mt-signin";
+import { DataService } from "../../providers/data/data-service";
 import { MtAboutPage } from "../mt-about-page/mt-about-page";
-import {EventInterface} from "../../interfaces/event-interface";
+
+import { EventInterface } from "../../interfaces/event-interface";
 
 @Component({
   selector: 'page-mt-event-page-1',
@@ -19,13 +20,12 @@ import {EventInterface} from "../../interfaces/event-interface";
 export class MtEventPage_1Page extends BaseComponent {
 
   private events;
-  firstLoad = false;
 
   constructor(
     private readonly storage: StorageService,
     private readonly navCtrl: NavController,
     private readonly actionSheet: ActionSheetService,
-    private readonly _dataService: DataService,
+    private readonly ds: DataService,
     private readonly loader: LoaderService,
     network: Network,
     platform: Platform,
@@ -33,17 +33,18 @@ export class MtEventPage_1Page extends BaseComponent {
     super(platform, toast, network);
     if (this.isOnline) {
       this.getEventsByDay('1');
-      setTimeout(() => this.firstLoad = true, 1000);
     }
   }
 
   getEventsByDay(day: string) {
     this.loader.showLoading({ content: 'Loading events...', duration: 0 });
-    this._dataService.getEntities({
+    this.ds.getEntities({
       collection: 'events',
-      query: (ref => ref.where('day', '==', day).orderBy('date', 'asc'))})
-      .then((events: EventInterface[]) => this.events = events.filter(f => f.isVisible))
-      .then((_) => this.loader.clear());
+      query: (ref => ref.where('day', '==', day).orderBy('date', 'asc'))
+    }).subscribe((events: EventInterface[]) => {
+      this.events = events.filter(f => f.isVisible);
+      this.loader.clear();
+    });
   }
 
   onClickOptions() {
@@ -66,15 +67,7 @@ export class MtEventPage_1Page extends BaseComponent {
     });
   }
 
-  onConnect(): void {
-    this.getEventsByDay('1');
-  }
-
-  ionViewWillEnter() {
-    if (this.isOnline && this.firstLoad) {
-      this.getEventsByDay('1');
-    }
-  }
+  onConnect(): void { }
 
   onDisconnect(): void { }
 }

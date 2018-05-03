@@ -31,7 +31,7 @@ export class MtFormFeedbackPage extends BaseComponent {
     private readonly loader: LoaderService,
     private readonly storage: StorageService,
     private readonly navCtrl: NavController,
-    private _dataService: DataService,
+    private ds: DataService,
     network: Network,
     platform: Platform,
     toast: ToastService) {
@@ -96,17 +96,16 @@ export class MtFormFeedbackPage extends BaseComponent {
   }
 
   private getFeedbackByEventId(id: string) {
-    this._dataService.getEntities({
+    this.ds.getEntities({
       collection: 'feedback',
-      query: (ref => ref.where('idEvent', '==', id).where('email', '==', this.user.email || ''))
-    }).then(res => res[0])
-      .then((record: FeedbackInterface) => {
-        if (record) {
-          this.feedback = record;
-          this.feedbackForm.get('comments').setValue(record.comments);
-          this.feedbackForm.get('rate').setValue(record.rate);
-        }
-      });
+      query: (ref => ref.where('email', '==', this.user.email).where('idEvent', '==', this.event.id))
+    }).subscribe((feedback: FeedbackInterface[]) => {
+      if (feedback[0]) {
+        this.feedback = feedback[0];
+        this.feedbackForm.get('comments').setValue(feedback[0].comments);
+        this.feedbackForm.get('rate').setValue(feedback[0].rate);
+      }
+    });
   }
 
   async onSubmit() {
@@ -116,7 +115,7 @@ export class MtFormFeedbackPage extends BaseComponent {
       this.feedback.updatedAt = new Date().getTime();
       if (this.isOnline) {
         this.loader.showLoading({ content: 'Sending...', duration: 0 });
-        return await this._dataService.updateEntity({ collection: 'feedback', key: this.feedback.id }, this.feedback)
+        return await this.ds.updateEntity({ collection: 'feedback', key: this.feedback.id }, this.feedback)
           .then(() => this.loader.clear())
           .then(() => {
             this.toast.showToast({ message: 'Your comment has been updated' });
@@ -130,8 +129,8 @@ export class MtFormFeedbackPage extends BaseComponent {
 
     if (this.isOnline) {
       this.loader.showLoading({ content: 'Sending...', duration: 0 });
-      await this._dataService.setEntity('surveyHistory', this.quiz);
-      await this._dataService.setEntity('feedback', this.feedback)
+      await this.ds.setEntity('surveyHistory', this.quiz);
+      await this.ds.setEntity('feedback', this.feedback)
         .then(() => this.loader.clear())
         .then(() => {
           this.storage.clear(this.event.id);

@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, Platform} from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 
-import { FeedbackInterface } from "../../interfaces/feedback-interface";
-import { EventInterface } from "../../interfaces/event-interface";
-import { UserInterface } from "../../interfaces/user-interface";
 import { StorageService } from "../../providers/storage/storage-service";
 import { LoaderService } from "../../providers/loader/loader-service";
 import { BaseComponent } from "../../components/base-component/base.component";
 import { ToastService } from "../../providers/toast/toast-service";
 import { DataService } from "../../providers/data/data-service";
 import { Network } from "@ionic-native/network";
-import {QuizInterface} from "../../interfaces/quiz-interface";
+
+import { FeedbackInterface } from "../../interfaces/feedback-interface";
+import { EventInterface } from "../../interfaces/event-interface";
+import { UserInterface } from "../../interfaces/user-interface";
+import { QuizInterface } from "../../interfaces/quiz-interface";
 
 @Component({
   selector: 'page-mt-detail-event',
@@ -26,7 +27,7 @@ export class MtDetailEventPage extends BaseComponent {
 
   constructor(
     private readonly navParams: NavParams,
-    private readonly dataService: DataService,
+    private readonly ds: DataService,
     private readonly loader: LoaderService,
     private readonly navCtrl: NavController,
     private readonly storage: StorageService,
@@ -34,7 +35,6 @@ export class MtDetailEventPage extends BaseComponent {
     platform: Platform,
     toast: ToastService) {
     super(platform, toast, network);
-    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.event = navParams.get('event');
     this.event.eventImg = this.isOnline ? this.event.eventImg : null;
     this.feedback = {
@@ -63,29 +63,29 @@ export class MtDetailEventPage extends BaseComponent {
         this.quiz.emailUser = user.email;
         this.user = user;
       })
-      .then(() => this.isOnline ? this.getFeedback() : null);
+      .then(() => this.isOnline ? this.getFeedbackByEvent() : null);
   }
 
-  getFeedback() {
-    this.loader.showLoading({ content: 'Loading...', duration: 0 });
-    this.dataService.getEntities({
+  getFeedbackByEvent() {
+    this.ds.getEntities({
       collection: 'feedback',
-      query: (ref => ref.where('email', '==', this.user.email).where('idEvent', '==', this.event.id))})
-      .then(data => data[0])
-      .then((feed: FeedbackInterface) => {
-        if (feed) {
-          this.feedback = feed;
-        }
-      })
-      .then(() => this.loader.clear());
+      query: (ref => ref.where('email', '==', this.user.email).where('idEvent', '==', this.event.id))
+    }).subscribe((feedback: FeedbackInterface[]) => {
+      if (feedback[0]) {
+        this.feedback = feedback[0];
+      }
+    });
   }
 
   getEventById() {
-    this.dataService.getEntities({
+    this.ds.getEntities({
       collection: 'events',
-      query: (ref => ref.where('id', '==', this.event.id))})
-      .then(data => data[0])
-      .then((event: EventInterface) => this.event = event);
+      query: (ref => ref.where('id', '==', this.event.id))
+    }).subscribe((events: EventInterface[]) => {
+      if (events[0]) {
+        this.event = events[0];
+      }
+    });
   }
 
   async onSubmit() {
@@ -93,10 +93,10 @@ export class MtDetailEventPage extends BaseComponent {
       this.feedback.updatedAt = new Date().getTime();
       if (this.isOnline) {
         this.loader.showLoading({ content: 'Sending...', duration: 0 });
-        return await this.dataService.updateEntity({ collection: 'feedback', key: this.feedback.id }, this.feedback)
+        return await this.ds.updateEntity({ collection: 'feedback', key: this.feedback.id }, this.feedback)
           .then(() => this.loader.clear())
           .then(() => {
-            this.toast.showToast({ message: 'Your comment has been updated' });
+            this.toast.showToast({ message: 'Your comment has been updated', position: 'top' });
             this.navCtrl.pop();
           });
       } else {
@@ -107,8 +107,8 @@ export class MtDetailEventPage extends BaseComponent {
 
     if (this.isOnline) {
       this.loader.showLoading({ content: 'Sending...', duration: 0 });
-      await this.dataService.setEntity('surveyHistory', this.quiz);
-      await this.dataService.setEntity('feedback', this.feedback)
+      await this.ds.setEntity('surveyHistory', this.quiz);
+      await this.ds.setEntity('feedback', this.feedback)
         .then(() => this.loader.clear())
         .then(() => {
           this.storage.clear(this.event.id);
@@ -123,18 +123,20 @@ export class MtDetailEventPage extends BaseComponent {
     }
   }
 
-  ionViewWillEnter() {
-    this.tabBarElement.style.display = 'none';
-  }
-
-  onConnect(): void {
-    this.getFeedback();
-    this.getEventById();
-  }
+  onConnect(): void { }
 
   onDisconnect(): void { }
 
+  ionViewWillEnter() {
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+    if (this.tabBarElement) {
+      this.tabBarElement.style.display = 'none';
+    }
+  }
+
   ionViewWillLeave() {
-    this.tabBarElement.style.display = 'flex';
+    if (this.tabBarElement) {
+      this.tabBarElement.style.display = 'flex';
+    }
   }
 }

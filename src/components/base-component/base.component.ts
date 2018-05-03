@@ -24,16 +24,16 @@ export abstract class BaseComponent {
     this.subscriptions.push(
       this.network.onDisconnect().subscribe(() => {
         this.isOnline = false;
-        // this.onDisconnect();
-        // this.toast.showToast({ message: 'Network lost', duration: 3000 });
+        this.onDisconnect();
+        setTimeout(() => this.toast.showToast({ message: 'Network lost', duration: 3000, position: 'top' }), 1500);
       })
     );
 
     this.subscriptions.push(
       this.network.onConnect().subscribe(() => {
         this.isOnline = true;
-        // this.onConnect();
-        // this.toast.showToast({ message: 'Network restored', duration: 3000 });
+        this.onConnect();
+        setTimeout(() => this.toast.showToast({ message: 'Network restored', duration: 3000, position: 'top' }), 1500);
       })
     );
   }
