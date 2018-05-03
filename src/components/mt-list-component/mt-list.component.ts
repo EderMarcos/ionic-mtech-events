@@ -63,20 +63,13 @@ export class MtListComponent {
     this.dataService.getEntities2({
       collection: 'feedback',
       query: (ref => ref.where('email', '==', this.user.email)) })
-      .subscribe(data => {
-        this.feedbackArray = data;
-        console.log(data);
-      })
+      .subscribe(data => this.feedbackArray = data)
   }
 
   getRateByEvent(id: string = 'GAMc8wjrHSDRSgKeaeLj') {
     if (this.feedbackArray) {
-      let aux = this.feedbackArray.find((feedback: FeedbackInterface) => feedback.idEvent === id);
-      return aux ? aux.rate : false;
+      let feed = this.feedbackArray.find((feedback: FeedbackInterface) => feedback.idEvent === id);
+      return feed ? feed.rate : false;
     }
-  }
-
-  ionViewWillLeave() {
-    console.error('Salio');
   }
 }

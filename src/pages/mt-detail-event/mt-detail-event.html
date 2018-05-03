@@ -19,8 +19,8 @@
       <h2 class="name">{{ event.exhibitorName }}</h2>
       <p class="date">{{ event.date | date:'MMM d, y, h:mm a' }}</p>
     </ion-item>
-
-    <ion-item class="no-border-rating">
+    <ion-item text-center class="no-border-rating">
+      <p>How would you rate this conference?</p>
       <rating text-center
               [(ngModel)]="feedback.rate"
               readOnly="false"
@@ -34,8 +34,8 @@
 
     <ion-item class="no-p">
       <ion-textarea [(ngModel)]="feedback.comments"
-                    placeholder="Enter a review"
-                    rows="10"></ion-textarea>
+                    placeholder="Would you like to leave a comment?"
+                    rows="5"></ion-textarea>
     </ion-item>
     <div class="text-center" padding>
       <button ion-button color="green-3" outline round block (click)="onSubmit()" [disabled]="feedback.rate < 1">
