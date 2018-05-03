@@ -6,30 +6,23 @@
 
 <ion-content *ngIf="event">
   <ion-card>
+    <img [src]="event.eventImg">
+
     <ion-item>
       <h2>{{ event.eventName }}</h2>
     </ion-item>
 
-    <img [src]="event.eventImg">
-    <ion-card-content>
-      <p>{{ event.description }}</p>
-    </ion-card-content>
-
     <ion-item>
-      <ion-avatar item-start>
-        <img [src]="event.exhibitorImg">
-      </ion-avatar>
+      <!--<ion-avatar item-start>-->
+        <!--<img [src]="event.exhibitorImg">-->
+      <!--</ion-avatar>-->
       <h2 class="name">{{ event.exhibitorName }}</h2>
       <p class="date">{{ event.date | date:'MMM d, y, h:mm a' }}</p>
     </ion-item>
-  </ion-card>
 
-  <ion-card *ngIf="feedback">
-    <ion-card-header> Reviewed </ion-card-header>
-    <ion-card-content>
-      <p>{{ feedback?.comments }}</p>
-      <rating [ngModel]="feedback?.rate"
-              text-center
+    <ion-item class="no-border-rating">
+      <rating text-center
+              [(ngModel)]="feedback.rate"
               readOnly="false"
               max="5"
               emptyStarIconName="star-outline"
@@ -37,11 +30,41 @@
               starIconName="star"
               nullable="false">
       </rating>
-    </ion-card-content>
-      <ion-item text-end>
-        <p>{{ feedback?.updatedAt | date:'MMM d, y, h:mm a' }}</p>
-      </ion-item>
+    </ion-item>
+
+    <ion-item class="no-p">
+      <ion-textarea [(ngModel)]="feedback.comments"
+                    placeholder="Enter a review"
+                    rows="10"></ion-textarea>
+    </ion-item>
+    <div class="text-center" padding>
+      <button ion-button color="green-3" outline round block (click)="onSubmit()" [disabled]="feedback.rate < 1">
+        Send
+      </button>
+    </div>
+    <!--<ion-card-content>-->
+      <!--<p>{{ event.description }}</p>-->
+    <!--</ion-card-content>-->
   </ion-card>
+
+  <!--<ion-card *ngIf="feedback">-->
+    <!--<ion-card-header> Reviewed </ion-card-header>-->
+    <!--<ion-card-content>-->
+      <!--<p>{{ feedback?.comments }}</p>-->
+      <!--<rating [ngModel]="feedback?.rate"-->
+              <!--text-center-->
+              <!--readOnly="false"-->
+              <!--max="5"-->
+              <!--emptyStarIconName="star-outline"-->
+              <!--halfStarIconName="star-half"-->
+              <!--starIconName="star"-->
+              <!--nullable="false">-->
+      <!--</rating>-->
+    <!--</ion-card-content>-->
+      <!--<ion-item text-end>-->
+        <!--<p>{{ feedback?.updatedAt | date:'MMM d, y, h:mm a' }}</p>-->
+      <!--</ion-item>-->
+  <!--</ion-card>-->
 
   <!--<ion-card>-->
     <!--<ion-card-header>-->

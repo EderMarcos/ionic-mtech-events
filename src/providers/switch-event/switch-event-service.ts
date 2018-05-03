@@ -40,20 +40,20 @@ export class SwitchEventService {
 
           events.forEach((ev, id) => {
             if (ev.available && now > ev.endTime) {
-              if (ev.breakFast) {
+              // if (ev.breakFast) {
                 ev.available = false;
-                return this.updateEvent(ev);
-              }
-              if (!ev.surveyEnable && !ev.breakFast) {
-                ev.surveyEnable = true;
                 obs.next(ev);
                 return this.updateEvent(ev);
-              }
-              if (ev.endTime + this.delay && !ev.breakFast) {
-                ev.available = false;
-                ev.surveyEnable = false;
-                return this.updateEvent(ev);
-              }
+                // return this.updateEvent(ev);
+              // }
+              // if (!ev.surveyEnable && !ev.breakFast) {
+              //   ev.available = false;
+                // ev.surveyEnable = true;
+              // }
+              // if (ev.endTime + this.delay && !ev.breakFast) {
+              //   ev.surveyEnable = false;
+              //   return this.updateEvent(ev);
+              // }
               // if (new Date(now).getDay() <= new Date(ev.endTime).getDay() && !ev.available) {
               //   console.log('Final', ev.eventName);
               //   this.customEvent.eventName = 'Thanks for comming today';

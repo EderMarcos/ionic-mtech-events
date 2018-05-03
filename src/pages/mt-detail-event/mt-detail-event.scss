@@ -1,6 +1,17 @@
-.name {
-  font-size: 1.4rem !important;
-}
-.date {
-  font-size: 1.1rem !important;
+page-mt-detail-event {
+  .name {
+    font-size: 1.4rem !important;
+  }
+  .date {
+    font-size: 1.1rem !important;
+  }
+
+  ion-textarea {
+    border-top: 0.45px solid #dedede;
+    border-bottom: 0.45px solid #dedede;
+    padding: 1rem;
+  }
+  .item-inner {
+    padding: 0 !important;
+  }
 }

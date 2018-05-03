@@ -31,7 +31,7 @@ export class MtCardComponent {
       .then((entities: EventInterface[]) => {
         this.switchEvent.getCurrentOrLastEvent(entities)
           .subscribe(event => {
-            if (event.available && !event.surveyEnable) {
+            if (event.available) {
               this.currentEvent = event;
             }
           });
