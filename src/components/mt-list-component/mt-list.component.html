@@ -17,6 +17,7 @@
       <ion-note class="mt-list-item__date"
                 [ngClass]="{ 'disabled': !event.available }"
                 item-end>{{ event.date | date:'h:mm' }} - {{ event.endTime | date:typeDate }}</ion-note>
+      <ion-badge *ngIf="getRateByEvent(event.id)">{{ getRateByEvent(event.id) }}</ion-badge>
       <p class="mt-list-item__subtitle"
          [ngClass]="{ 'disabled': !event.available }">{{ event.exhibitorName }}</p>
     </ion-item>

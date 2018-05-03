@@ -3,9 +3,12 @@ import { NavController } from "ionic-angular";
 
 import { EventInterface } from "../../interfaces/event-interface";
 import { MtFormFeedbackPage } from "../../pages/mt-form-feedback/mt-form-feedback";
-import { MtDetailEventPage } from "../../pages/mt-detail-event/mt-detail-event";
 import { SwitchEventService } from "../../providers/switch-event/switch-event-service";
-import { NotificationService } from "../../providers/notification/notification-service";
+import { MtDetailEventPage } from "../../pages/mt-detail-event/mt-detail-event";
+import { DataService } from "../../providers/data/data-service";
+import {FeedbackInterface} from "../../interfaces/feedback-interface";
+import {UserInterface} from "../../interfaces/user-interface";
+import {StorageService} from "../../providers/storage/storage-service";
 
 @Component({
   selector: 'mt-list',
@@ -13,10 +16,19 @@ import { NotificationService } from "../../providers/notification/notification-s
 })
 export class MtListComponent {
 
+  private feedbackArray: any[] = [];
+  private user: UserInterface;
+
   constructor(
     private readonly navCtrl: NavController,
     private readonly switchEvent: SwitchEventService,
-    private readonly notification: NotificationService) {
+    private readonly storage: StorageService,
+    private readonly dataService: DataService) {
+    this.storage.getEntity('user')
+      .then((user: UserInterface) => {
+        this.user = user;
+        this.getFeedback();
+      });
   }
 
   @Input() events: EventInterface[];
@@ -44,6 +56,23 @@ export class MtListComponent {
       //       }, this.navCtrl)
       //     }
       //   });
+    }
+  }
+
+  getFeedback() {
+    this.dataService.getEntities2({
+      collection: 'feedback',
+      query: (ref => ref.where('email', '==', this.user.email)) })
+      .subscribe(data => {
+        this.feedbackArray = data;
+        console.log(data);
+      })
+  }
+
+  getRateByEvent(id: string = 'GAMc8wjrHSDRSgKeaeLj') {
+    if (this.feedbackArray) {
+      let aux = this.feedbackArray.find((feedback: FeedbackInterface) => feedback.idEvent === id);
+      return aux ? aux.rate : false;
     }
   }
 

@@ -13,7 +13,7 @@ export class MtAboutPage {
 
   openMail() {
     // window.open('mailto:sales@mtech-systems.com', "_system");
-    window.open('mailto:marketing@mtech-systems.com?subject=Hello', "_system");
+    window.open('mailto:marketing@mtech-systems.com?subject=Users conferences contact', "_system");
   }
 
   openWebPage() {

@@ -52,6 +52,18 @@ export class DataService {
     });
   }
 
+  public getEntities2(params: { collection: string, query?: ((ref: any) => any)}) {
+      return this.db.collection(params.collection, params.query)
+        .snapshotChanges()
+        .map(res => {
+          return res.map(a => {
+            const data = a.payload.doc.data();
+            data.id = a.payload.doc.id;
+            return data;
+          });
+        });
+  }
+
   public deleteEntity(params: { collection: string, key: string }) {
     return this.db.doc(`/${ params.collection }/${ params.key }`).delete();
   }
