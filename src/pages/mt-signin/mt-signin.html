@@ -1,5 +1,9 @@
 <ion-content class="background">
   <ion-card>
+    <ion-card-header>
+      Please log in
+    </ion-card-header>
+    <p>Enter the email you used for registration (usually your company email)</p>
     <ion-card-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <ion-list no-line>

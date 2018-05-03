@@ -12,7 +12,7 @@ export class ToastService {
     this.toastCtrl.create({
       message: params.message,
       duration: params.duration || 2500,
-      position: params.position || 'bottom',
+      position: params.position || 'top',
       showCloseButton: params.showCloseButton,
       closeButtonText: params.closeButtonText,
       dismissOnPageChange: params.dismissOnPageChange,

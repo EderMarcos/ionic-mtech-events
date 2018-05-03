@@ -40,8 +40,10 @@ ion-badge {
   position: absolute;
   left: 8px;
   top: 8px;
-  background: white !important;
+  background: #fafafa !important;
   color: #0B1B33 !important;
   font-size: 0.9rem;
-
+  ion-icon {
+    color: #FFB400;
+  }
 }
