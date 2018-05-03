@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, SimpleChange} from '@angular/core';
 import { NavController } from "ionic-angular";
 
 import { MtMapsPage } from "../../pages/mt-maps-page/mt-maps-page";
@@ -13,12 +13,13 @@ import { DataService } from "../../providers/data/data-service";
 export class MtCardComponent {
 
   currentEvent: EventInterface;
+  @Input() events: EventInterface[];
 
   constructor(
     private readonly navCtrl: NavController,
     private readonly dataService: DataService,
     private readonly switchEvent: SwitchEventService) {
-    this.init();
+    // this.init();
   }
 
   @Input() onNullImg: string = 'https://picsum.photos/300/300';
@@ -35,6 +36,18 @@ export class MtCardComponent {
             }
           });
       });
+  }
+
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    this.init();
+    // if (this.events) {
+    //   console.log(this.events);
+    //   this.events.forEach(event => {
+    //     if (event.available && !event.surveyEnable) {
+    //       this.currentEvent = event;
+    //     }
+    //   });
+    // }
   }
 
   onCardClick() {
