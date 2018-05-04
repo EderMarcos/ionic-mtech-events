@@ -19,6 +19,7 @@ import { QuizInterface } from "../../interfaces/quiz-interface";
 })
 export class MtDetailEventPage extends BaseComponent {
 
+  private img: string;
   private event: EventInterface;
   private feedback: FeedbackInterface;
   private user: UserInterface;
@@ -36,7 +37,8 @@ export class MtDetailEventPage extends BaseComponent {
     toast: ToastService) {
     super(platform, toast, network);
     this.event = navParams.get('event');
-    this.event.eventImg = this.isOnline ? this.event.eventImg : null;
+    this.img = this.event.eventImg;
+    this.event.eventImg = (this.isOnline) ? this.img : null;
     this.feedback = {
       idEvent: null,
       email: null,
@@ -63,7 +65,8 @@ export class MtDetailEventPage extends BaseComponent {
         this.quiz.emailUser = user.email;
         this.user = user;
       })
-      .then(() => this.isOnline ? this.getFeedbackByEvent() : null);
+      .then(() => this.getFeedbackByEvent());
+    this.initNetworkWatchEvents();
   }
 
   getFeedbackByEvent() {
@@ -123,7 +126,9 @@ export class MtDetailEventPage extends BaseComponent {
     }
   }
 
-  onConnect(): void { }
+  onConnect(): void {
+    this.event.eventImg = this.img;
+  }
 
   onDisconnect(): void { }
 
@@ -138,5 +143,6 @@ export class MtDetailEventPage extends BaseComponent {
     if (this.tabBarElement) {
       this.tabBarElement.style.display = 'flex';
     }
+    this.closeNetworkWatchEvents();
   }
 }

@@ -7,6 +7,7 @@ import { ToastService } from "../../providers/toast/toast-service";
 export abstract class BaseComponent {
 
   protected subscriptions: Subscription[] = [];
+  protected custom: Subscription[] = [];
   protected isOnline: boolean;
 
   protected constructor(
@@ -25,7 +26,7 @@ export abstract class BaseComponent {
           this.isOnline = false;
           setTimeout(() => {
             this.toast.showToast({ message: 'Network lost', duration: 3000, position: 'top' });
-            this.onDisconnect();
+            // this.onDisconnect();
           }, 2000);
         }
       })
@@ -36,14 +37,38 @@ export abstract class BaseComponent {
         this.isOnline = true;
         setTimeout(() => {
           this.toast.showToast({ message: 'Network restored', duration: 3000, position: 'top' });
+          // this.onConnect();
+        }, 3000);
+      })
+    );
+  }
+
+  protected closeNetworkWatchEvents() {
+    if (this.custom) {
+      this.custom.forEach(f => f.unsubscribe());
+    }
+  }
+
+  protected initNetworkWatchEvents() {
+    this.custom.push(
+      this.network.onDisconnect().subscribe(() => {
+        setTimeout(() => {
+          this.onDisconnect();
+        }, 2000);
+      })
+    );
+
+    this.custom.push(
+      this.network.onConnect().subscribe(() => {
+        setTimeout(() => {
           this.onConnect();
         }, 3000);
       })
     );
   }
 
-  abstract onConnect(): void;
-  abstract onDisconnect(): void;
+  protected onConnect() {};
+  protected onDisconnect() {};
 
   ionViewWillLeave() {
     this.subscriptions.forEach(s => s.unsubscribe());

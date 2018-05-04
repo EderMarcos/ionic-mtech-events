@@ -37,9 +37,7 @@ export class MtEventPage_1Page extends BaseComponent {
     platform: Platform,
     toast: ToastService) {
     super(platform, toast, network);
-    if (this.isOnline) {
-      this.getEventsByDay('1');
-    }
+    this.getEventsByDay('1');
     if (this.platform.is('cordova')) {
       this.oneSignal.startInit('964720b7-7958-4dc5-9ad5-7d570b3fefb2', '1033092115983');
       this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
@@ -51,6 +49,8 @@ export class MtEventPage_1Page extends BaseComponent {
       });
       this.oneSignal.endInit();
     }
+
+    this.initNetworkWatchEvents();
   }
 
   getEventsByDay(day: string) {
@@ -90,5 +90,9 @@ export class MtEventPage_1Page extends BaseComponent {
 
   onDisconnect(): void {
     this.subscription.unsubscribe();
+  }
+
+  ionViewWillLeave() {
+    this.closeNetworkWatchEvents();
   }
 }

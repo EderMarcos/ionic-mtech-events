@@ -1,6 +1,6 @@
-import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
-import { Component } from '@angular/core';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { NavParams } from "ionic-angular";
+import { Component } from '@angular/core';
 
 import { EventInterface } from "../../interfaces/event-interface";
 
@@ -11,7 +11,6 @@ import { EventInterface } from "../../interfaces/event-interface";
 export class MtMapsPage {
 
   private event: EventInterface;
-  private options: LaunchNavigatorOptions;
   private tabBarElement: any;
 
   constructor(
@@ -35,8 +34,6 @@ export class MtMapsPage {
 
   openMaps(address: string) {
     this.launchNavigator.navigate(address)
-      .then(
-        success => console.log('Launched navigator')
-      );
+      .then(success => console.log('Launched navigator'));
   }
 }

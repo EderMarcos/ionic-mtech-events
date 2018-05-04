@@ -33,9 +33,8 @@ export class MtEventPage_3Page extends BaseComponent {
     platform: Platform,
     toast: ToastService) {
     super(platform, toast, network);
-    if (this.isOnline) {
-      this.getEventsByDay('3');
-    }
+    this.getEventsByDay('3');
+    this.initNetworkWatchEvents();
   }
 
   getEventsByDay(day: string) {
@@ -75,5 +74,9 @@ export class MtEventPage_3Page extends BaseComponent {
 
   onDisconnect(): void {
     this.subscription.unsubscribe();
+  }
+
+  ionViewWillLeave() {
+    this.closeNetworkWatchEvents();
   }
 }
