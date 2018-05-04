@@ -33,8 +33,6 @@ export class MtSigninPage {
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9._-]+\.[a-z]{2,3}$')])
     });
-
-    console.log('Ingreso login page');
   }
 
   onSubmit() {
@@ -48,26 +46,28 @@ export class MtSigninPage {
       if (users[0]) {
         this.user = users[0];
         this.storage.setEntity('user', JSON.stringify(this.user));
-        this.navCtrl.push(MtTabsComponent);
-      } else {
+        if (this.navCtrl.getViews().length > 1) {
+          this.navCtrl.pop();
+        } else {
+          this.navCtrl.push(MtTabsComponent);
+        }
+      }
+       else {
         this.alert.showAlert({ title: 'Failed to login', subTitle: 'This email does not have permissions' })
       }
     });
   }
 
   ionViewWillEnter() {
-    if (!this.tabBarElement) {
-      this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
-    }
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     if (this.tabBarElement) {
       this.tabBarElement.style.display = 'none';
-      console.log(this.tabBarElement);
     }
   }
 
   ionViewWillLeave() {
     if (this.tabBarElement) {
-      // this.tabBarElement.removeAttribute("style");
+      this.tabBarElement.style.display = 'flex';
     }
   }
 }
