@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { OneSignal, OSNotificationOpenedResult } from "@ionic-native/onesignal";
 import { NavController, Platform } from "ionic-angular";
 import { Subscription } from "rxjs/Subscription";
+import { Component } from '@angular/core';
 import { Network } from "@ionic-native/network";
 
+import { PushNotificationProvider } from "../../providers/push-notification/push-notification";
 import { ActionSheetService } from "../../providers/action-sheet/action-sheet-service";
 import { StorageService } from "../../providers/storage/storage-service";
 import { LoaderService } from "../../providers/loader/loader-service";
@@ -24,17 +26,30 @@ export class MtEventPage_1Page extends BaseComponent {
   private subscription: Subscription;
 
   constructor(
+    private readonly pushNotification: PushNotificationProvider,
     private readonly storage: StorageService,
     private readonly navCtrl: NavController,
     private readonly actionSheet: ActionSheetService,
     private readonly ds: DataService,
     private readonly loader: LoaderService,
+    private readonly oneSignal: OneSignal,
     network: Network,
     platform: Platform,
     toast: ToastService) {
     super(platform, toast, network);
     if (this.isOnline) {
       this.getEventsByDay('1');
+    }
+    if (this.platform.is('cordova')) {
+      this.oneSignal.startInit('964720b7-7958-4dc5-9ad5-7d570b3fefb2', '1033092115983');
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+      this.oneSignal.handleNotificationOpened()
+        .map((payload: OSNotificationOpenedResult) => payload.notification.payload.additionalData.day)
+        .subscribe(day => {
+          console.log(day);
+          this.navCtrl.parent.select(+day);
+      });
+      this.oneSignal.endInit();
     }
   }
 

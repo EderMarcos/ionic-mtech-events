@@ -6,27 +6,24 @@ import { ToastService } from "../../providers/toast/toast-service";
 
 export abstract class BaseComponent {
 
-  private subscriptions: Subscription[] = [];
+  protected subscriptions: Subscription[] = [];
   protected isOnline: boolean;
 
   protected constructor(
     protected readonly platform: Platform,
     protected readonly toast: ToastService,
     protected readonly network: Network) {
-    this.initNetworkWatch();
-  }
-
-  initNetworkWatch() {
     this.isOnline = this.platform.is('cordova')
       ? (this.network.type !== 'unknown' && this.network.type !== 'none')
       : navigator.onLine;
+  }
 
+  protected initNetworkWatch() {
     this.subscriptions.push(
       this.network.onDisconnect().subscribe(() => {
         if (this.isOnline) {
           this.isOnline = false;
           setTimeout(() => {
-            console.log('onDisconnect!!!!!!!!');
             this.toast.showToast({ message: 'Network lost', duration: 3000, position: 'top' });
             this.onDisconnect();
           }, 2000);
@@ -38,7 +35,6 @@ export abstract class BaseComponent {
       this.network.onConnect().subscribe(() => {
         this.isOnline = true;
         setTimeout(() => {
-          console.log('onConnect!!!!!!!!');
           this.toast.showToast({ message: 'Network restored', duration: 3000, position: 'top' });
           this.onConnect();
         }, 3000);
@@ -50,7 +46,6 @@ export abstract class BaseComponent {
   abstract onDisconnect(): void;
 
   ionViewWillLeave() {
-    console.log('Base componente leave');
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 }

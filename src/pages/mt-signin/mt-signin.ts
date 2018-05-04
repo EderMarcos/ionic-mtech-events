@@ -8,6 +8,7 @@ import { MtTabsComponent } from "../../components/mt-tabs-component/mt-tabs.comp
 import { AlertService } from "../../providers/alert/alert-service";
 import { DataService } from "../../providers/data/data-service";
 import { LoaderService } from "../../providers/loader/loader-service";
+import {BaseComponent} from "../../components/base-component/base.component";
 
 @Component({
   selector: 'page-mt-signin',
