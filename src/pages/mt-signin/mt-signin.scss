@@ -3,7 +3,7 @@ page-mt-signin {
     width: 100%;
     height: 100%;
     //background: linear-gradient(to bottom,  #0B1B33 70%, #2CB897 100%);
-    background: url("https://picsum.photos/720/1280/?image=112") center center no-repeat;
+    //background: "assets/imgs/bg.png" center center no-repeat;
   }
 
   .img {
@@ -24,7 +24,7 @@ page-mt-signin {
 
   ion-card.card {
     box-shadow: none;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     p {
       padding: 0 1rem;
@@ -34,7 +34,7 @@ page-mt-signin {
 
   a, p,
   ion-card-header.card-header {
-    color: #fff!important;
+    color: #fff !important;
   }
 
   .list > .item-block:first-child {
@@ -49,32 +49,32 @@ page-mt-signin {
 
   .item {
     margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.5);
+    //background: rgba(0, 0, 0, 0.5);
     border: medium none;
 
-    .text-input {
-      color: #fff;
-    }
-
-    input::-moz-placeholder  {
-      color: #fff!important;
-    }
-
-    input:-moz-placeholder {
-      color: #fff!important;
-    }
-
-    *::-webkit-input-placeholder  {
-      color: #fff!important;
-    }
-
-    *:-ms-input-placeholder  {
-      color: #fff!important;
-    }
-
-    *:-moz-placeholder  {
-      color: #fff!important;
-    }
+    //.text-input {
+    //  color: #fff;
+    //}
+    //
+    //input::-moz-placeholder  {
+    //  color: #fff!important;
+    //}
+    //
+    //input:-moz-placeholder {
+    //  color: #fff!important;
+    //}
+    //
+    //*::-webkit-input-placeholder  {
+    //  color: #fff!important;
+    //}
+    //
+    //*:-ms-input-placeholder  {
+    //  color: #fff!important;
+    //}
+    //
+    //*:-moz-placeholder  {
+    //  color: #fff!important;
+    //}
   }
 
   .error {

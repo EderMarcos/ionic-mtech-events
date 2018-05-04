@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, Platform } from "ionic-angular";
+import { Subscription } from "rxjs/Subscription";
 import { Network } from "@ionic-native/network";
 
 import { ActionSheetService } from "../../providers/action-sheet/action-sheet-service";
@@ -20,6 +21,7 @@ import { EventInterface } from "../../interfaces/event-interface";
 export class MtEventPage_3Page extends BaseComponent {
 
   private events;
+  private subscription: Subscription;
 
   constructor(
     private readonly storage: StorageService,
@@ -38,7 +40,7 @@ export class MtEventPage_3Page extends BaseComponent {
 
   getEventsByDay(day: string) {
     this.loader.showLoading({ content: 'Loading events...', duration: 0 });
-    this.ds.getEntities({
+    this.subscription = this.ds.getEntities({
       collection: 'events',
       query: (ref => ref.where('day', '==', day).orderBy('date', 'asc'))
     }).subscribe((events: EventInterface[]) => {
@@ -67,7 +69,11 @@ export class MtEventPage_3Page extends BaseComponent {
     });
   }
 
-  onConnect(): void { }
+  onConnect(): void {
+    this.getEventsByDay('3');
+  }
 
-  onDisconnect(): void { }
+  onDisconnect(): void {
+    this.subscription.unsubscribe();
+  }
 }

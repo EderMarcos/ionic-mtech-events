@@ -32,7 +32,9 @@ export class MtSigninPage {
       'email': new FormControl('', [
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9._-]+\.[a-z]{2,3}$')])
-    })
+    });
+
+    console.log('Ingreso login page');
   }
 
   onSubmit() {
@@ -54,15 +56,18 @@ export class MtSigninPage {
   }
 
   ionViewWillEnter() {
+    if (!this.tabBarElement) {
       this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
-      if (this.tabBarElement) {
-        this.tabBarElement.style.display = 'none';
-      }
+    }
+    if (this.tabBarElement) {
+      this.tabBarElement.style.display = 'none';
+      console.log(this.tabBarElement);
+    }
   }
 
   ionViewWillLeave() {
     if (this.tabBarElement) {
-      this.tabBarElement.style.display = 'flex';
+      // this.tabBarElement.removeAttribute("style");
     }
   }
 }

@@ -23,17 +23,25 @@ export abstract class BaseComponent {
 
     this.subscriptions.push(
       this.network.onDisconnect().subscribe(() => {
-        this.isOnline = false;
-        this.onDisconnect();
-        setTimeout(() => this.toast.showToast({ message: 'Network lost', duration: 3000, position: 'top' }), 1500);
+        if (this.isOnline) {
+          this.isOnline = false;
+          setTimeout(() => {
+            console.log('onDisconnect!!!!!!!!');
+            this.toast.showToast({ message: 'Network lost', duration: 3000, position: 'top' });
+            this.onDisconnect();
+          }, 2000);
+        }
       })
     );
 
     this.subscriptions.push(
       this.network.onConnect().subscribe(() => {
         this.isOnline = true;
-        this.onConnect();
-        setTimeout(() => this.toast.showToast({ message: 'Network restored', duration: 3000, position: 'top' }), 1500);
+        setTimeout(() => {
+          console.log('onConnect!!!!!!!!');
+          this.toast.showToast({ message: 'Network restored', duration: 3000, position: 'top' });
+          this.onConnect();
+        }, 3000);
       })
     );
   }
@@ -42,6 +50,7 @@ export abstract class BaseComponent {
   abstract onDisconnect(): void;
 
   ionViewWillLeave() {
+    console.log('Base componente leave');
     this.subscriptions.forEach(s => s.unsubscribe());
   }
 }

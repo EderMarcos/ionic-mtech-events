@@ -5,7 +5,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class DataService {
 
   constructor(
-    private readonly db: AngularFirestore) { }
+    private readonly db: AngularFirestore) {}
 
   public setEntity(collection: string, entity: any) {
     return this.db.collection(collection).add(entity);
