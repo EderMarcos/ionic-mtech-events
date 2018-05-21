@@ -1,8 +1,10 @@
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
-import { NavParams } from "ionic-angular";
+import {NavParams, Platform} from "ionic-angular";
 import { Component } from '@angular/core';
 
 import { EventInterface } from "../../interfaces/event-interface";
+import {LoaderService} from "../../providers/loader/loader-service";
+import {ToastService} from "../../providers/toast/toast-service";
 
 @Component({
   selector: 'page-mt-maps',
@@ -15,6 +17,8 @@ export class MtMapsPage {
 
   constructor(
     private readonly launchNavigator: LaunchNavigator,
+    private readonly toast: ToastService,
+    private readonly platform: Platform,
     private readonly navParams: NavParams) {
     this.event = this.navParams.get('event');
   }
@@ -33,7 +37,10 @@ export class MtMapsPage {
   }
 
   openMaps(address: string) {
-    this.launchNavigator.navigate(address)
-      .then(success => console.log('Launched navigator'));
+    if (this.platform.is('cordova')) {
+      return this.launchNavigator.navigate(address)
+        .then(_ => console.log('Launched navigator'));
+    }
+    this.toast.showToast({ message: 'This option is not available if you are from the browser', duration: 4000 });
   }
 }

@@ -41,20 +41,20 @@ export class MtEventPage_1Page extends BaseComponent {
     super(platform, toast, network);
     this.getEventsByDay('1');
     if (this.platform.is('cordova')) {
-      this.storage.getEntity('user')
-        .then((user: UserInterface) => {
-          if (user.email) {
-            this.oneSignal.startInit('964720b7-7958-4dc5-9ad5-7d570b3fefb2', '1033092115983');
-            this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-            this.oneSignal.handleNotificationOpened()
-              .map((payload: OSNotificationOpenedResult) => payload.notification.payload.additionalData.day)
-              .subscribe(day => {
-                console.log(day);
-                this.navCtrl.parent.select(+day);
-              });
-            this.oneSignal.endInit();
-          }
+      this.oneSignal.startInit('964720b7-7958-4dc5-9ad5-7d570b3fefb2', '1033092115983');
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+      this.oneSignal.handleNotificationOpened()
+        .map((payload: OSNotificationOpenedResult) => payload.notification.payload.additionalData.day)
+        .subscribe(day => {
+          this.storage.getEntity('user')
+            .then((user: UserInterface) => {
+              if (user.email) {
+                return this.navCtrl.parent.select(+day);
+              }
+              this.navCtrl.push(MtSigninPage);
+            });
         });
+      this.oneSignal.endInit();
     }
 
     this.initNetworkWatchEvents();
