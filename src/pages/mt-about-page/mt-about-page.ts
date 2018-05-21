@@ -12,8 +12,13 @@ export class MtAboutPage {
   constructor(private readonly inAppBrowser: InAppBrowser) { }
 
   openMail() {
-    // window.open('mailto:sales@mtech-systems.com', "_system");
-    window.open('mailto:marketing@mtech-systems.com?subject=Users conferences contact', "_system");
+    if ((navigator.platform.indexOf('iPhone') != -1) ||
+      (navigator.platform.indexOf('iPad') != -1) ||
+      (navigator.platform.indexOf('iPod') != -1)) {
+      window.open('mailto:marketing@mtech-systems.com?subject=Users conferences contact', '_system');
+    } else {
+      window.open('mailto:marketing@mtech-systems.com?subject=Users conferences contact');
+    }
   }
 
   openWebPage() {

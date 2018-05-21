@@ -22,6 +22,14 @@ page-mt-signin {
     //padding-bottom: 0 !important;
   }
 
+  ion-content.content-md[padding] .scroll-content {
+    padding-bottom: 16px !important;
+  }
+
+  ion-content.content-md:not([padding]) .scroll-content {
+    padding-bottom: 0 !important;
+  }
+
   ion-card.card {
     box-shadow: none;
     background: rgba(255, 255, 255, 0.2);

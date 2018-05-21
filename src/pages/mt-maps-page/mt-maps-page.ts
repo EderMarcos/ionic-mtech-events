@@ -44,7 +44,7 @@ export class MtMapsPage {
     if ((navigator.platform.indexOf('iPhone') != -1) ||
       (navigator.platform.indexOf('iPad') != -1) ||
       (navigator.platform.indexOf('iPod') != -1)) {
-      window.open(`maps://maps.google.com/maps?daddr=${ this.event.latitude },${ this.event.longitude }`);
+      window.open(`http://maps.apple.com/?daddr=${ this.event.latitude },${ this.event.longitude }`);
     } else {
       window.open(`https://maps.google.com/maps?daddr=${ this.event.latitude },${ this.event.longitude }`);
     }
