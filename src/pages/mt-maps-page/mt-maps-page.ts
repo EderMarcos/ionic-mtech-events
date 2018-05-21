@@ -41,6 +41,12 @@ export class MtMapsPage {
       return this.launchNavigator.navigate(address)
         .then(_ => console.log('Launched navigator'));
     }
-    this.toast.showToast({ message: 'This option is not available if you are from the browser', duration: 4000 });
+    if ((navigator.platform.indexOf('iPhone') != -1) ||
+      (navigator.platform.indexOf('iPad') != -1) ||
+      (navigator.platform.indexOf('iPod') != -1)) {
+      window.open(`maps://maps.google.com/maps?daddr=${ this.event.latitude },${ this.event.longitude }`);
+    } else {
+      window.open(`https://maps.google.com/maps?daddr=${ this.event.latitude },${ this.event.longitude }`);
+    }
   }
 }
