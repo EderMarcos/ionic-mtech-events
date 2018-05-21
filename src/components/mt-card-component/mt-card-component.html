@@ -3,8 +3,10 @@
        *ngIf="currentEvent?.eventImg"
        [src]="currentEvent?.eventImg"/>
   <div class="card">
-    <ion-badge *ngIf="!currentEvent?.breakFast && currentEvent?.available">Now Presenting</ion-badge>
-    <p class="card__title">{{ currentEvent?.eventName }}</p>
+    <p class="card__title">
+      <ion-badge *ngIf="!currentEvent?.breakFast && currentEvent?.available">Now Presenting</ion-badge>
+      {{ currentEvent?.eventName }}
+    </p>
     <p class="card__date" *ngIf="currentEvent?.date && currentEvent?.isVisible">
       <ion-icon style=" margin-right: 0.5rem;" name="calendar"></ion-icon>
       {{ currentEvent?.date | date:'EEEE, MMMM d, y, h:mm' }} -
