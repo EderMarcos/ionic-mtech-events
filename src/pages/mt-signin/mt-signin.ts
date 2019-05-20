@@ -41,8 +41,8 @@ export class MtSigninPage {
     this.loader.showLoading({ content: 'Please wait!', duration: 0 });
     this.dataService.getEntities({
       collection: 'users',
-      query: (ref) => ref.where('email', '==', this.user.email)
     }).subscribe((users: UserInterface[]) => {
+      console.log(users);
       this.loader.clear();
       if (users[0]) {
         this.user = users[0];

@@ -66,6 +66,8 @@ export class MtEventPage_1Page extends BaseComponent {
       collection: 'events',
       query: (ref => ref.where('day', '==', day).orderBy('date', 'asc'))
     }).subscribe((events: EventInterface[]) => {
+      this.subscription.unsubscribe();
+      console.log(events);
       this.events = events.filter(f => f.isVisible);
       this.loader.clear();
     });

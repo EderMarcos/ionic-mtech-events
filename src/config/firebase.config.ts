@@ -1,8 +1,8 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyAF3FOx_oXj3X1zuAjrkdIVv8d9WYwZUYo",
-  authDomain: "mtechappevents.firebaseapp.com",
-  databaseURL: "https://mtechappevents.firebaseio.com",
-  projectId: "mtechappevents",
-  storageBucket: "mtechappevents.appspot.com",
-  messagingSenderId: "1033092115983"
+  apiKey: "AIzaSyDq19fGZwERDjzhWbbpOHeOP6vpF81UHvc",
+  authDomain: "mtech-events.firebaseapp.com",
+  databaseURL: "https://mtech-events.firebaseio.com",
+  projectId: "mtech-events",
+  storageBucket: "mtech-events.appspot.com",
+  messagingSenderId: "272186063175"
 };
